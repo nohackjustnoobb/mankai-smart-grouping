@@ -1,0 +1,1784 @@
+[
+  {
+    "accuracy": 89.3,
+    "avgTimeMs": 10.912354826927185,
+    "inferencePerSecond": 91.63924889359471,
+    "maxTimeMs": 59.70501899719238,
+    "minTimeMs": 7.898092269897461,
+    "modelName": "run_30_20260207_131805_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 10912.354826927185,
+    "trainingMetrics": {
+      "test_loss": 0.2930717817507684,
+      "test_acc": 88.5,
+      "precision": 0.9477434679334917,
+      "recall": 0.8109756097560976,
+      "f1_score": 0.874041621029573,
+      "training_time": 1458.3495116233826,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 88.4,
+    "avgTimeMs": 7.202215075492859,
+    "inferencePerSecond": 138.84617295069717,
+    "maxTimeMs": 9.914994239807129,
+    "minTimeMs": 3.744959831237793,
+    "modelName": "run_30_20260207_131805_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7202.215075492859,
+    "trainingMetrics": {
+      "test_loss": 0.2930717817507684,
+      "test_acc": 88.5,
+      "precision": 0.9477434679334917,
+      "recall": 0.8109756097560976,
+      "f1_score": 0.874041621029573,
+      "training_time": 1458.3495116233826,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 97.3,
+    "avgTimeMs": 8.628319025039673,
+    "inferencePerSecond": 115.89742997424716,
+    "maxTimeMs": 44.54994201660156,
+    "minTimeMs": 7.447004318237305,
+    "modelName": "run_8_20260207_110215_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 8628.319025039673,
+    "trainingMetrics": {
+      "test_loss": 0.0964969188971736,
+      "test_acc": 96.5,
+      "precision": 0.9698189134808853,
+      "recall": 0.9601593625498008,
+      "f1_score": 0.9649649649649651,
+      "training_time": 709.4669868946075,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 97.5,
+    "avgTimeMs": 5.37122654914856,
+    "inferencePerSecond": 186.177214989846,
+    "maxTimeMs": 7.78806209564209,
+    "minTimeMs": 2.9430389404296875,
+    "modelName": "run_8_20260207_110215_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5371.22654914856,
+    "trainingMetrics": {
+      "test_loss": 0.0964969188971736,
+      "test_acc": 96.5,
+      "precision": 0.9698189134808853,
+      "recall": 0.9601593625498008,
+      "f1_score": 0.9649649649649651,
+      "training_time": 709.4669868946075,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.39999999999999,
+    "avgTimeMs": 11.099600076675415,
+    "inferencePerSecond": 90.09333607445818,
+    "maxTimeMs": 58.541059494018555,
+    "minTimeMs": 7.781982421875,
+    "modelName": "run_2_20260207_101245_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 11099.600076675415,
+    "trainingMetrics": {
+      "test_loss": 0.1439628734563788,
+      "test_acc": 94.5,
+      "precision": 0.956,
+      "recall": 0.9354207436399217,
+      "f1_score": 0.9455984174085064,
+      "training_time": 1715.3053567409515,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.39999999999999,
+    "avgTimeMs": 7.21458375453949,
+    "inferencePerSecond": 138.60813513611092,
+    "maxTimeMs": 9.528040885925293,
+    "minTimeMs": 3.7069320678710938,
+    "modelName": "run_2_20260207_101245_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7214.58375453949,
+    "trainingMetrics": {
+      "test_loss": 0.1439628734563788,
+      "test_acc": 94.5,
+      "precision": 0.956,
+      "recall": 0.9354207436399217,
+      "f1_score": 0.9455984174085064,
+      "training_time": 1715.3053567409515,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 91.5,
+    "avgTimeMs": 19.45203983783722,
+    "inferencePerSecond": 51.40849023220925,
+    "maxTimeMs": 32.05704689025879,
+    "minTimeMs": 10.370016098022461,
+    "modelName": "run_17_20260207_115650_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 19452.03983783722,
+    "trainingMetrics": {
+      "test_loss": 0.24349506525322795,
+      "test_acc": 91.6,
+      "precision": 0.9859154929577465,
+      "recall": 0.8433734939759037,
+      "f1_score": 0.9090909090909092,
+      "training_time": 1031.9821863174438,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 91.2,
+    "avgTimeMs": 7.708910942077637,
+    "inferencePerSecond": 129.72000941685403,
+    "maxTimeMs": 15.101909637451172,
+    "minTimeMs": 3.7360191345214844,
+    "modelName": "run_17_20260207_115650_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7708.910942077637,
+    "trainingMetrics": {
+      "test_loss": 0.24349506525322795,
+      "test_acc": 91.6,
+      "precision": 0.9859154929577465,
+      "recall": 0.8433734939759037,
+      "f1_score": 0.9090909090909092,
+      "training_time": 1031.9821863174438,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 95.89999999999999,
+    "avgTimeMs": 8.659159302711487,
+    "inferencePerSecond": 115.48465215172388,
+    "maxTimeMs": 42.85907745361328,
+    "minTimeMs": 7.274985313415527,
+    "modelName": "run_16_20260207_115505_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 8659.159302711487,
+    "trainingMetrics": {
+      "test_loss": 0.08647315831492758,
+      "test_acc": 96.3,
+      "precision": 0.9780439121756487,
+      "recall": 0.9496124031007752,
+      "f1_score": 0.9636184857423796,
+      "training_time": 616.2719295024872,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.5,
+    "avgTimeMs": 5.377854704856873,
+    "inferencePerSecond": 185.94775331079055,
+    "maxTimeMs": 7.059931755065918,
+    "minTimeMs": 3.3409595489501953,
+    "modelName": "run_16_20260207_115505_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5377.854704856873,
+    "trainingMetrics": {
+      "test_loss": 0.08647315831492758,
+      "test_acc": 96.3,
+      "precision": 0.9780439121756487,
+      "recall": 0.9496124031007752,
+      "f1_score": 0.9636184857423796,
+      "training_time": 616.2719295024872,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.8,
+    "avgTimeMs": 10.647688865661621,
+    "inferencePerSecond": 93.91709436823993,
+    "maxTimeMs": 56.20598793029785,
+    "minTimeMs": 7.769942283630371,
+    "modelName": "run_18_20260207_120757_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 10647.688865661621,
+    "trainingMetrics": {
+      "test_loss": 0.14504656422650442,
+      "test_acc": 94.4,
+      "precision": 0.9820224719101124,
+      "recall": 0.9010309278350516,
+      "f1_score": 0.9397849462365592,
+      "training_time": 1438.3936696052551,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 93.30000000000001,
+    "avgTimeMs": 7.001494646072388,
+    "inferencePerSecond": 142.82664638770632,
+    "maxTimeMs": 12.034058570861816,
+    "minTimeMs": 4.492044448852539,
+    "modelName": "run_18_20260207_120757_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7001.494646072388,
+    "trainingMetrics": {
+      "test_loss": 0.14504656422650442,
+      "test_acc": 94.4,
+      "precision": 0.9820224719101124,
+      "recall": 0.9010309278350516,
+      "f1_score": 0.9397849462365592,
+      "training_time": 1438.3936696052551,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.1,
+    "avgTimeMs": 19.238478779792786,
+    "inferencePerSecond": 51.979161733429464,
+    "maxTimeMs": 32.99891948699951,
+    "minTimeMs": 10.316014289855957,
+    "modelName": "run_5_20260207_104323_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 19238.478779792786,
+    "trainingMetrics": {
+      "test_loss": 0.11979103792691603,
+      "test_acc": 95.5,
+      "precision": 0.9732510288065843,
+      "recall": 0.9366336633663367,
+      "f1_score": 0.9545913218970736,
+      "training_time": 979.0999484062195,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96,
+    "avgTimeMs": 7.47738778591156,
+    "inferencePerSecond": 133.73654391499386,
+    "maxTimeMs": 15.774965286254883,
+    "minTimeMs": 3.497004508972168,
+    "modelName": "run_5_20260207_104323_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7477.38778591156,
+    "trainingMetrics": {
+      "test_loss": 0.11979103792691603,
+      "test_acc": 95.5,
+      "precision": 0.9732510288065843,
+      "recall": 0.9366336633663367,
+      "f1_score": 0.9545913218970736,
+      "training_time": 979.0999484062195,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.8,
+    "avgTimeMs": 8.789149284362793,
+    "inferencePerSecond": 113.77665433208071,
+    "maxTimeMs": 44.865965843200684,
+    "minTimeMs": 7.541060447692871,
+    "modelName": "run_4_20260207_104144_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 8789.149284362793,
+    "trainingMetrics": {
+      "test_loss": 0.08802960281692711,
+      "test_acc": 96.4,
+      "precision": 0.9607072691552063,
+      "recall": 0.9683168316831683,
+      "f1_score": 0.9644970414201183,
+      "training_time": 617.1114110946655,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.8,
+    "avgTimeMs": 5.43143093585968,
+    "inferencePerSecond": 184.11354425916514,
+    "maxTimeMs": 8.136987686157227,
+    "minTimeMs": 3.681063652038574,
+    "modelName": "run_4_20260207_104144_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5431.43093585968,
+    "trainingMetrics": {
+      "test_loss": 0.08802960281692711,
+      "test_acc": 96.4,
+      "precision": 0.9607072691552063,
+      "recall": 0.9683168316831683,
+      "f1_score": 0.9644970414201183,
+      "training_time": 617.1114110946655,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 80.30000000000001,
+    "avgTimeMs": 19.302033185958862,
+    "inferencePerSecond": 51.80801371367673,
+    "maxTimeMs": 28.035998344421387,
+    "minTimeMs": 10.391950607299805,
+    "modelName": "run_29_20260207_130839_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 19302.033185958862,
+    "trainingMetrics": {
+      "test_loss": 0.3899880005046725,
+      "test_acc": 80.8,
+      "precision": 0.865296803652968,
+      "recall": 0.740234375,
+      "f1_score": 0.7978947368421052,
+      "training_time": 1045.719861984253,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 79.80000000000001,
+    "avgTimeMs": 7.362059950828552,
+    "inferencePerSecond": 135.83154805571183,
+    "maxTimeMs": 11.923074722290039,
+    "minTimeMs": 3.698110580444336,
+    "modelName": "run_29_20260207_130839_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7362.059950828552,
+    "trainingMetrics": {
+      "test_loss": 0.3899880005046725,
+      "test_acc": 80.8,
+      "precision": 0.865296803652968,
+      "recall": 0.740234375,
+      "f1_score": 0.7978947368421052,
+      "training_time": 1045.719861984253,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 78.7,
+    "avgTimeMs": 20.848283767700195,
+    "inferencePerSecond": 47.96557890051741,
+    "maxTimeMs": 33.82003307342529,
+    "minTimeMs": 10.599017143249512,
+    "modelName": "run_33_20260207_133022_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 20848.283767700195,
+    "trainingMetrics": {
+      "test_loss": 0.4340481851249933,
+      "test_acc": 81.2,
+      "precision": 0.8482758620689655,
+      "recall": 0.7515274949083504,
+      "f1_score": 0.7969762419006481,
+      "training_time": 1058.2643191814423,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 78.9,
+    "avgTimeMs": 7.609909534454346,
+    "inferencePerSecond": 131.40760681482965,
+    "maxTimeMs": 10.022997856140137,
+    "minTimeMs": 3.6100149154663086,
+    "modelName": "run_33_20260207_133022_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7609.909534454346,
+    "trainingMetrics": {
+      "test_loss": 0.4340481851249933,
+      "test_acc": 81.2,
+      "precision": 0.8482758620689655,
+      "recall": 0.7515274949083504,
+      "f1_score": 0.7969762419006481,
+      "training_time": 1058.2643191814423,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.39999999999999,
+    "avgTimeMs": 14.611146450042725,
+    "inferencePerSecond": 68.44089910529067,
+    "maxTimeMs": 48.1640100479126,
+    "minTimeMs": 8.1939697265625,
+    "modelName": "run_15_20260207_114228_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 14611.146450042725,
+    "trainingMetrics": {
+      "test_loss": 0.11443737725032464,
+      "test_acc": 95.8,
+      "precision": 0.9825708061002179,
+      "recall": 0.9298969072164949,
+      "f1_score": 0.9555084745762712,
+      "training_time": 1491.1796281337738,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.69999999999999,
+    "avgTimeMs": 6.713505506515503,
+    "inferencePerSecond": 148.95347877937886,
+    "maxTimeMs": 9.199023246765137,
+    "minTimeMs": 3.3870935440063477,
+    "modelName": "run_15_20260207_114228_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 6713.505506515503,
+    "trainingMetrics": {
+      "test_loss": 0.11443737725032464,
+      "test_acc": 95.8,
+      "precision": 0.9825708061002179,
+      "recall": 0.9298969072164949,
+      "f1_score": 0.9555084745762712,
+      "training_time": 1491.1796281337738,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 87,
+    "avgTimeMs": 10.06794548034668,
+    "inferencePerSecond": 99.32513062889232,
+    "maxTimeMs": 48.91407489776611,
+    "minTimeMs": 7.406949996948242,
+    "modelName": "run_32_20260207_132829_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 10067.94548034668,
+    "trainingMetrics": {
+      "test_loss": 0.24438056140206754,
+      "test_acc": 89.6,
+      "precision": 0.9379310344827586,
+      "recall": 0.8412371134020619,
+      "f1_score": 0.8869565217391304,
+      "training_time": 683.6875689029694,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 87.9,
+    "avgTimeMs": 5.460686445236206,
+    "inferencePerSecond": 183.12715993286523,
+    "maxTimeMs": 7.447004318237305,
+    "minTimeMs": 3.7119388580322266,
+    "modelName": "run_32_20260207_132829_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5460.686445236206,
+    "trainingMetrics": {
+      "test_loss": 0.24438056140206754,
+      "test_acc": 89.6,
+      "precision": 0.9379310344827586,
+      "recall": 0.8412371134020619,
+      "f1_score": 0.8869565217391304,
+      "training_time": 683.6875689029694,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.89999999999999,
+    "avgTimeMs": 13.156886100769043,
+    "inferencePerSecond": 76.00582632858304,
+    "maxTimeMs": 68.37403774261475,
+    "minTimeMs": 8.056998252868652,
+    "modelName": "run_10_20260207_112316_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 13156.886100769043,
+    "trainingMetrics": {
+      "test_loss": 0.09419496660120785,
+      "test_acc": 96.0,
+      "precision": 0.9454191033138402,
+      "recall": 0.9758551307847082,
+      "f1_score": 0.9603960396039604,
+      "training_time": 726.663542509079,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.6,
+    "avgTimeMs": 7.166078805923462,
+    "inferencePerSecond": 139.54633029899176,
+    "maxTimeMs": 9.508967399597168,
+    "minTimeMs": 4.6280622482299805,
+    "modelName": "run_10_20260207_112316_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7166.078805923462,
+    "trainingMetrics": {
+      "test_loss": 0.09419496660120785,
+      "test_acc": 96.0,
+      "precision": 0.9454191033138402,
+      "recall": 0.9758551307847082,
+      "f1_score": 0.9603960396039604,
+      "training_time": 726.663542509079,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 86.2,
+    "avgTimeMs": 13.201802611351013,
+    "inferencePerSecond": 75.74723160458346,
+    "maxTimeMs": 61.566948890686035,
+    "minTimeMs": 8.129000663757324,
+    "modelName": "run_31_20260207_132632_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 13201.802611351013,
+    "trainingMetrics": {
+      "test_loss": 0.2597371581941843,
+      "test_acc": 88.3,
+      "precision": 0.9513888888888888,
+      "recall": 0.8106508875739645,
+      "f1_score": 0.8753993610223643,
+      "training_time": 685.9115822315216,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 85.39999999999999,
+    "avgTimeMs": 6.7336297035217285,
+    "inferencePerSecond": 148.50831483605253,
+    "maxTimeMs": 9.38403606414795,
+    "minTimeMs": 3.399014472961426,
+    "modelName": "run_31_20260207_132632_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 6733.6297035217285,
+    "trainingMetrics": {
+      "test_loss": 0.2597371581941843,
+      "test_acc": 88.3,
+      "precision": 0.9513888888888888,
+      "recall": 0.8106508875739645,
+      "f1_score": 0.8753993610223643,
+      "training_time": 685.9115822315216,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 95.1,
+    "avgTimeMs": 10.467653393745422,
+    "inferencePerSecond": 95.53239512090788,
+    "maxTimeMs": 55.27698993682861,
+    "minTimeMs": 7.729053497314453,
+    "modelName": "run_20_20260207_121633_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 10467.653393745422,
+    "trainingMetrics": {
+      "test_loss": 0.0991591722558951,
+      "test_acc": 96.1,
+      "precision": 0.9805194805194806,
+      "recall": 0.937888198757764,
+      "f1_score": 0.9587301587301588,
+      "training_time": 690.960150718689,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 95,
+    "avgTimeMs": 5.510376811027527,
+    "inferencePerSecond": 181.47579272596582,
+    "maxTimeMs": 7.401943206787109,
+    "minTimeMs": 3.359079360961914,
+    "modelName": "run_20_20260207_121633_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5510.376811027527,
+    "trainingMetrics": {
+      "test_loss": 0.0991591722558951,
+      "test_acc": 96.1,
+      "precision": 0.9805194805194806,
+      "recall": 0.937888198757764,
+      "f1_score": 0.9587301587301588,
+      "training_time": 690.960150718689,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 92.60000000000001,
+    "avgTimeMs": 12.890024185180664,
+    "inferencePerSecond": 77.57937344676783,
+    "maxTimeMs": 71.4789628982544,
+    "minTimeMs": 7.892012596130371,
+    "modelName": "run_26_20260207_123849_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 12890.024185180664,
+    "trainingMetrics": {
+      "test_loss": 0.21314300638106135,
+      "test_acc": 92.1,
+      "precision": 0.971677559912854,
+      "recall": 0.87109375,
+      "f1_score": 0.9186405767250256,
+      "training_time": 1649.9948561191559,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 92.7,
+    "avgTimeMs": 7.3915488719940186,
+    "inferencePerSecond": 135.28964190291958,
+    "maxTimeMs": 10.833978652954102,
+    "minTimeMs": 4.189014434814453,
+    "modelName": "run_26_20260207_123849_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7391.548871994019,
+    "trainingMetrics": {
+      "test_loss": 0.21314300638106135,
+      "test_acc": 92.1,
+      "precision": 0.971677559912854,
+      "recall": 0.87109375,
+      "f1_score": 0.9186405767250256,
+      "training_time": 1649.9948561191559,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 87.6,
+    "avgTimeMs": 13.511118292808533,
+    "inferencePerSecond": 74.01311855379602,
+    "maxTimeMs": 60.6309175491333,
+    "minTimeMs": 8.1099271774292,
+    "modelName": "run_27_20260207_125304_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 13511.118292808533,
+    "trainingMetrics": {
+      "test_loss": 0.27339063201927477,
+      "test_acc": 88.3,
+      "precision": 0.9646017699115044,
+      "recall": 0.8119180633147114,
+      "f1_score": 0.8816986855409504,
+      "training_time": 1457.9923446178436,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 87.4,
+    "avgTimeMs": 6.695714950561523,
+    "inferencePerSecond": 149.34924909193407,
+    "maxTimeMs": 9.093999862670898,
+    "minTimeMs": 3.6350488662719727,
+    "modelName": "run_27_20260207_125304_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 6695.714950561523,
+    "trainingMetrics": {
+      "test_loss": 0.27339063201927477,
+      "test_acc": 88.3,
+      "precision": 0.9646017699115044,
+      "recall": 0.8119180633147114,
+      "f1_score": 0.8816986855409504,
+      "training_time": 1457.9923446178436,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 95.89999999999999,
+    "avgTimeMs": 20.867191314697266,
+    "inferencePerSecond": 47.922117783799486,
+    "maxTimeMs": 35.215020179748535,
+    "minTimeMs": 10.265946388244629,
+    "modelName": "run_9_20260207_110412_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 20867.191314697266,
+    "trainingMetrics": {
+      "test_loss": 0.09453436976764351,
+      "test_acc": 96.3,
+      "precision": 0.9855670103092784,
+      "recall": 0.9409448818897638,
+      "f1_score": 0.9627391742195367,
+      "training_time": 1202.384569644928,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 95.39999999999999,
+    "avgTimeMs": 7.772920727729797,
+    "inferencePerSecond": 128.65176875309078,
+    "maxTimeMs": 15.328049659729004,
+    "minTimeMs": 3.7349462509155273,
+    "modelName": "run_9_20260207_110412_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7772.920727729797,
+    "trainingMetrics": {
+      "test_loss": 0.09453436976764351,
+      "test_acc": 96.3,
+      "precision": 0.9855670103092784,
+      "recall": 0.9409448818897638,
+      "f1_score": 0.9627391742195367,
+      "training_time": 1202.384569644928,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 95.3,
+    "avgTimeMs": 21.762308955192566,
+    "inferencePerSecond": 45.95100648827965,
+    "maxTimeMs": 36.54909133911133,
+    "minTimeMs": 10.331034660339355,
+    "modelName": "run_1_20260207_101245_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 21762.308955192566,
+    "trainingMetrics": {
+      "test_loss": 0.07445356192525536,
+      "test_acc": 97.6,
+      "precision": 0.9775967413441955,
+      "recall": 0.973630831643002,
+      "f1_score": 0.975609756097561,
+      "training_time": 999.9454348087311,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 95.19999999999999,
+    "avgTimeMs": 7.776926159858704,
+    "inferencePerSecond": 128.5855078786255,
+    "maxTimeMs": 9.66501235961914,
+    "minTimeMs": 3.672957420349121,
+    "modelName": "run_1_20260207_101245_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7776.926159858704,
+    "trainingMetrics": {
+      "test_loss": 0.07445356192525536,
+      "test_acc": 97.6,
+      "precision": 0.9775967413441955,
+      "recall": 0.973630831643002,
+      "f1_score": 0.975609756097561,
+      "training_time": 999.9454348087311,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 89.9,
+    "avgTimeMs": 11.382392525672913,
+    "inferencePerSecond": 87.85499162364208,
+    "maxTimeMs": 45.52304744720459,
+    "minTimeMs": 7.588028907775879,
+    "modelName": "run_24_20260207_123703_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 11382.392525672913,
+    "trainingMetrics": {
+      "test_loss": 0.20607127575203776,
+      "test_acc": 91.7,
+      "precision": 0.9852216748768473,
+      "recall": 0.8385744234800838,
+      "f1_score": 0.9060022650056624,
+      "training_time": 702.9765300750732,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 90.4,
+    "avgTimeMs": 5.451517343521118,
+    "inferencePerSecond": 183.43516804334388,
+    "maxTimeMs": 9.070038795471191,
+    "minTimeMs": 3.3649206161499023,
+    "modelName": "run_24_20260207_123703_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5451.517343521118,
+    "trainingMetrics": {
+      "test_loss": 0.20607127575203776,
+      "test_acc": 91.7,
+      "precision": 0.9852216748768473,
+      "recall": 0.8385744234800838,
+      "f1_score": 0.9060022650056624,
+      "training_time": 702.9765300750732,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 91.10000000000001,
+    "avgTimeMs": 9.691355586051941,
+    "inferencePerSecond": 103.18473934020405,
+    "maxTimeMs": 62.64793872833252,
+    "minTimeMs": 7.729053497314453,
+    "modelName": "run_28_20260207_130657_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 9691.355586051941,
+    "trainingMetrics": {
+      "test_loss": 0.22244281611508793,
+      "test_acc": 90.9,
+      "precision": 0.9448275862068966,
+      "recall": 0.8598326359832636,
+      "f1_score": 0.9003285870755751,
+      "training_time": 626.8792471885681,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 91.60000000000001,
+    "avgTimeMs": 5.563750147819519,
+    "inferencePerSecond": 179.73488626046742,
+    "maxTimeMs": 9.209036827087402,
+    "minTimeMs": 3.6649703979492188,
+    "modelName": "run_28_20260207_130657_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5563.750147819519,
+    "trainingMetrics": {
+      "test_loss": 0.22244281611508793,
+      "test_acc": 90.9,
+      "precision": 0.9448275862068966,
+      "recall": 0.8598326359832636,
+      "f1_score": 0.9003285870755751,
+      "training_time": 626.8792471885681,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.6,
+    "avgTimeMs": 9.364941120147705,
+    "inferencePerSecond": 106.78123729455203,
+    "maxTimeMs": 62.82496452331543,
+    "minTimeMs": 7.604002952575684,
+    "modelName": "run_12_20260207_112532_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 9364.941120147705,
+    "trainingMetrics": {
+      "test_loss": 0.07591751625295728,
+      "test_acc": 98.0,
+      "precision": 0.992,
+      "recall": 0.96875,
+      "f1_score": 0.9802371541501976,
+      "training_time": 712.3088054656982,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.7,
+    "avgTimeMs": 5.651099681854248,
+    "inferencePerSecond": 176.9567086581418,
+    "maxTimeMs": 7.766008377075195,
+    "minTimeMs": 3.944993019104004,
+    "modelName": "run_12_20260207_112532_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5651.099681854248,
+    "trainingMetrics": {
+      "test_loss": 0.07591751625295728,
+      "test_acc": 98.0,
+      "precision": 0.992,
+      "recall": 0.96875,
+      "f1_score": 0.9802371541501976,
+      "training_time": 712.3088054656982,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 84.2,
+    "avgTimeMs": 21.115275382995605,
+    "inferencePerSecond": 47.35907923821408,
+    "maxTimeMs": 39.80696201324463,
+    "minTimeMs": 11.915087699890137,
+    "modelName": "run_25_20260207_123720_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 21115.275382995605,
+    "trainingMetrics": {
+      "test_loss": 0.3543480844606483,
+      "test_acc": 83.6,
+      "precision": 0.9175257731958762,
+      "recall": 0.7295081967213115,
+      "f1_score": 0.8127853881278538,
+      "training_time": 924.4089543819427,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 84.7,
+    "avgTimeMs": 7.727662920951843,
+    "inferencePerSecond": 129.4052303043294,
+    "maxTimeMs": 13.489961624145508,
+    "minTimeMs": 3.986954689025879,
+    "modelName": "run_25_20260207_123720_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7727.662920951843,
+    "trainingMetrics": {
+      "test_loss": 0.3543480844606483,
+      "test_acc": 83.6,
+      "precision": 0.9175257731958762,
+      "recall": 0.7295081967213115,
+      "f1_score": 0.8127853881278538,
+      "training_time": 924.4089543819427,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 95.1,
+    "avgTimeMs": 21.77485740184784,
+    "inferencePerSecond": 45.92452577508677,
+    "maxTimeMs": 50.83596706390381,
+    "minTimeMs": 9.834051132202148,
+    "modelName": "run_13_20260207_112618_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 21774.85740184784,
+    "trainingMetrics": {
+      "test_loss": 0.13838691766270333,
+      "test_acc": 94.5,
+      "precision": 0.9815950920245399,
+      "recall": 0.9125475285171103,
+      "f1_score": 0.9458128078817735,
+      "training_time": 951.8213992118835,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.39999999999999,
+    "avgTimeMs": 7.575865864753723,
+    "inferencePerSecond": 131.99811319950132,
+    "maxTimeMs": 11.366009712219238,
+    "minTimeMs": 3.759026527404785,
+    "modelName": "run_13_20260207_112618_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7575.865864753723,
+    "trainingMetrics": {
+      "test_loss": 0.13838691766270333,
+      "test_acc": 94.5,
+      "precision": 0.9815950920245399,
+      "recall": 0.9125475285171103,
+      "f1_score": 0.9458128078817735,
+      "training_time": 951.8213992118835,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.8,
+    "avgTimeMs": 16.477716207504272,
+    "inferencePerSecond": 60.688021774800355,
+    "maxTimeMs": 67.89994239807129,
+    "minTimeMs": 8.19098949432373,
+    "modelName": "run_3_20260207_102945_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 16477.716207504272,
+    "trainingMetrics": {
+      "test_loss": 0.09453947027583444,
+      "test_acc": 96.8,
+      "precision": 0.9523809523809523,
+      "recall": 0.9885931558935361,
+      "f1_score": 0.9701492537313432,
+      "training_time": 1676.9644765853882,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.7,
+    "avgTimeMs": 6.406175136566162,
+    "inferencePerSecond": 156.0993851529354,
+    "maxTimeMs": 9.02700424194336,
+    "minTimeMs": 2.927064895629883,
+    "modelName": "run_3_20260207_102945_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 6406.175136566162,
+    "trainingMetrics": {
+      "test_loss": 0.09453947027583444,
+      "test_acc": 96.8,
+      "precision": 0.9523809523809523,
+      "recall": 0.9885931558935361,
+      "f1_score": 0.9701492537313432,
+      "training_time": 1676.9644765853882,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.5,
+    "avgTimeMs": 14.322096347808838,
+    "inferencePerSecond": 69.82218075589135,
+    "maxTimeMs": 80.46293258666992,
+    "minTimeMs": 8.156061172485352,
+    "modelName": "run_19_20260207_121433_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 14322.096347808838,
+    "trainingMetrics": {
+      "test_loss": 0.1587233625468798,
+      "test_acc": 94.7,
+      "precision": 0.990909090909091,
+      "recall": 0.8989690721649485,
+      "f1_score": 0.9427027027027026,
+      "training_time": 698.5168981552124,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.89999999999999,
+    "avgTimeMs": 6.791969060897827,
+    "inferencePerSecond": 147.23270836981854,
+    "maxTimeMs": 8.922934532165527,
+    "minTimeMs": 3.89707088470459,
+    "modelName": "run_19_20260207_121433_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 6791.969060897827,
+    "trainingMetrics": {
+      "test_loss": 0.1587233625468798,
+      "test_acc": 94.7,
+      "precision": 0.990909090909091,
+      "recall": 0.8989690721649485,
+      "f1_score": 0.9427027027027026,
+      "training_time": 698.5168981552124,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 93.60000000000001,
+    "avgTimeMs": 14.565553069114685,
+    "inferencePerSecond": 68.65513415487362,
+    "maxTimeMs": 78.70304584503174,
+    "minTimeMs": 7.854104042053223,
+    "modelName": "run_22_20260207_123233_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 14565.553069114685,
+    "trainingMetrics": {
+      "test_loss": 0.17685544164851308,
+      "test_acc": 94.5,
+      "precision": 0.9889624724061811,
+      "recall": 0.8995983935742972,
+      "f1_score": 0.9421661409043113,
+      "training_time": 731.0921995639801,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 94.1,
+    "avgTimeMs": 7.370214581489563,
+    "inferencePerSecond": 135.68125987966746,
+    "maxTimeMs": 9.562015533447266,
+    "minTimeMs": 4.204988479614258,
+    "modelName": "run_22_20260207_123233_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7370.214581489563,
+    "trainingMetrics": {
+      "test_loss": 0.17685544164851308,
+      "test_acc": 94.5,
+      "precision": 0.9889624724061811,
+      "recall": 0.8995983935742972,
+      "f1_score": 0.9421661409043113,
+      "training_time": 731.0921995639801,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 92.60000000000001,
+    "avgTimeMs": 13.315083384513855,
+    "inferencePerSecond": 75.10279666464972,
+    "maxTimeMs": 63.90702724456787,
+    "minTimeMs": 7.803082466125488,
+    "modelName": "run_6_20260207_105816_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 13315.083384513855,
+    "trainingMetrics": {
+      "test_loss": 0.15745294326916337,
+      "test_acc": 93.3,
+      "precision": 0.9166666666666666,
+      "recall": 0.9486652977412731,
+      "f1_score": 0.9323915237134208,
+      "training_time": 1443.4048545360565,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 92.4,
+    "avgTimeMs": 7.2544639110565186,
+    "inferencePerSecond": 137.84616096523706,
+    "maxTimeMs": 9.690999984741211,
+    "minTimeMs": 3.77500057220459,
+    "modelName": "run_6_20260207_105816_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7254.463911056519,
+    "trainingMetrics": {
+      "test_loss": 0.15745294326916337,
+      "test_acc": 93.3,
+      "precision": 0.9166666666666666,
+      "recall": 0.9486652977412731,
+      "f1_score": 0.9323915237134208,
+      "training_time": 1443.4048545360565,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.89999999999999,
+    "avgTimeMs": 14.167018055915833,
+    "inferencePerSecond": 70.58648447069793,
+    "maxTimeMs": 71.6860294342041,
+    "minTimeMs": 7.912993431091309,
+    "modelName": "run_14_20260207_112717_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 14167.018055915833,
+    "trainingMetrics": {
+      "test_loss": 0.07015483576290694,
+      "test_acc": 97.1,
+      "precision": 0.977319587628866,
+      "recall": 0.9634146341463414,
+      "f1_score": 0.9703172978505629,
+      "training_time": 1637.5657806396484,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.8,
+    "avgTimeMs": 7.301920294761658,
+    "inferencePerSecond": 136.95027604141234,
+    "maxTimeMs": 9.605050086975098,
+    "minTimeMs": 4.659056663513184,
+    "modelName": "run_14_20260207_112717_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 16,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7301.920294761658,
+    "trainingMetrics": {
+      "test_loss": 0.07015483576290694,
+      "test_acc": 97.1,
+      "precision": 0.977319587628866,
+      "recall": 0.9634146341463414,
+      "f1_score": 0.9703172978505629,
+      "training_time": 1637.5657806396484,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 90.5,
+    "avgTimeMs": 21.483840703964233,
+    "inferencePerSecond": 46.54661211556453,
+    "maxTimeMs": 47.73604869842529,
+    "minTimeMs": 10.43999195098877,
+    "modelName": "run_21_20260207_121831_133449051535040/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 21483.840703964233,
+    "trainingMetrics": {
+      "test_loss": 0.22585307992994785,
+      "test_acc": 91.3,
+      "precision": 0.9646017699115044,
+      "recall": 0.8599605522682445,
+      "f1_score": 0.9092805005213764,
+      "training_time": 1091.241828918457,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 89.9,
+    "avgTimeMs": 7.63550877571106,
+    "inferencePerSecond": 130.96704219384185,
+    "maxTimeMs": 13.847112655639648,
+    "minTimeMs": 3.6829710006713867,
+    "modelName": "run_21_20260207_121831_133449051535040/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7635.50877571106,
+    "trainingMetrics": {
+      "test_loss": 0.22585307992994785,
+      "test_acc": 91.3,
+      "precision": 0.9646017699115044,
+      "recall": 0.8599605522682445,
+      "f1_score": 0.9092805005213764,
+      "training_time": 1091.241828918457,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 85.9,
+    "avgTimeMs": 9.597975850105286,
+    "inferencePerSecond": 104.18863473062713,
+    "maxTimeMs": 44.23689842224121,
+    "minTimeMs": 7.5119733810424805,
+    "modelName": "run_36_20260207_134743_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 9597.975850105286,
+    "trainingMetrics": {
+      "test_loss": 0.31211145501583815,
+      "test_acc": 86.1,
+      "precision": 0.9507042253521126,
+      "recall": 0.7743785850860421,
+      "f1_score": 0.8535300316122233,
+      "training_time": 710.3303456306458,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 84.5,
+    "avgTimeMs": 5.847310662269592,
+    "inferencePerSecond": 171.01879098926773,
+    "maxTimeMs": 9.020090103149414,
+    "minTimeMs": 3.6879777908325195,
+    "modelName": "run_36_20260207_134743_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 5847.310662269592,
+    "trainingMetrics": {
+      "test_loss": 0.31211145501583815,
+      "test_acc": 86.1,
+      "precision": 0.9507042253521126,
+      "recall": 0.7743785850860421,
+      "f1_score": 0.8535300316122233,
+      "training_time": 710.3303456306458,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 96.8,
+    "avgTimeMs": 14.175514936447144,
+    "inferencePerSecond": 70.54417454909284,
+    "maxTimeMs": 101.86207294464111,
+    "minTimeMs": 8.160948753356934,
+    "modelName": "run_7_20260207_110012_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 14175.514936447144,
+    "trainingMetrics": {
+      "test_loss": 0.07139144963002764,
+      "test_acc": 97.7,
+      "precision": 0.966,
+      "recall": 0.9877300613496932,
+      "f1_score": 0.9767441860465117,
+      "training_time": 699.4743449687958,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 97,
+    "avgTimeMs": 6.815632104873657,
+    "inferencePerSecond": 146.72153435114691,
+    "maxTimeMs": 8.823990821838379,
+    "minTimeMs": 5.0029754638671875,
+    "modelName": "run_7_20260207_110012_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 32,
+      "epochs": 10,
+      "learningRate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 6815.632104873657,
+    "trainingMetrics": {
+      "test_loss": 0.07139144963002764,
+      "test_acc": 97.7,
+      "precision": 0.966,
+      "recall": 0.9877300613496932,
+      "f1_score": 0.9767441860465117,
+      "training_time": 699.4743449687958,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 87.2,
+    "avgTimeMs": 13.128826260566711,
+    "inferencePerSecond": 76.16827126455054,
+    "maxTimeMs": 57.48701095581055,
+    "minTimeMs": 8.003950119018555,
+    "modelName": "run_34_20260207_134307_133449043142336/model",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 13128.826260566711,
+    "trainingMetrics": {
+      "test_loss": 0.27502691373229027,
+      "test_acc": 88.0,
+      "precision": 0.9502487562189055,
+      "recall": 0.7925311203319502,
+      "f1_score": 0.8642533936651583,
+      "training_time": 724.2093389034271,
+      "epochs_run": 10
+    }
+  },
+  {
+    "accuracy": 87.3,
+    "avgTimeMs": 7.274815797805786,
+    "inferencePerSecond": 137.46052515881127,
+    "maxTimeMs": 9.485006332397461,
+    "minTimeMs": 3.5619735717773438,
+    "modelName": "run_34_20260207_134307_133449043142336/model_optimized",
+    "modelSettings": {
+      "batchSize": 64,
+      "epochs": 10,
+      "learningRate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "modelType": "model_optimized.mlpackage",
+    "totalInferences": 1000,
+    "totalTimeMs": 7274.815797805786,
+    "trainingMetrics": {
+      "test_loss": 0.27502691373229027,
+      "test_acc": 88.0,
+      "precision": 0.9502487562189055,
+      "recall": 0.7925311203319502,
+      "f1_score": 0.8642533936651583,
+      "training_time": 724.2093389034271,
+      "epochs_run": 10
+    }
+  }
+]

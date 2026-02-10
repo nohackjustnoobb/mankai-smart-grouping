@@ -1,0 +1,16 @@
+{
+    "test_loss": 0.025060733169363365,
+    "test_acc": 99.25,
+    "precision": 0.991356783919598,
+    "recall": 0.9935535858178888,
+    "f1_score": 0.9924539692121944,
+    "training_time": 25048.050758361816,
+    "epochs_run": 16,
+    "parameters": {
+        "epochs": 50,
+        "batch_size": 32,
+        "learning_rate": 0.001,
+        "model": "mobilenetv3_large_100",
+        "patience": 10
+    }
+}
