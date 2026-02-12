@@ -1,5 +1,5 @@
 import argparse
-import glob
+import csv
 import json
 import os
 import random
@@ -18,6 +18,7 @@ from torchvision import transforms
 # Configuration Defaults
 IMAGE_EXTS = ["*.jpg", "*.jpeg", "*.png", "*.webp"]
 DEFAULT_IMAGE_DIR = "./images"
+DEFAULT_CSV_PATH = "./pairs.csv"
 DEFAULT_RESULTS_DIR = "./results"
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
@@ -27,91 +28,58 @@ DEV_DATASET_SIZE = 10000
 
 
 class AdjacencyDataset(Dataset):
-    """
-    Dataset that generates pairs of image patches on the fly.
-    Label 1: Left and Right halves of the same image (Adjacent).
-    Label 0: Left half of Image A, Left half of Image B (Non-adjacent/Random).
-    """
+    def __init__(self, csv_path, image_dir, transform=None, dev_mode=False):
+        self.pairs = []
+        self.transform = transform
+        self.image_dir = image_dir
 
-    def __init__(self, image_dir, transform=None, dev_mode=False):
-        self.image_files = []
-        for ext in IMAGE_EXTS:
-            self.image_files.extend(glob.glob(os.path.join(image_dir, ext)))
+        # Load pairs from CSV
+        if not os.path.exists(csv_path):
+            raise FileNotFoundError(f"CSV file not found: {csv_path}")
 
-        # In DEV_MODE, limit to 1000 images
+        with open(csv_path, "r") as f:
+            reader = csv.DictReader(f)
+            for row in reader:
+                left_path = os.path.join(image_dir, row["left_image"])
+                right_path = os.path.join(image_dir, row["right_image"])
+                label = float(row["label"])
+
+                # Verify both images exist
+                if os.path.exists(left_path) and os.path.exists(right_path):
+                    self.pairs.append((left_path, right_path, label))
+                else:
+                    print(
+                        f"Warning: Skipping pair - image not found: {left_path} or {right_path}"
+                    )
+
+        # Shuffle pairs for randomization
+        random.shuffle(self.pairs)
+
+        # In DEV_MODE, limit dataset size
         if dev_mode:
             print(
-                f"[DEV_MODE] Limiting dataset to {DEV_DATASET_SIZE} images (found {len(self.image_files)})"
+                f"[DEV_MODE] Limiting dataset to {DEV_DATASET_SIZE} pairs (found {len(self.pairs)})"
             )
-            self.image_files = self.image_files[:DEV_DATASET_SIZE]
+            self.pairs = self.pairs[:DEV_DATASET_SIZE]
         else:
-            print(f"Found {len(self.image_files)} images.")
-
-        self.transform = transform
+            print(f"Found {len(self.pairs)} image pairs.")
 
     def __len__(self):
-        return len(self.image_files)
+        return len(self.pairs)
 
     def __getitem__(self, idx):
-        # 1. Load the primary image (Image A)
-        img_path_a = self.image_files[idx]
-        image_a = Image.open(img_path_a).convert("RGB")
-        w, h = image_a.size
+        left_path, right_path, label = self.pairs[idx]
 
-        # 2. Extract Left and Right patches
-        # We define "adjacent" as the vertical midline split
-        # Left Patch: 0 to w/2
-        # Right Patch: w/2 to w
-        mid_x = w // 2
+        # Load pre-processed images (already 224x224)
+        patch_left = Image.open(left_path).convert("RGB")
+        patch_right = Image.open(right_path).convert("RGB")
 
-        patch_left_a = image_a.crop((0, 0, mid_x, h))
-        patch_right_a = image_a.crop((mid_x, 0, w, h))
-
-        # 3. Determine if Positive or Negative Example
-        # 50% chance of being a positive pair (Adjacent)
-        # 50% chance of being a negative pair (Random)
-        is_positive = random.random() > 0.5
-
-        label = 1.0 if is_positive else 0.0
-
-        if is_positive:
-            patch_1 = patch_left_a
-            patch_2 = patch_right_a
-        else:
-            # Negative: Pair Left patch of A with Left patch of random Image B
-            rand_idx = random.randint(0, len(self.image_files) - 1)
-            while rand_idx == idx and len(self.image_files) > 1:
-                rand_idx = random.randint(0, len(self.image_files) - 1)
-
-            img_path_b = self.image_files[rand_idx]
-            image_b = Image.open(img_path_b).convert("RGB")
-            w_b, h_b = image_b.size
-            mid_x_b = w_b // 2
-
-            # Using left patch of B to ensure it doesn't accidentally march right patch of A if they were same image
-            patch_left_b = image_b.crop((0, 0, mid_x_b, h_b))
-
-            patch_1 = patch_left_a
-            patch_2 = patch_left_b
-
-        # 4. Apply Transforms (Resize -> Tensor -> Normalize)
-        target_w, target_h = IMG_SIZE
-
-        # patch_1 is the Left patch. Adjacency boundary is on its RIGHT.
-        if patch_1.width > target_w:
-            patch_1 = patch_1.crop(
-                (patch_1.width - target_w, 0, patch_1.width, patch_1.height)
-            )
-
-        # patch_2 is the Right patch (or serves that role). Adjacency boundary is on its LEFT.
-        if patch_2.width > target_w:
-            patch_2 = patch_2.crop((0, 0, target_w, patch_2.height))
-
+        # Apply transforms (ToTensor, Normalize)
         if self.transform:
-            patch_1 = self.transform(patch_1)
-            patch_2 = self.transform(patch_2)
+            patch_left = self.transform(patch_left)
+            patch_right = self.transform(patch_right)
 
-        return patch_1, patch_2, torch.tensor(label, dtype=torch.float32)
+        return patch_left, patch_right, torch.tensor(label, dtype=torch.float32)
 
 
 class SiameseNetwork(nn.Module):
@@ -234,6 +202,12 @@ def main():
         "--images", type=str, default=DEFAULT_IMAGE_DIR, help="Path to image directory"
     )
     parser.add_argument(
+        "--csv",
+        type=str,
+        default=DEFAULT_CSV_PATH,
+        help="Path to CSV file with image pairs",
+    )
+    parser.add_argument(
         "--results",
         type=str,
         default=DEFAULT_RESULTS_DIR,
@@ -266,6 +240,14 @@ def main():
     )
     args = parser.parse_args()
 
+    seed = 69
+    random.seed(seed)
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(seed)
+    print(f"Random seed set to: {seed}")
+
     # Check device
     device = torch.device(
         "cuda"
@@ -279,20 +261,20 @@ def main():
     # Create results directory if it doesn't exist
     os.makedirs(args.results, exist_ok=True)
 
-    # Transforms
     transform = transforms.Compose(
         [
-            transforms.Resize(IMG_SIZE),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
         ]
     )
 
     # Dataset
-    full_dataset = AdjacencyDataset(args.images, transform=transform, dev_mode=args.dev)
+    full_dataset = AdjacencyDataset(
+        csv_path=args.csv, image_dir=args.images, transform=transform, dev_mode=args.dev
+    )
 
     if len(full_dataset) == 0:
-        print(f"No images found in {args.images}. Please check path.")
+        print(f"No image pairs found. Please check {args.csv} and {args.images}.")
         return
 
     # Split
@@ -301,8 +283,10 @@ def main():
     test_size = min(int(0.1 * total_size), 10000)
     train_size = total_size - val_size - test_size
 
+    # Use generator with seed for reproducible random split
+    generator = torch.Generator().manual_seed(seed)
     train_dataset, val_dataset, test_dataset = random_split(
-        full_dataset, [train_size, val_size, test_size]
+        full_dataset, [train_size, val_size, test_size], generator=generator
     )
 
     print(

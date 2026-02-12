@@ -24,19 +24,65 @@
     uv sync
     ```
 
+## Dataset Structure
+
+The dataset uses a CSV-based approach for organizing image pairs. Here's how to structure your data:
+
+### Directory Layout
+
+```
+project/
+├── images/
+│   ├── pair_001_left.jpg
+│   ├── pair_001_right.jpg
+│   ├── pair_002_left.jpg
+│   ├── pair_002_right.jpg
+│   ├── pair_003_left.jpg
+│   ├── pair_003_right.jpg
+│   └── ...
+└── pairs.csv
+```
+
+### CSV Format
+
+Create a `pairs.csv` file with the following structure:
+
+```csv
+left_image,right_image,label
+pair_001_left.jpg,pair_001_right.jpg,1
+pair_002_left.jpg,pair_002_right.jpg,0
+pair_003_left.jpg,pair_003_right.jpg,1
+```
+
+**Columns:**
+
+- `left_image`: Filename of the left patch (relative to the images directory)
+- `right_image`: Filename of the right patch (relative to the images directory)
+- `label`:
+  - `1` = Adjacent (patches from the same source image, side-by-side)
+  - `0` = Non-adjacent (patches from different images or not adjacent)
+
+### Image Requirements
+
+- **Resolution**: All images must be pre-processed to **224×224 pixels**
+- **Format**: JPG, PNG, or WebP
+- **Naming**: Use consistent naming conventions (e.g., `{id}_left.jpg`, `{id}_right.jpg`)
+- **Color**: RGB color images
+
 ## Usage
 
 ### Training
 
-To train the adjacency detection model, use the `src/siamese_network.py` script. You can configure the model architecture, batch size, learning rate, and more.
+Ensure your dataset is structured according to the [Dataset Structure](#dataset-structure) section above. Then train the adjacency detection model:
 
 ```bash
-uv run src/siamese_network.py --images ./images --epochs 10 --model resnet18
+uv run src/siamese_network.py --images ./images --csv ./pairs.csv --epochs 10 --model resnet18
 ```
 
 **Common Arguments:**
 
 - `--images`: Path to the directory containing images (default: `./images`).
+- `--csv`: Path to the CSV file with image pairs (default: `./pairs.csv`).
 - `--model`: Model backbone to use (e.g., `resnet18`, `efficientnet_b0`, `mobilenetv3_large_100`).
 - `--epochs`: Number of training epochs.
 - `--dev`: Run in development mode with a smaller dataset for quick testing.
@@ -57,7 +103,7 @@ uv run scripts/convert_to_mlpackage.py --model_path results/model.pth --optimize
 
 ## Final Model
 
-The final production model is located in the `results` directory. It is a **MobileNetV3 Large 100** model chosen for its superior balance of speed and accuracy.
+The final production model is located in the `models` directory. It is a **MobileNetV3 Large 100** model chosen for its superior balance of speed and accuracy.
 
 - **PyTorch Model:** [`models/model.pth`](models/model.pth)
 - **Core ML Model:** [`models/model.mlpackage`](models/model.mlpackage) / [`models/model_optimized.mlpackage`](models/model_optimized.mlpackage)
@@ -85,13 +131,13 @@ The final production model is located in the `results` directory. It is a **Mobi
 
 ### Top Results Summary (Training)
 
-| Model                      | Learning Rate | Batch Size | Status  | Accuracy | Loss   | Precision | Recall | F1 Score | Duration (s) |
-| -------------------------- | ------------- | ---------- | ------- | -------- | ------ | --------- | ------ | -------- | ------------ |
-| mobilenetv3_large_100      | 0.001         | 64         | Success | 98.00%   | 0.0759 | 0.9920    | 0.9688 | 0.9802   | 725.23       |
-| efficientnet_b0            | 0.001         | 32         | Success | 97.70%   | 0.0714 | 0.9660    | 0.9877 | 0.9767   | 717.09       |
-| resnet18                   | 0.001         | 16         | Success | 97.60%   | 0.0745 | 0.9776    | 0.9736 | 0.9756   | 1019.94      |
-| fastvit_t8.apple_dist_in1k | 0.0001        | 16         | Success | 97.10%   | 0.0702 | 0.9773    | 0.9634 | 0.9703   | 1667.97      |
-| efficientnet_b0            | 0.001         | 16         | Success | 96.80%   | 0.0945 | 0.9524    | 0.9886 | 0.9701   | 1711.09      |
+| Model                      | Learning Rate | Batch Size | Accuracy | Loss   | Precision | Recall | F1 Score | Duration (s) |
+| -------------------------- | ------------- | ---------- | -------- | ------ | --------- | ------ | -------- | ------------ |
+| mobilenetv3_large_100      | 0.001         | 64         | 98.00%   | 0.0759 | 0.9920    | 0.9688 | 0.9802   | 725.23       |
+| efficientnet_b0            | 0.001         | 32         | 97.70%   | 0.0714 | 0.9660    | 0.9877 | 0.9767   | 717.09       |
+| resnet18                   | 0.001         | 16         | 97.60%   | 0.0745 | 0.9776    | 0.9736 | 0.9756   | 1019.94      |
+| fastvit_t8.apple_dist_in1k | 0.0001        | 16         | 97.10%   | 0.0702 | 0.9773    | 0.9634 | 0.9703   | 1667.97      |
+| efficientnet_b0            | 0.001         | 16         | 96.80%   | 0.0945 | 0.9524    | 0.9886 | 0.9701   | 1711.09      |
 
 ### Runtime Benchmark (Inference)
 

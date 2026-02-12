@@ -227,5 +227,7 @@ xcuserdata/
 
 
 # Custom
+/raw_images
 /images
 /results
+pairs.csv
