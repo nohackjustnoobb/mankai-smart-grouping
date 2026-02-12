@@ -1,6 +1,8 @@
 import argparse
 import csv
 import random
+import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 from typing import Dict, List
 
@@ -122,15 +124,15 @@ def process_image(
 
     # Save patches
     base_name = f"{image_index:06d}"
-    ll_filename = f"{base_name}_ll.jpg"
-    lr_filename = f"{base_name}_lr.jpg"
-    rl_filename = f"{base_name}_rl.jpg"
-    rr_filename = f"{base_name}_rr.jpg"
+    ll_filename = f"{base_name}_ll.webp"
+    lr_filename = f"{base_name}_lr.webp"
+    rl_filename = f"{base_name}_rl.webp"
+    rr_filename = f"{base_name}_rr.webp"
 
-    patch_ll.save(output_dir / ll_filename, quality=95)
-    patch_lr.save(output_dir / lr_filename, quality=95)
-    patch_rl.save(output_dir / rl_filename, quality=95)
-    patch_rr.save(output_dir / rr_filename, quality=95)
+    patch_ll.save(output_dir / ll_filename, "WEBP")
+    patch_lr.save(output_dir / lr_filename, "WEBP")
+    patch_rl.save(output_dir / rl_filename, "WEBP")
+    patch_rr.save(output_dir / rr_filename, "WEBP")
 
     return {
         "ll": ll_filename,
@@ -140,12 +142,50 @@ def process_image(
     }
 
 
+def process_image_batch(
+    image_paths_with_indices: List[tuple[Path, int]],
+    output_dir: Path,
+    patch_size: int,
+    worker_id: int,
+) -> List[Dict[str, str]]:
+    """
+    Process a batch of images.
+
+    Args:
+        image_paths_with_indices: List of tuples (image_path, image_index)
+        output_dir: Directory to save the patches
+        patch_size: Size of the output patches
+        worker_id: ID of the worker thread for progress bar positioning
+
+    Returns:
+        List of patch dictionaries for successfully processed images
+    """
+    results = []
+    
+    # Create a progress bar for this worker
+    with tqdm(
+        total=len(image_paths_with_indices),
+        desc=f"Worker {worker_id}",
+        position=worker_id,
+        leave=True,
+        unit="img"
+    ) as pbar:
+        for image_path, image_index in image_paths_with_indices:
+            patches = process_image(image_path, output_dir, image_index, patch_size)
+            if patches:
+                results.append(patches)
+            pbar.update(1)
+    
+    return results
+
+
 def generate_dataset(
     input_dir: str,
     output_dir: str,
     csv_path: str,
     patch_size: int = 224,
     max_images: int = None,
+    num_workers: int = 4,
 ):
     """
     Generate dataset from images directory.
@@ -156,6 +196,7 @@ def generate_dataset(
         csv_path: Path to save the CSV file with pairs
         patch_size: Size of the output patches (default 224)
         max_images: Maximum number of images to process (None for all)
+        num_workers: Number of parallel workers for processing (default 4)
     """
     # Create output directory
     output_path = Path(output_dir)
@@ -172,13 +213,29 @@ def generate_dataset(
         image_files = image_files[:max_images]
 
     print(f"Found {len(image_files)} images to process")
+    print(f"Using {num_workers} workers for parallel processing")
 
-    # Process all images and collect patches
+    # Split images into chunks for each worker
+    chunk_size = (len(image_files) + num_workers - 1) // num_workers
+    image_chunks = []
+    for i in range(0, len(image_files), chunk_size):
+        chunk = [(image_files[j], j) for j in range(i, min(i + chunk_size, len(image_files)))]
+        image_chunks.append(chunk)
+
+    # Process all images and collect patches using multithreading
     all_patches = []
-    for idx, image_path in enumerate(tqdm(image_files, desc="Processing images")):
-        patches = process_image(image_path, output_path, idx, patch_size)
-        if patches:  # Only add if processing was successful
-            all_patches.append(patches)
+    
+    with ThreadPoolExecutor(max_workers=num_workers) as executor:
+        # Submit one task per worker with unique worker ID
+        futures = [
+            executor.submit(process_image_batch, chunk, output_path, patch_size, i)
+            for i, chunk in enumerate(image_chunks)
+        ]
+        
+        # Collect results as they complete
+        for future in as_completed(futures):
+            batch_results = future.result()
+            all_patches.extend(batch_results)
 
     if len(all_patches) < 2:
         print(
@@ -201,7 +258,9 @@ def generate_dataset(
     # For each image, create a false pair with a random different image
     for i, patches_i in enumerate(all_patches):
         # Choose a random different image
-        j = random.choice([x for x in range(len(all_patches)) if x != i])
+        j = random.randint(0, len(all_patches) - 2)
+        if j >= i:
+            j += 1
         patches_j = all_patches[j]
 
         # Pair right edge of image A with left edge of image B
@@ -262,6 +321,12 @@ def main():
         default=None,
         help="Maximum number of images to process (default: all)",
     )
+    parser.add_argument(
+        "--num-workers",
+        type=int,
+        default=os.cpu_count() or 4,
+        help="Number of parallel workers for processing (default: number of CPU cores)",
+    )
 
     args = parser.parse_args()
 
@@ -271,6 +336,7 @@ def main():
         csv_path=args.csv_path,
         patch_size=args.patch_size,
         max_images=args.max_images,
+        num_workers=args.num_workers,
     )
 
 
