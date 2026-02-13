@@ -66,7 +66,6 @@ pair_003_left.jpg,pair_003_right.jpg,1
 
 - **Resolution**: All images must be pre-processed to **224×224 pixels**
 - **Format**: JPG, PNG, or WebP
-- **Naming**: Use consistent naming conventions (e.g., `{id}_left.jpg`, `{id}_right.jpg`)
 - **Color**: RGB color images
 
 ## Usage
@@ -108,17 +107,17 @@ The final production model is located in the `models` directory. It is a **Mobil
 - **PyTorch Model:** [`models/model.pth`](models/model.pth)
 - **Core ML Model:** [`models/model.mlpackage`](models/model.mlpackage) / [`models/model_optimized.mlpackage`](models/model_optimized.mlpackage)
 - **Architecture:** `mobilenetv3_large_100`
-- **Test Accuracy:** 99.25%
-- **Precision:** 0.9914
-- **Recall:** 0.9936
-- **F1 Score:** 0.9925
+- **Test Accuracy:** 99.51%
+- **Precision:** 0.9945
+- **Recall:** 0.9955
+- **F1 Score:** 0.9950
 
 **Training Settings:**
 
-- **Dataset:** ~260,000 images
-- **Epochs:** 16 (Early Stopping, Max 50)
-- **Batch Size:** 32
-- **Learning Rate:** 0.001
+- **Dataset:** ~520,000 pairs (~1,040,000 images)
+- **Epochs:** 12 (Early Stopping, Max 50)
+- **Batch Size:** 16
+- **Learning Rate:** 0.0001
 - **Patience:** 10
 
 ## Benchmark Results
@@ -127,34 +126,32 @@ The final production model is located in the `models` directory. It is a **Mobil
 
 - **Epochs:** 10
 - **GPU:** RTX 3080 10GB
-- **Dataset:** 10,000 images
+- **Dataset:** 10,000 pairs (20,000 images)
 
 ### Top Results Summary (Training)
 
 | Model                      | Learning Rate | Batch Size | Accuracy | Loss   | Precision | Recall | F1 Score | Duration (s) |
 | -------------------------- | ------------- | ---------- | -------- | ------ | --------- | ------ | -------- | ------------ |
-| mobilenetv3_large_100      | 0.001         | 64         | 98.00%   | 0.0759 | 0.9920    | 0.9688 | 0.9802   | 725.23       |
-| efficientnet_b0            | 0.001         | 32         | 97.70%   | 0.0714 | 0.9660    | 0.9877 | 0.9767   | 717.09       |
-| resnet18                   | 0.001         | 16         | 97.60%   | 0.0745 | 0.9776    | 0.9736 | 0.9756   | 1019.94      |
-| fastvit_t8.apple_dist_in1k | 0.0001        | 16         | 97.10%   | 0.0702 | 0.9773    | 0.9634 | 0.9703   | 1667.97      |
-| efficientnet_b0            | 0.001         | 16         | 96.80%   | 0.0945 | 0.9524    | 0.9886 | 0.9701   | 1711.09      |
+| fastvit_t8.apple_dist_in1k | 0.0001        | 32         | 97.40%   | 0.1129 | 0.9959    | 0.9526 | 0.9737   | 485.37       |
+| mobilenetv3_large_100      | 0.0001        | 16         | 97.20%   | 0.0968 | 0.9723    | 0.9723 | 0.9723   | 398.40       |
+| efficientnet_b0            | 0.0001        | 16         | 96.80%   | 0.1810 | 0.9817    | 0.9545 | 0.9679   | 593.13       |
+| efficientnet_b0            | 0.001         | 16         | 96.70%   | 0.0901 | 0.9797    | 0.9545 | 0.9670   | 597.14       |
+| efficientnet_b0            | 0.0001        | 32         | 96.40%   | 0.2142 | 0.9719    | 0.9565 | 0.9641   | 303.55       |
 
-### Runtime Benchmark (Inference)
-
-**Environment:**
+### Inference Environment
 
 - **Device:** iPhone 15
 - **OS:** iOS 26.2.1
-- **Dataset:** 1,000 images
+- **Dataset:** 1,000 pairs (2,000 images)
 
-**Top Results:**
+### Top Results Summary (Inference)
 
-| Model                      | Type      | Batch Size | Learning Rate | Accuracy | Avg Time (ms) | Inf/Sec |
-| :------------------------- | :-------- | :--------- | :------------ | :------- | :------------ | :------ |
-| mobilenetv3_large_100      | Optimized | 32         | 0.001         | 97.50%   | 5.37          | 186.18  |
-| mobilenetv3_large_100      | Standard  | 32         | 0.001         | 97.30%   | 8.63          | 115.90  |
-| efficientnet_b0            | Optimized | 32         | 0.001         | 97.00%   | 6.82          | 146.72  |
-| fastvit_t8.apple_dist_in1k | Standard  | 16         | 0.0001        | 96.90%   | 14.17         | 70.59   |
-| mobilenetv3_large_100      | Standard  | 16         | 0.001         | 96.80%   | 8.79          | 113.78  |
+| Model                 | Type      | Batch Size | Learning Rate | Accuracy | Avg Time (ms) | Inf/Sec |
+| :-------------------- | :-------- | :--------- | :------------ | :------- | :------------ | :------ |
+| mobilenetv3_large_100 | Optimized | 16         | 0.0001        | 86.00%   | 5.35          | 186.92  |
+| mobilenetv3_large_100 | Optimized | 64         | 0.001         | 86.90%   | 5.35          | 186.89  |
+| mobilenetv3_large_100 | Optimized | 16         | 0.001         | 86.70%   | 5.35          | 186.77  |
+| mobilenetv3_large_100 | Optimized | 16         | 1e-05         | 80.00%   | 5.37          | 186.11  |
+| mobilenetv3_large_100 | Optimized | 64         | 1e-05         | 76.40%   | 5.38          | 185.74  |
 
 For the full benchmark results, please refer to [benchmark_results.json](benchmark_results.json).

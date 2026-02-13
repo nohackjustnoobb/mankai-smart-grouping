@@ -1,0 +1,188 @@
+import json
+import os
+import re
+
+# Paths
+TRAINING_RESULTS_PATH = "results/benchmark_runs/benchmark_results.json"
+INFERENCE_RESULTS_PATH = "results/benchmark_runs/inference_benchmark_results.json"
+MERGED_RESULTS_PATH = "benchmark_results.json"
+
+def load_json(path):
+    if not os.path.exists(path):
+        print(f"Warning: File not found: {path}")
+        return []
+    with open(path, "r") as f:
+        return json.load(f)
+
+def save_json(data, path):
+    with open(path, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"Saved merged results to {path}")
+
+def merge_results():
+    training_data = load_json(TRAINING_RESULTS_PATH)
+    inference_data = load_json(INFERENCE_RESULTS_PATH)
+
+    merged_map = {}
+
+    # 1. Process Training Data
+    for item in training_data:
+        run_id = item.get("run_id")
+        if not run_id:
+            continue
+        
+        raw_metrics = item.get("metrics", {})
+        # Use parameters from metrics if available, otherwise fallback to top-level parameters
+        settings_params = raw_metrics.get("parameters", item.get("parameters", {}))
+        
+        # Create a clean copy of metrics for the output, removing parameters since they are now in settings
+        clean_metrics = raw_metrics.copy()
+        if "parameters" in clean_metrics:
+            del clean_metrics["parameters"]
+
+        merged_map[run_id] = {
+            "modelId": run_id,
+            "settings": settings_params,
+            "training": {
+                "status": item.get("status"),
+                "duration": item.get("duration"),
+                "metrics": clean_metrics
+            },
+            "inference": {
+                "optimized": None,
+                "standard": None
+            }
+        }
+
+    # 2. Process Inference Data
+    for item in inference_data:
+        model_name = item.get("modelName", "")
+        # Extract run_id from modelName (e.g., "run_1_20260212_130702_128197228668608/model")
+        # Trying to capture run_{index}_{date}_{time}_{thread_id}
+        run_id_match = re.search(r"(run_\d+_\d+_\d+_\d+)", model_name)
+        
+        run_id = run_id_match.group(1) if run_id_match else None
+        
+        if not run_id:
+            continue
+
+        if run_id not in merged_map:
+            merged_map[run_id] = {
+                "modelId": run_id,
+                "settings": item.get("modelSettings", {}),
+                "training": None,
+                "inference": {
+                    "optimized": None,
+                    "standard": None
+                }
+            }
+        
+        # Determine type
+        model_type_raw = item.get("modelType", "")
+        inference_entry = item.copy()
+        keys_to_remove = ["modelSettings", "modelName", "modelPath", "modelType"]
+        for key in keys_to_remove:
+            if key in inference_entry:
+                del inference_entry[key]
+            
+        if "optimized" in model_type_raw:
+            merged_map[run_id]["inference"]["optimized"] = inference_entry
+        else:
+            merged_map[run_id]["inference"]["standard"] = inference_entry
+
+    merged_list = list(merged_map.values())
+   
+    merged_list.sort(key=lambda x: x["modelId"])
+    
+    return merged_list
+
+def generate_inference_table(merged_data):
+    # Header
+    table = "| Model | Type | Batch Size | Learning Rate | Accuracy | Avg Time (ms) | Inf/Sec |\n"
+    table += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
+    
+    flat_rows = []
+    
+    for entry in merged_data:
+        settings = entry.get("settings", {})
+        model_name = settings.get("model", "Unknown")
+        bs = settings.get("batchSize", settings.get("batch_size", "-"))
+        lr = settings.get("learningRate", settings.get("learning_rate", "-"))
+        
+        inf = entry.get("inference", {})
+        if not inf: continue
+        
+        for type_key in ["optimized", "standard"]:
+            data = inf.get(type_key)
+            if data:
+                row = {
+                    "model": model_name,
+                    "type": type_key.capitalize(),
+                    "bs": bs,
+                    "lr": lr,
+                    "acc": data.get("accuracy", 0),
+                    "time": data.get("avgTimeMs", 0),
+                    "inf_sec": data.get("inferencePerSecond", 0)
+                }
+                flat_rows.append(row)
+
+    # Sort by inf_sec descending
+    flat_rows.sort(key=lambda x: x["inf_sec"], reverse=True)
+
+    for r in flat_rows[:5]:
+        acc_str = f"{r['acc']:.2f}%"
+        time_str = f"{r['time']:.2f}"
+        inf_str = f"{r['inf_sec']:.2f}"
+        
+        # Format LR if it's a number
+        lr_val = r['lr']
+        
+        table += f"| {r['model']} | {r['type']} | {r['bs']} | {lr_val} | {acc_str} | {time_str} | {inf_str} |\n"
+
+    return table
+
+def generate_training_table(merged_data):
+    # Filter only those with training metrics
+    valid_runs = [x for x in merged_data if x.get("training") and x["training"].get("status") == "success"]
+    
+    # Sort by Test Accuracy
+    valid_runs.sort(key=lambda x: x["training"]["metrics"].get("test_acc", 0), reverse=True)
+
+    header = "| Model | Learning Rate | Batch Size | Accuracy | Loss | Precision | Recall | F1 Score | Duration (s) |\n"
+    header += "| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n"
+    
+    table = header
+    for item in valid_runs[:5]: # Top 5
+        settings = item["settings"]
+        training = item["training"]
+        metrics = training.get("metrics", {})
+        
+        model = settings.get("model", "Unknown")
+        lr = settings.get("learning_rate", settings.get("learningRate", "-"))
+        bs = settings.get("batch_size", settings.get("batchSize", "-"))
+        
+        acc = f"{metrics.get('test_acc', 0):.2f}%"
+        loss = f"{metrics.get('test_loss', 0):.4f}"
+        prec = f"{metrics.get('precision', 0):.4f}"
+        rec = f"{metrics.get('recall', 0):.4f}"
+        f1 = f"{metrics.get('f1_score', 0):.4f}"
+        dur = f"{training.get('duration', 0):.2f}"
+        
+        table += f"| {model} | {lr} | {bs} | {acc} | {loss} | {prec} | {rec} | {f1} | {dur} |\n"
+        
+    return table
+
+def main():
+    merged_data = merge_results()
+    save_json(merged_data, MERGED_RESULTS_PATH)
+    
+    print("\n\n### Top Results Summary (Training)")
+    train_table = generate_training_table(merged_data)
+    print(train_table)
+    
+    print("\n### Runtime Benchmark (Inference)")
+    inf_table = generate_inference_table(merged_data)
+    print(inf_table)
+
+if __name__ == "__main__":
+    main()

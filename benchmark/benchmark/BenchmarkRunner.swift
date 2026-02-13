@@ -24,7 +24,7 @@ class BenchmarkRunner {
     // MARK: - Private Properties
 
     private let modelRunner = ModelRunner()
-    private let batchSize = 500
+    private let batchSize = 1000
 
     // MARK: - Accumulated Results (for batch processing)
 

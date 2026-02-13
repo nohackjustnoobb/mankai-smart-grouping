@@ -184,6 +184,12 @@ def convert_to_mlpackage(
         compute_precision=ct_precision,
     )
 
+    # Add metadata
+    mlmodel.author = "Mankai"
+    mlmodel.license = "MIT"
+    mlmodel.short_description = "Siamese Network for image similarity"
+    mlmodel.version = "1.0.0"
+
     # Add input/output descriptions
     mlmodel.input_description["image1"] = "First image patch (left or reference)"
     mlmodel.input_description["image2"] = "Second image patch (right or comparison)"

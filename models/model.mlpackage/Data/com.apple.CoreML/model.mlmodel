@@ -1,4 +1,4 @@
-¿
+˙
 ?
 image1%First image patch (left or reference)*
 ‡‡†Ä
@@ -7,11 +7,12 @@ B
 ‡‡†ÄRV
 adjacency_score7Probability that the two patches are adjacent (0.0-1.0)
 *
-†Ä¢ﬂ¢4
-#com.github.apple.coremltools.sourcetorch==2.10.0¢+
-$com.github.apple.coremltools.version9.0¢:
+†Ä¢ô
+$Siamese Network for image similarity1.0.0Mankai"MIT¢+
+$com.github.apple.coremltools.version9.0¢4
+#com.github.apple.coremltools.sourcetorch==2.10.0¢:
 ,com.github.apple.coremltools.conversion_date
-2026-02-10¢:
+2026-02-13¢:
 +com.github.apple.coremltools.source_dialectTorchScript≤ ™€®
 main—®
 *
@@ -599,7 +600,7 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 
-s-@ø
+∆G=ø
 const8
 !siamese_model_classifier_3_weight
 
@@ -727,32 +728,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.bin¿ıΩ≥
-conv
-groups
-
-input_1_groups_0
-weight
-	
-const_0"
+conv"
 pad_type
 
-input_1_pad_type_0
-bias
-	
-const_1
+input_1_pad_type_0 
+strides
+
+input_1_strides_0
+groups
+
+input_1_groups_0
+x
+
+
+image1
 pad
 
 input_1_pad_0$
 	dilations
 
-input_1_dilations_0 
-strides
-
-input_1_strides_0
-x
-
-
-image1)
+input_1_dilations_0
+bias
+	
+const_1
+weight
+	
+const_0)
 input_3
 
 
@@ -819,16 +820,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?À
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_0_beta_0#
 alpha
 
 sigmoid_hard_0_alpha_0
 x
 
-thresholded_relu_0!
-beta
-
-sigmoid_hard_0_beta_00
+thresholded_relu_00
 sigmoid_hard_0
 
 
@@ -839,13 +840,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_0Ö
-mul
-y
-
-sigmoid_hard_0
+mul
 x
 
-thresholded_relu_0)
+thresholded_relu_0
+y
+
+sigmoid_hard_0)
 input_5
 
 
@@ -957,31 +958,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.bin¿˚Ω¥
-conv
-groups
-
-input_7_groups_0
-weight
-	
-const_2"
+conv"
 pad_type
 
-input_7_pad_type_0
-bias
+input_7_pad_type_0 
+strides
+
+input_7_strides_0
+groups
+
+input_7_groups_0
+x
 	
-const_3
+input_5
 pad
 
 input_7_pad_0$
 	dilations
 
-input_7_dilations_0 
-strides
-
-input_7_strides_0
-x
+input_7_dilations_0
+bias
 	
-input_5)
+const_3
+weight
+	
+const_2)
 input_9
 
 
@@ -1107,32 +1108,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.binÄÖæ≤
-conv
-groups
-
-input_13_groups_0
-weight
-	
-const_4#
+conv#
 pad_type
 
-input_13_pad_type_0
-bias
-	
-const_5
+input_13_pad_type_0!
+strides
+
+input_13_strides_0
+groups
+
+input_13_groups_0
+x
+
+
+input_11
 pad
 
 input_13_pad_0%
 	dilations
 
-input_13_dilations_0!
-strides
-
-input_13_strides_0
-x
-
-
-input_11%
+input_13_dilations_0
+bias
+	
+const_5
+weight
+	
+const_4%
 x_1
 
 
@@ -1143,13 +1144,13 @@ $com.github.apple.coremltools.version9.0¢:
 	
 "
 x_1q
-add
-y
-	
-input_5
+add
 x
 
-x_1*
+x_1
+y
+	
+input_5*
 input_15
 
 
@@ -1261,32 +1262,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 @*%
 @model_path/weights/weight.bin¿¶æº
-conv
-groups
-
-input_17_groups_0
-weight
-	
-const_6#
+conv#
 pad_type
 
-input_17_pad_type_0
-bias
-	
-const_7
+input_17_pad_type_0!
+strides
+
+input_17_strides_0
+groups
+
+input_17_groups_0
+x
+
+
+input_15
 pad
 
 input_17_pad_0%
 	dilations
 
-input_17_dilations_0!
-strides
-
-input_17_strides_0
-x
-
-
-input_15*
+input_17_dilations_0
+bias
+	
+const_7
+weight
+	
+const_6*
 input_19
 
 
@@ -1415,32 +1416,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 @*%
 @model_path/weights/weight.bin¿ªæº
-conv
-groups
-
-input_23_groups_0
-weight
-	
-const_8#
+conv#
 pad_type
 
-input_23_pad_type_0
-bias
-	
-const_9
+input_23_pad_type_0!
+strides
+
+input_23_strides_0
+groups
+
+input_23_groups_0
+x
+
+
+input_21
 pad
 
 input_23_pad_0%
 	dilations
 
-input_23_dilations_0!
-strides
-
-input_23_strides_0
-x
-
-
-input_21*
+input_23_dilations_0
+bias
+	
+const_9
+weight
+	
+const_8*
 input_25
 
 
@@ -1570,34 +1571,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.bin¿Óææ
-conv
-groups
-
-input_29_groups_0
-weight
-
-
-const_10#
+conv#
 pad_type
 
-input_29_pad_type_0
-bias
+input_29_pad_type_0!
+strides
+
+input_29_strides_0
+groups
+
+input_29_groups_0
+x
 
 
-const_11
+input_27
 pad
 
 input_29_pad_0%
 	dilations
 
-input_29_dilations_0!
-strides
-
-input_29_strides_0
-x
+input_29_dilations_0
+bias
 
 
-input_27*
+const_11
+weight
+
+
+const_10*
 input_31
 
 
@@ -1711,34 +1712,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 H*%
 @model_path/weights/weight.bin¿¶øæ
-conv
-groups
-
-input_33_groups_0
-weight
-
-
-const_12#
+conv#
 pad_type
 
-input_33_pad_type_0
-bias
+input_33_pad_type_0!
+strides
+
+input_33_strides_0
+groups
+
+input_33_groups_0
+x
 
 
-const_13
+input_31
 pad
 
 input_33_pad_0%
 	dilations
 
-input_33_dilations_0!
-strides
-
-input_33_strides_0
-x
+input_33_dilations_0
+bias
 
 
-input_31*
+const_13
+weight
+
+
+const_12*
 input_35
 
 
@@ -1869,34 +1870,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 H*%
 @model_path/weights/weight.bin¿æøæ
-conv
-groups
-
-input_39_groups_0
-weight
-
-
-const_14#
+conv#
 pad_type
 
-input_39_pad_type_0
-bias
+input_39_pad_type_0!
+strides
+
+input_39_strides_0
+groups
+
+input_39_groups_0
+x
 
 
-const_15
+input_37
 pad
 
 input_39_pad_0%
 	dilations
 
-input_39_dilations_0!
-strides
-
-input_39_strides_0
-x
+input_39_dilations_0
+bias
 
 
-input_37*
+const_15
+weight
+
+
+const_14*
 input_41
 
 
@@ -2026,34 +2027,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.binÄ¯ø¥
-conv
-groups
-
-input_45_groups_0
-weight
-
-
-const_16#
+conv#
 pad_type
 
-input_45_pad_type_0
-bias
+input_45_pad_type_0!
+strides
+
+input_45_strides_0
+groups
+
+input_45_groups_0
+x
 
 
-const_17
+input_43
 pad
 
 input_45_pad_0%
 	dilations
 
-input_45_dilations_0!
-strides
-
-input_45_strides_0
-x
+input_45_dilations_0
+bias
 
 
-input_43%
+const_17
+weight
+
+
+const_16%
 x_3
 
 
@@ -2064,14 +2065,14 @@ $com.github.apple.coremltools.version9.0¢:
 	
 "
 x_3r
-add
+add
+x
+
+x_3
 y
 
 
-input_31
-x
-
-x_3*
+input_31*
 input_47
 
 
@@ -2185,34 +2186,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 H*%
 @model_path/weights/weight.binÄ∞¿æ
-conv
-groups
-
-input_49_groups_0
-weight
-
-
-const_18#
+conv#
 pad_type
 
-input_49_pad_type_0
-bias
+input_49_pad_type_0!
+strides
+
+input_49_strides_0
+groups
+
+input_49_groups_0
+x
 
 
-const_19
+input_47
 pad
 
 input_49_pad_0%
 	dilations
 
-input_49_dilations_0!
-strides
-
-input_49_strides_0
-x
+input_49_dilations_0
+bias
 
 
-input_47*
+const_19
+weight
+
+
+const_18*
 input_51
 
 
@@ -2343,34 +2344,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 H*%
 @model_path/weights/weight.binÄÏ¿æ
-conv
-groups
-
-input_55_groups_0
-weight
-
-
-const_20#
+conv#
 pad_type
 
-input_55_pad_type_0
-bias
+input_55_pad_type_0!
+strides
+
+input_55_strides_0
+groups
+
+input_55_groups_0
+x
 
 
-const_21
+input_53
 pad
 
 input_55_pad_0%
 	dilations
 
-input_55_dilations_0!
-strides
-
-input_55_strides_0
-x
+input_55_dilations_0
+bias
 
 
-input_53*
+const_21
+weight
+
+
+const_20*
 input_57
 
 
@@ -2423,16 +2424,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ´
-reduce_mean
-x
-
-x_5
-axes
-
-input_59_axes_0%
+reduce_mean%
 	keep_dims
 
-input_59_keep_dims_0*
+input_59_keep_dims_0
+axes
+
+input_59_axes_0
+x
+
+x_5*
 input_59
 
 
@@ -2512,32 +2513,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ö
-conv
-groups
-
-input_61_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_0_se_conv_reduce_weight#
+conv#
 pad_type
 
-input_61_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_0_se_conv_reduce_bias
+input_61_pad_type_0!
+strides
+
+input_61_strides_0
+groups
+
+input_61_groups_0
+x
+
+
+input_59
 pad
 
 input_61_pad_0%
 	dilations
 
-input_61_dilations_0!
-strides
-
-input_61_strides_0
-x
-
-
-input_59*
+input_61_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_0_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_0_se_conv_reduce_weight*
 input_61
 
 
@@ -2633,32 +2634,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ö
-conv
-groups
-
-input_65_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_0_se_conv_expand_weight#
+conv#
 pad_type
 
-input_65_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_0_se_conv_expand_bias
+input_65_pad_type_0!
+strides
+
+input_65_strides_0
+groups
+
+input_65_groups_0
+x
+
+
+input_63
 pad
 
 input_65_pad_0%
 	dilations
 
-input_65_dilations_0!
-strides
-
-input_65_strides_0
-x
-
-
-input_63*
+input_65_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_0_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_0_se_conv_expand_weight*
 input_65
 
 
@@ -2696,17 +2697,17 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?§
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_217_beta_0
 alpha
 
 var_217_alpha_0
 x
 
 
-input_65
-beta
-
-var_217_beta_0)
+input_65)
 var_217
 
 
@@ -2718,13 +2719,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 op_217q
-mul
-y
-	
-var_217
+mul
 x
 
-x_5*
+x_5
+y
+	
+var_217*
 input_67
 
 
@@ -2838,34 +2839,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 (*%
 @model_path/weights/weight.bin¿…¡æ
-conv
-groups
-
-input_69_groups_0
-weight
-
-
-const_22#
+conv#
 pad_type
 
-input_69_pad_type_0
-bias
+input_69_pad_type_0!
+strides
+
+input_69_strides_0
+groups
+
+input_69_groups_0
+x
 
 
-const_23
+input_67
 pad
 
 input_69_pad_0%
 	dilations
 
-input_69_dilations_0!
-strides
-
-input_69_strides_0
-x
+input_69_dilations_0
+bias
 
 
-input_67*
+const_23
+weight
+
+
+const_22*
 input_71
 
 
@@ -2979,34 +2980,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 x*%
 @model_path/weights/weight.binÄ‚¬æ
-conv
-groups
-
-input_73_groups_0
-weight
-
-
-const_24#
+conv#
 pad_type
 
-input_73_pad_type_0
-bias
+input_73_pad_type_0!
+strides
+
+input_73_strides_0
+groups
+
+input_73_groups_0
+x
 
 
-const_25
+input_71
 pad
 
 input_73_pad_0%
 	dilations
 
-input_73_dilations_0!
-strides
-
-input_73_strides_0
-x
+input_73_dilations_0
+bias
 
 
-input_71*
+const_25
+weight
+
+
+const_24*
 input_75
 
 
@@ -3137,34 +3138,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 x*%
 @model_path/weights/weight.binÄ≈√æ
-conv
-groups
-
-input_79_groups_0
-weight
-
-
-const_26#
+conv#
 pad_type
 
-input_79_pad_type_0
-bias
+input_79_pad_type_0!
+strides
+
+input_79_strides_0
+groups
+
+input_79_groups_0
+x
 
 
-const_27
+input_77
 pad
 
 input_79_pad_0%
 	dilations
 
-input_79_dilations_0!
-strides
-
-input_79_strides_0
-x
+input_79_dilations_0
+bias
 
 
-input_77*
+const_27
+weight
+
+
+const_26*
 input_81
 
 
@@ -3217,16 +3218,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ´
-reduce_mean
-x
-
-x_7
-axes
-
-input_83_axes_0%
+reduce_mean%
 	keep_dims
 
-input_83_keep_dims_0*
+input_83_keep_dims_0
+axes
+
+input_83_axes_0
+x
+
+x_7*
 input_83
 
 
@@ -3306,32 +3307,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ö
-conv
-groups
-
-input_85_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_1_se_conv_reduce_weight#
+conv#
 pad_type
 
-input_85_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_1_se_conv_reduce_bias
+input_85_pad_type_0!
+strides
+
+input_85_strides_0
+groups
+
+input_85_groups_0
+x
+
+
+input_83
 pad
 
 input_85_pad_0%
 	dilations
 
-input_85_dilations_0!
-strides
-
-input_85_strides_0
-x
-
-
-input_83*
+input_85_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_1_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_1_se_conv_reduce_weight*
 input_85
 
 
@@ -3427,32 +3428,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ö
-conv
-groups
-
-input_89_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_1_se_conv_expand_weight#
+conv#
 pad_type
 
-input_89_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_1_se_conv_expand_bias
+input_89_pad_type_0!
+strides
+
+input_89_strides_0
+groups
+
+input_89_groups_0
+x
+
+
+input_87
 pad
 
 input_89_pad_0%
 	dilations
 
-input_89_dilations_0!
-strides
-
-input_89_strides_0
-x
-
-
-input_87*
+input_89_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_1_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_1_se_conv_expand_weight*
 input_89
 
 
@@ -3490,17 +3491,17 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?§
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_280_beta_0
 alpha
 
 var_280_alpha_0
 x
 
 
-input_89
-beta
-
-var_280_beta_0)
+input_89)
 var_280
 
 
@@ -3512,13 +3513,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 op_280q
-mul
-y
-	
-var_280
+mul
 x
 
-x_7*
+x_7
+y
+	
+var_280*
 input_91
 
 
@@ -3632,34 +3633,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 (*%
 @model_path/weights/weight.binÄ‡ƒ¥
-conv
-groups
-
-input_93_groups_0
-weight
-
-
-const_28#
+conv#
 pad_type
 
-input_93_pad_type_0
-bias
+input_93_pad_type_0!
+strides
+
+input_93_strides_0
+groups
+
+input_93_groups_0
+x
 
 
-const_29
+input_91
 pad
 
 input_93_pad_0%
 	dilations
 
-input_93_dilations_0!
-strides
-
-input_93_strides_0
-x
+input_93_dilations_0
+bias
 
 
-input_91%
+const_29
+weight
+
+
+const_28%
 x_9
 
 
@@ -3670,14 +3671,14 @@ $com.github.apple.coremltools.version9.0¢:
 	
 "
 x_9r
-add
+add
+x
+
+x_9
 y
 
 
-input_71
-x
-
-x_9*
+input_71*
 input_95
 
 
@@ -3791,34 +3792,34 @@ $com.github.apple.coremltools.version9.0¢:
 
 x*%
 @model_path/weights/weight.bin¿¯≈æ
-conv
-groups
-
-input_97_groups_0
-weight
-
-
-const_30#
+conv#
 pad_type
 
-input_97_pad_type_0
-bias
+input_97_pad_type_0!
+strides
+
+input_97_strides_0
+groups
+
+input_97_groups_0
+x
 
 
-const_31
+input_95
 pad
 
 input_97_pad_0%
 	dilations
 
-input_97_dilations_0!
-strides
-
-input_97_strides_0
-x
+input_97_dilations_0
+bias
 
 
-input_95*
+const_31
+weight
+
+
+const_30*
 input_99
 
 
@@ -3948,33 +3949,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 x*%
 @model_path/weights/weight.bin¿€∆∆
-conv 
-groups
-
-input_103_groups_0
-weight
-
-
-const_32$
+conv$
 pad_type
 
-input_103_pad_type_0
-bias
-
-
-const_33
+input_103_pad_type_0"
+strides
+
+input_103_strides_0 
+groups
+
+input_103_groups_0
+x
+
+	input_101
 pad
 
 input_103_pad_0&
 	dilations
 
-input_103_dilations_0"
-strides
-
-input_103_strides_0
-x
-
-	input_101+
+input_103_dilations_0
+bias
+
+
+const_33
+weight
+
+
+const_32+
 	input_105
 
 
@@ -4026,16 +4027,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∞
-reduce_mean
-x
-
-x_11
-axes
-
-input_107_axes_0&
+reduce_mean&
 	keep_dims
 
-input_107_keep_dims_0+
+input_107_keep_dims_0
+axes
+
+input_107_axes_0
+x
+
+x_11+
 	input_107
 
 
@@ -4114,31 +4115,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_109_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_2_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_109_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_2_se_conv_reduce_bias
+input_109_pad_type_0"
+strides
+
+input_109_strides_0 
+groups
+
+input_109_groups_0
+x
+
+	input_107
 pad
 
 input_109_pad_0&
 	dilations
 
-input_109_dilations_0"
-strides
-
-input_109_strides_0
-x
-
-	input_107+
+input_109_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_2_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_2_se_conv_reduce_weight+
 	input_109
 
 
@@ -4231,31 +4232,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_113_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_2_se_conv_expand_weight$
+conv$
 pad_type
 
-input_113_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_2_se_conv_expand_bias
+input_113_pad_type_0"
+strides
+
+input_113_strides_0 
+groups
+
+input_113_groups_0
+x
+
+	input_111
 pad
 
 input_113_pad_0&
 	dilations
 
-input_113_dilations_0"
-strides
-
-input_113_strides_0
-x
-
-	input_111+
+input_113_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_2_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_2_se_conv_expand_weight+
 	input_113
 
 
@@ -4292,16 +4293,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?•
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_344_beta_0
 alpha
 
 var_344_alpha_0
 x
 
-	input_113
-beta
-
-var_344_beta_0)
+	input_113)
 var_344
 
 
@@ -4313,13 +4314,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 op_344t
-mul
-y
-	
-var_344
+mul
 x
 
-x_11+
+x_11
+y
+	
+var_344+
 	input_115
 
 
@@ -4432,33 +4433,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 (*%
 @model_path/weights/weight.bin¿ˆ«º
-conv 
-groups
-
-input_117_groups_0
-weight
-
-
-const_34$
+conv$
 pad_type
 
-input_117_pad_type_0
-bias
-
-
-const_35
+input_117_pad_type_0"
+strides
+
+input_117_strides_0 
+groups
+
+input_117_groups_0
+x
+
+	input_115
 pad
 
 input_117_pad_0&
 	dilations
 
-input_117_dilations_0"
-strides
-
-input_117_strides_0
-x
-
-	input_115&
+input_117_dilations_0
+bias
+
+
+const_35
+weight
+
+
+const_34&
 x_13
 
 
@@ -4470,14 +4471,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_13u
-add
+add
+x
+
+x_13
 y
 
 
-input_95
-x
-
-x_13+
+input_95+
 	input_119
 
 
@@ -4588,33 +4589,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.binÄ• «
-conv 
-groups
-
-input_121_groups_0
-weight
-
-
-const_36$
+conv$
 pad_type
 
-input_121_pad_type_0
-bias
-
-
-const_37
+input_121_pad_type_0"
+strides
+
+input_121_strides_0 
+groups
+
+input_121_groups_0
+x
+
+	input_119
 pad
 
 input_121_pad_0&
 	dilations
 
-input_121_dilations_0"
-strides
-
-input_121_strides_0
-x
-
-	input_119,
+input_121_dilations_0
+bias
+
+
+const_37
+weight
+
+
+const_36,
 	input_123
 
 
@@ -4681,16 +4682,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_1_beta_0#
 alpha
 
 sigmoid_hard_1_alpha_0
 x
 
-thresholded_relu_1!
-beta
-
-sigmoid_hard_1_beta_01
+thresholded_relu_11
 sigmoid_hard_1
 
 
@@ -4701,13 +4702,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_1ä
-mul
-y
-
-sigmoid_hard_1
+mul
 x
 
-thresholded_relu_1,
+thresholded_relu_1
+y
+
+sigmoid_hard_1,
 	input_125
 
 
@@ -4819,33 +4820,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.binÄÒ «
-conv 
-groups
-
-input_127_groups_0
-weight
-
-
-const_38$
+conv$
 pad_type
 
-input_127_pad_type_0
-bias
-
-
-const_39
+input_127_pad_type_0"
+strides
+
+input_127_strides_0 
+groups
+
+input_127_groups_0
+x
+
+	input_125
 pad
 
 input_127_pad_0&
 	dilations
 
-input_127_dilations_0"
-strides
-
-input_127_strides_0
-x
-
-	input_125,
+input_127_dilations_0
+bias
+
+
+const_39
+weight
+
+
+const_38,
 	input_129
 
 
@@ -4912,16 +4913,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_2_beta_0#
 alpha
 
 sigmoid_hard_2_alpha_0
 x
 
-thresholded_relu_2!
-beta
-
-sigmoid_hard_2_beta_01
+thresholded_relu_21
 sigmoid_hard_2
 
 
@@ -4932,13 +4933,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_2ä
-mul
-y
-
-sigmoid_hard_2
+mul
 x
 
-thresholded_relu_2,
+thresholded_relu_2
+y
+
+sigmoid_hard_2,
 	input_131
 
 
@@ -5051,33 +5052,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 P*%
 @model_path/weights/weight.bin¿—œ∆
-conv 
-groups
-
-input_133_groups_0
-weight
-
-
-const_40$
+conv$
 pad_type
 
-input_133_pad_type_0
-bias
-
-
-const_41
+input_133_pad_type_0"
+strides
+
+input_133_strides_0 
+groups
+
+input_133_groups_0
+x
+
+	input_131
 pad
 
 input_133_pad_0&
 	dilations
 
-input_133_dilations_0"
-strides
-
-input_133_strides_0
-x
-
-	input_131+
+input_133_dilations_0
+bias
+
+
+const_41
+weight
+
+
+const_40+
 	input_135
 
 
@@ -5188,33 +5189,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 »*%
 @model_path/weights/weight.binÄ…”«
-conv 
-groups
-
-input_137_groups_0
-weight
-
-
-const_42$
+conv$
 pad_type
 
-input_137_pad_type_0
-bias
-
-
-const_43
+input_137_pad_type_0"
+strides
+
+input_137_strides_0 
+groups
+
+input_137_groups_0
+x
+
+	input_135
 pad
 
 input_137_pad_0&
 	dilations
 
-input_137_dilations_0"
-strides
-
-input_137_strides_0
-x
-
-	input_135,
+input_137_dilations_0
+bias
+
+
+const_43
+weight
+
+
+const_42,
 	input_139
 
 
@@ -5281,16 +5282,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_3_beta_0#
 alpha
 
 sigmoid_hard_3_alpha_0
 x
 
-thresholded_relu_3!
-beta
-
-sigmoid_hard_3_beta_01
+thresholded_relu_31
 sigmoid_hard_3
 
 
@@ -5301,13 +5302,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_3ä
-mul
-y
-
-sigmoid_hard_3
+mul
 x
 
-thresholded_relu_3,
+thresholded_relu_3
+y
+
+sigmoid_hard_3,
 	input_141
 
 
@@ -5419,33 +5420,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 »*%
 @model_path/weights/weight.binÄâ‘«
-conv 
-groups
-
-input_143_groups_0
-weight
-
-
-const_44$
+conv$
 pad_type
 
-input_143_pad_type_0
-bias
-
-
-const_45
+input_143_pad_type_0"
+strides
+
+input_143_strides_0 
+groups
+
+input_143_groups_0
+x
+
+	input_141
 pad
 
 input_143_pad_0&
 	dilations
 
-input_143_dilations_0"
-strides
-
-input_143_strides_0
-x
-
-	input_141,
+input_143_dilations_0
+bias
+
+
+const_45
+weight
+
+
+const_44,
 	input_145
 
 
@@ -5512,16 +5513,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_4_beta_0#
 alpha
 
 sigmoid_hard_4_alpha_0
 x
 
-thresholded_relu_4!
-beta
-
-sigmoid_hard_4_beta_01
+thresholded_relu_41
 sigmoid_hard_4
 
 
@@ -5532,13 +5533,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_4ä
-mul
-y
-
-sigmoid_hard_4
+mul
 x
 
-thresholded_relu_4,
+thresholded_relu_4
+y
+
+sigmoid_hard_4,
 	input_147
 
 
@@ -5651,33 +5652,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 P*%
 @model_path/weights/weight.bin¿Ñÿº
-conv 
-groups
-
-input_149_groups_0
-weight
-
-
-const_46$
+conv$
 pad_type
 
-input_149_pad_type_0
-bias
-
-
-const_47
+input_149_pad_type_0"
+strides
+
+input_149_strides_0 
+groups
+
+input_149_groups_0
+x
+
+	input_147
 pad
 
 input_149_pad_0&
 	dilations
 
-input_149_dilations_0"
-strides
-
-input_149_strides_0
-x
-
-	input_147&
+input_149_dilations_0
+bias
+
+
+const_47
+weight
+
+
+const_46&
 x_15
 
 
@@ -5689,13 +5690,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_15v
-add
-y
-
-	input_135
+add
 x
 
-x_15+
+x_15
+y
+
+	input_135+
 	input_151
 
 
@@ -5806,33 +5807,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ∏*%
 @model_path/weights/weight.binÄ‘€«
-conv 
-groups
-
-input_153_groups_0
-weight
-
-
-const_48$
+conv$
 pad_type
 
-input_153_pad_type_0
-bias
-
-
-const_49
+input_153_pad_type_0"
+strides
+
+input_153_strides_0 
+groups
+
+input_153_groups_0
+x
+
+	input_151
 pad
 
 input_153_pad_0&
 	dilations
 
-input_153_dilations_0"
-strides
-
-input_153_strides_0
-x
-
-	input_151,
+input_153_dilations_0
+bias
+
+
+const_49
+weight
+
+
+const_48,
 	input_155
 
 
@@ -5899,16 +5900,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_5_beta_0#
 alpha
 
 sigmoid_hard_5_alpha_0
 x
 
-thresholded_relu_5!
-beta
-
-sigmoid_hard_5_beta_01
+thresholded_relu_51
 sigmoid_hard_5
 
 
@@ -5919,13 +5920,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_5ä
-mul
-y
-
-sigmoid_hard_5
+mul
 x
 
-thresholded_relu_5,
+thresholded_relu_5
+y
+
+sigmoid_hard_5,
 	input_157
 
 
@@ -6037,33 +6038,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ∏*%
 @model_path/weights/weight.binÄè‹«
-conv 
-groups
-
-input_159_groups_0
-weight
-
-
-const_50$
+conv$
 pad_type
 
-input_159_pad_type_0
-bias
-
-
-const_51
+input_159_pad_type_0"
+strides
+
+input_159_strides_0 
+groups
+
+input_159_groups_0
+x
+
+	input_157
 pad
 
 input_159_pad_0&
 	dilations
 
-input_159_dilations_0"
-strides
-
-input_159_strides_0
-x
-
-	input_157,
+input_159_dilations_0
+bias
+
+
+const_51
+weight
+
+
+const_50,
 	input_161
 
 
@@ -6130,16 +6131,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_6_beta_0#
 alpha
 
 sigmoid_hard_6_alpha_0
 x
 
-thresholded_relu_6!
-beta
-
-sigmoid_hard_6_beta_01
+thresholded_relu_61
 sigmoid_hard_6
 
 
@@ -6150,13 +6151,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_6ä
-mul
-y
-
-sigmoid_hard_6
+mul
 x
 
-thresholded_relu_6,
+thresholded_relu_6
+y
+
+sigmoid_hard_6,
 	input_163
 
 
@@ -6269,33 +6270,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 P*%
 @model_path/weights/weight.binÄ‚ﬂº
-conv 
-groups
-
-input_165_groups_0
-weight
-
-
-const_52$
+conv$
 pad_type
 
-input_165_pad_type_0
-bias
-
-
-const_53
+input_165_pad_type_0"
+strides
+
+input_165_strides_0 
+groups
+
+input_165_groups_0
+x
+
+	input_163
 pad
 
 input_165_pad_0&
 	dilations
 
-input_165_dilations_0"
-strides
-
-input_165_strides_0
-x
-
-	input_163&
+input_165_dilations_0
+bias
+
+
+const_53
+weight
+
+
+const_52&
 x_17
 
 
@@ -6307,13 +6308,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_17v
-add
-y
-
-	input_151
+add
 x
 
-x_17+
+x_17
+y
+
+	input_151+
 	input_167
 
 
@@ -6424,33 +6425,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ∏*%
 @model_path/weights/weight.bin¿±„«
-conv 
-groups
-
-input_169_groups_0
-weight
-
-
-const_54$
+conv$
 pad_type
 
-input_169_pad_type_0
-bias
-
-
-const_55
+input_169_pad_type_0"
+strides
+
+input_169_strides_0 
+groups
+
+input_169_groups_0
+x
+
+	input_167
 pad
 
 input_169_pad_0&
 	dilations
 
-input_169_dilations_0"
-strides
-
-input_169_strides_0
-x
-
-	input_167,
+input_169_dilations_0
+bias
+
+
+const_55
+weight
+
+
+const_54,
 	input_171
 
 
@@ -6517,16 +6518,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_7_beta_0#
 alpha
 
 sigmoid_hard_7_alpha_0
 x
 
-thresholded_relu_7!
-beta
-
-sigmoid_hard_7_beta_01
+thresholded_relu_71
 sigmoid_hard_7
 
 
@@ -6537,13 +6538,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_7ä
-mul
-y
-
-sigmoid_hard_7
+mul
 x
 
-thresholded_relu_7,
+thresholded_relu_7
+y
+
+sigmoid_hard_7,
 	input_173
 
 
@@ -6655,33 +6656,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ∏*%
 @model_path/weights/weight.bin¿Ï„«
-conv 
-groups
-
-input_175_groups_0
-weight
-
-
-const_56$
+conv$
 pad_type
 
-input_175_pad_type_0
-bias
-
-
-const_57
+input_175_pad_type_0"
+strides
+
+input_175_strides_0 
+groups
+
+input_175_groups_0
+x
+
+	input_173
 pad
 
 input_175_pad_0&
 	dilations
 
-input_175_dilations_0"
-strides
-
-input_175_strides_0
-x
-
-	input_173,
+input_175_dilations_0
+bias
+
+
+const_57
+weight
+
+
+const_56,
 	input_177
 
 
@@ -6748,16 +6749,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_8_beta_0#
 alpha
 
 sigmoid_hard_8_alpha_0
 x
 
-thresholded_relu_8!
-beta
-
-sigmoid_hard_8_beta_01
+thresholded_relu_81
 sigmoid_hard_8
 
 
@@ -6768,13 +6769,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_8ä
-mul
-y
-
-sigmoid_hard_8
+mul
 x
 
-thresholded_relu_8,
+thresholded_relu_8
+y
+
+sigmoid_hard_8,
 	input_179
 
 
@@ -6887,33 +6888,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 P*%
 @model_path/weights/weight.bin¿øÁº
-conv 
-groups
-
-input_181_groups_0
-weight
-
-
-const_58$
+conv$
 pad_type
 
-input_181_pad_type_0
-bias
-
-
-const_59
+input_181_pad_type_0"
+strides
+
+input_181_strides_0 
+groups
+
+input_181_groups_0
+x
+
+	input_179
 pad
 
 input_181_pad_0&
 	dilations
 
-input_181_dilations_0"
-strides
-
-input_181_strides_0
-x
-
-	input_179&
+input_181_dilations_0
+bias
+
+
+const_59
+weight
+
+
+const_58&
 x_19
 
 
@@ -6925,13 +6926,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_19v
-add
-y
-
-	input_167
+add
 x
 
-x_19+
+x_19
+y
+
+	input_167+
 	input_183
 
 
@@ -7042,33 +7043,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ‡*%
 @model_path/weights/weight.binÄÛ«
-conv 
-groups
-
-input_185_groups_0
-weight
-
-
-const_60$
+conv$
 pad_type
 
-input_185_pad_type_0
-bias
-
-
-const_61
+input_185_pad_type_0"
+strides
+
+input_185_strides_0 
+groups
+
+input_185_groups_0
+x
+
+	input_183
 pad
 
 input_185_pad_0&
 	dilations
 
-input_185_dilations_0"
-strides
-
-input_185_strides_0
-x
-
-	input_183,
+input_185_dilations_0
+bias
+
+
+const_61
+weight
+
+
+const_60,
 	input_187
 
 
@@ -7135,16 +7136,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?Ã
-sigmoid_hard#
+sigmoid_hard!
+beta
+
+sigmoid_hard_9_beta_0#
 alpha
 
 sigmoid_hard_9_alpha_0
 x
 
-thresholded_relu_9!
-beta
-
-sigmoid_hard_9_beta_01
+thresholded_relu_91
 sigmoid_hard_9
 
 
@@ -7155,13 +7156,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_9ä
-mul
-y
-
-sigmoid_hard_9
+mul
 x
 
-thresholded_relu_9,
+thresholded_relu_9
+y
+
+sigmoid_hard_9,
 	input_189
 
 
@@ -7273,33 +7274,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ‡*%
 @model_path/weights/weight.binÄäÚ«
-conv 
-groups
-
-input_191_groups_0
-weight
-
-
-const_62$
+conv$
 pad_type
 
-input_191_pad_type_0
-bias
-
-
-const_63
+input_191_pad_type_0"
+strides
+
+input_191_strides_0 
+groups
+
+input_191_groups_0
+x
+
+	input_189
 pad
 
 input_191_pad_0&
 	dilations
 
-input_191_dilations_0"
-strides
-
-input_191_strides_0
-x
-
-	input_189,
+input_191_dilations_0
+bias
+
+
+const_63
+weight
+
+
+const_62,
 	input_193
 
 
@@ -7366,16 +7367,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_10_beta_0$
 alpha
 
 sigmoid_hard_10_alpha_0
 x
 
-thresholded_relu_10"
-beta
-
-sigmoid_hard_10_beta_02
+thresholded_relu_102
 sigmoid_hard_10
 
 
@@ -7386,13 +7387,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_10Ç
-mul
-y
-
-sigmoid_hard_10
+mul
 x
 
-thresholded_relu_10'
+thresholded_relu_10
+y
+
+sigmoid_hard_10'
 x_21
 
 
@@ -7430,16 +7431,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_21
-axes
-
-input_195_axes_0&
+reduce_mean&
 	keep_dims
 
-input_195_keep_dims_0,
+input_195_keep_dims_0
+axes
+
+input_195_axes_0
+x
+
+x_21,
 	input_195
 
 
@@ -7518,31 +7519,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_197_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_4_0_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_197_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_4_0_se_conv_reduce_bias
+input_197_pad_type_0"
+strides
+
+input_197_strides_0 
+groups
+
+input_197_groups_0
+x
+
+	input_195
 pad
 
 input_197_pad_0&
 	dilations
 
-input_197_dilations_0"
-strides
-
-input_197_strides_0
-x
-
-	input_195+
+input_197_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_4_0_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_4_0_se_conv_reduce_weight+
 	input_197
 
 
@@ -7635,31 +7636,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_201_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_4_0_se_conv_expand_weight$
+conv$
 pad_type
 
-input_201_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_4_0_se_conv_expand_bias
+input_201_pad_type_0"
+strides
+
+input_201_strides_0 
+groups
+
+input_201_groups_0
+x
+
+	input_199
 pad
 
 input_201_pad_0&
 	dilations
 
-input_201_dilations_0"
-strides
-
-input_201_strides_0
-x
-
-	input_199,
+input_201_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_4_0_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_4_0_se_conv_expand_weight,
 	input_201
 
 
@@ -7696,16 +7697,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?¶
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_581_beta_0
 alpha
 
 var_581_alpha_0
 x
 
-	input_201
-beta
-
-var_581_beta_0*
+	input_201*
 var_581
 
 
@@ -7717,13 +7718,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 op_581u
-mul
-y
-	
-var_581
+mul
 x
 
-x_21,
+x_21
+y
+	
+var_581,
 	input_203
 
 
@@ -7836,33 +7837,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 p*%
 @model_path/weights/weight.binÄ™ˇ∆
-conv 
-groups
-
-input_205_groups_0
-weight
-
-
-const_64$
+conv$
 pad_type
 
-input_205_pad_type_0
-bias
-
-
-const_65
+input_205_pad_type_0"
+strides
+
+input_205_strides_0 
+groups
+
+input_205_groups_0
+x
+
+	input_203
 pad
 
 input_205_pad_0&
 	dilations
 
-input_205_dilations_0"
-strides
-
-input_205_strides_0
-x
-
-	input_203+
+input_205_dilations_0
+bias
+
+
+const_65
+weight
+
+
+const_64+
 	input_207
 
 
@@ -7973,33 +7974,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 †*%
 @model_path/weights/weight.bin¿ﬁë«
-conv 
-groups
-
-input_209_groups_0
-weight
-
-
-const_66$
+conv$
 pad_type
 
-input_209_pad_type_0
-bias
-
-
-const_67
+input_209_pad_type_0"
+strides
+
+input_209_strides_0 
+groups
+
+input_209_groups_0
+x
+
+	input_207
 pad
 
 input_209_pad_0&
 	dilations
 
-input_209_dilations_0"
-strides
-
-input_209_strides_0
-x
-
-	input_207,
+input_209_dilations_0
+bias
+
+
+const_67
+weight
+
+
+const_66,
 	input_211
 
 
@@ -8066,16 +8067,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_11_beta_0$
 alpha
 
 sigmoid_hard_11_alpha_0
 x
 
-thresholded_relu_11"
-beta
-
-sigmoid_hard_11_beta_02
+thresholded_relu_112
 sigmoid_hard_11
 
 
@@ -8086,13 +8087,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_11å
-mul
-y
-
-sigmoid_hard_11
+mul
 x
 
-thresholded_relu_11,
+thresholded_relu_11
+y
+
+sigmoid_hard_11,
 	input_213
 
 
@@ -8204,33 +8205,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 †*%
 @model_path/weights/weight.bin¿±ì«
-conv 
-groups
-
-input_215_groups_0
-weight
-
-
-const_68$
+conv$
 pad_type
 
-input_215_pad_type_0
-bias
-
-
-const_69
+input_215_pad_type_0"
+strides
+
+input_215_strides_0 
+groups
+
+input_215_groups_0
+x
+
+	input_213
 pad
 
 input_215_pad_0&
 	dilations
 
-input_215_dilations_0"
-strides
-
-input_215_strides_0
-x
-
-	input_213,
+input_215_dilations_0
+bias
+
+
+const_69
+weight
+
+
+const_68,
 	input_217
 
 
@@ -8297,16 +8298,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_12_beta_0$
 alpha
 
 sigmoid_hard_12_alpha_0
 x
 
-thresholded_relu_12"
-beta
-
-sigmoid_hard_12_beta_02
+thresholded_relu_122
 sigmoid_hard_12
 
 
@@ -8317,13 +8318,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_12Ç
-mul
-y
-
-sigmoid_hard_12
+mul
 x
 
-thresholded_relu_12'
+thresholded_relu_12
+y
+
+sigmoid_hard_12'
 x_23
 
 
@@ -8361,16 +8362,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_23
-axes
-
-input_219_axes_0&
+reduce_mean&
 	keep_dims
 
-input_219_keep_dims_0,
+input_219_keep_dims_0
+axes
+
+input_219_axes_0
+x
+
+x_23,
 	input_219
 
 
@@ -8449,31 +8450,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_221_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_4_1_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_221_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_4_1_se_conv_reduce_bias
+input_221_pad_type_0"
+strides
+
+input_221_strides_0 
+groups
+
+input_221_groups_0
+x
+
+	input_219
 pad
 
 input_221_pad_0&
 	dilations
 
-input_221_dilations_0"
-strides
-
-input_221_strides_0
-x
-
-	input_219,
+input_221_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_4_1_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_4_1_se_conv_reduce_weight,
 	input_221
 
 
@@ -8566,31 +8567,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_225_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_4_1_se_conv_expand_weight$
+conv$
 pad_type
 
-input_225_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_4_1_se_conv_expand_bias
+input_225_pad_type_0"
+strides
+
+input_225_strides_0 
+groups
+
+input_225_groups_0
+x
+
+	input_223
 pad
 
 input_225_pad_0&
 	dilations
 
-input_225_dilations_0"
-strides
-
-input_225_strides_0
-x
-
-	input_223,
+input_225_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_4_1_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_4_1_se_conv_expand_weight,
 	input_225
 
 
@@ -8627,16 +8628,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?¶
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_644_beta_0
 alpha
 
 var_644_alpha_0
 x
 
-	input_225
-beta
-
-var_644_beta_0*
+	input_225*
 var_644
 
 
@@ -8648,13 +8649,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 op_644u
-mul
-y
-	
-var_644
+mul
 x
 
-x_23,
+x_23
+y
+	
+var_644,
 	input_227
 
 
@@ -8767,33 +8768,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 p*%
 @model_path/weights/weight.bin¿˜•º
-conv 
-groups
-
-input_229_groups_0
-weight
-
-
-const_70$
+conv$
 pad_type
 
-input_229_pad_type_0
-bias
-
-
-const_71
+input_229_pad_type_0"
+strides
+
+input_229_strides_0 
+groups
+
+input_229_groups_0
+x
+
+	input_227
 pad
 
 input_229_pad_0&
 	dilations
 
-input_229_dilations_0"
-strides
-
-input_229_strides_0
-x
-
-	input_227&
+input_229_dilations_0
+bias
+
+
+const_71
+weight
+
+
+const_70&
 x_25
 
 
@@ -8805,13 +8806,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_25v
-add
-y
-
-	input_207
+add
 x
 
-x_25+
+x_25
+y
+
+	input_207+
 	input_231
 
 
@@ -8922,33 +8923,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 †*%
 @model_path/weights/weight.binÄ¨∏«
-conv 
-groups
-
-input_233_groups_0
-weight
-
-
-const_72$
+conv$
 pad_type
 
-input_233_pad_type_0
-bias
-
-
-const_73
+input_233_pad_type_0"
+strides
+
+input_233_strides_0 
+groups
+
+input_233_groups_0
+x
+
+	input_231
 pad
 
 input_233_pad_0&
 	dilations
 
-input_233_dilations_0"
-strides
-
-input_233_strides_0
-x
-
-	input_231,
+input_233_dilations_0
+bias
+
+
+const_73
+weight
+
+
+const_72,
 	input_235
 
 
@@ -9015,16 +9016,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_13_beta_0$
 alpha
 
 sigmoid_hard_13_alpha_0
 x
 
-thresholded_relu_13"
-beta
-
-sigmoid_hard_13_beta_02
+thresholded_relu_132
 sigmoid_hard_13
 
 
@@ -9035,13 +9036,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_13å
-mul
-y
-
-sigmoid_hard_13
+mul
 x
 
-thresholded_relu_13,
+thresholded_relu_13
+y
+
+sigmoid_hard_13,
 	input_237
 
 
@@ -9153,33 +9154,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 †*%
 @model_path/weights/weight.binÄœº«
-conv 
-groups
-
-input_239_groups_0
-weight
-
-
-const_74$
+conv$
 pad_type
 
-input_239_pad_type_0
-bias
-
-
-const_75
+input_239_pad_type_0"
+strides
+
+input_239_strides_0 
+groups
+
+input_239_groups_0
+x
+
+	input_237
 pad
 
 input_239_pad_0&
 	dilations
 
-input_239_dilations_0"
-strides
-
-input_239_strides_0
-x
-
-	input_237,
+input_239_dilations_0
+bias
+
+
+const_75
+weight
+
+
+const_74,
 	input_241
 
 
@@ -9246,16 +9247,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_14_beta_0$
 alpha
 
 sigmoid_hard_14_alpha_0
 x
 
-thresholded_relu_14"
-beta
-
-sigmoid_hard_14_beta_02
+thresholded_relu_142
 sigmoid_hard_14
 
 
@@ -9266,13 +9267,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_14Ç
-mul
-y
-
-sigmoid_hard_14
+mul
 x
 
-thresholded_relu_14'
+thresholded_relu_14
+y
+
+sigmoid_hard_14'
 x_27
 
 
@@ -9310,16 +9311,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_27
-axes
-
-input_243_axes_0&
+reduce_mean&
 	keep_dims
 
-input_243_keep_dims_0,
+input_243_keep_dims_0
+axes
+
+input_243_axes_0
+x
+
+x_27,
 	input_243
 
 
@@ -9398,31 +9399,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_245_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_0_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_245_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_0_se_conv_reduce_bias
+input_245_pad_type_0"
+strides
+
+input_245_strides_0 
+groups
+
+input_245_groups_0
+x
+
+	input_243
 pad
 
 input_245_pad_0&
 	dilations
 
-input_245_dilations_0"
-strides
-
-input_245_strides_0
-x
-
-	input_243,
+input_245_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_0_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_0_se_conv_reduce_weight,
 	input_245
 
 
@@ -9515,31 +9516,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_249_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_0_se_conv_expand_weight$
+conv$
 pad_type
 
-input_249_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_0_se_conv_expand_bias
+input_249_pad_type_0"
+strides
+
+input_249_strides_0 
+groups
+
+input_249_groups_0
+x
+
+	input_247
 pad
 
 input_249_pad_0&
 	dilations
 
-input_249_dilations_0"
-strides
-
-input_249_strides_0
-x
-
-	input_247,
+input_249_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_0_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_0_se_conv_expand_weight,
 	input_249
 
 
@@ -9576,16 +9577,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?¶
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_711_beta_0
 alpha
 
 var_711_alpha_0
 x
 
-	input_249
-beta
-
-var_711_beta_0*
+	input_249*
 var_711
 
 
@@ -9597,13 +9598,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 op_711u
-mul
-y
-	
-var_711
+mul
 x
 
-x_27,
+x_27
+y
+	
+var_711,
 	input_251
 
 
@@ -9714,33 +9715,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 †*%
 @model_path/weights/weight.binÄÖ◊«
-conv 
-groups
-
-input_253_groups_0
-weight
-
-
-const_76$
+conv$
 pad_type
 
-input_253_pad_type_0
-bias
-
-
-const_77
+input_253_pad_type_0"
+strides
+
+input_253_strides_0 
+groups
+
+input_253_groups_0
+x
+
+	input_251
 pad
 
 input_253_pad_0&
 	dilations
 
-input_253_dilations_0"
-strides
-
-input_253_strides_0
-x
-
-	input_251,
+input_253_dilations_0
+bias
+
+
+const_77
+weight
+
+
+const_76,
 	input_255
 
 
@@ -9851,33 +9852,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ¿*%
 @model_path/weights/weight.binÄÀ¸«
-conv 
-groups
-
-input_257_groups_0
-weight
-
-
-const_78$
+conv$
 pad_type
 
-input_257_pad_type_0
-bias
-
-
-const_79
+input_257_pad_type_0"
+strides
+
+input_257_strides_0 
+groups
+
+input_257_groups_0
+x
+
+	input_255
 pad
 
 input_257_pad_0&
 	dilations
 
-input_257_dilations_0"
-strides
-
-input_257_strides_0
-x
-
-	input_255,
+input_257_dilations_0
+bias
+
+
+const_79
+weight
+
+
+const_78,
 	input_259
 
 
@@ -9944,16 +9945,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_15_beta_0$
 alpha
 
 sigmoid_hard_15_alpha_0
 x
 
-thresholded_relu_15"
-beta
-
-sigmoid_hard_15_beta_02
+thresholded_relu_152
 sigmoid_hard_15
 
 
@@ -9964,13 +9965,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_15å
-mul
-y
-
-sigmoid_hard_15
+mul
 x
 
-thresholded_relu_15,
+thresholded_relu_15
+y
+
+sigmoid_hard_15,
 	input_261
 
 
@@ -10082,33 +10083,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ¿*%
 @model_path/weights/weight.binÄÿÇ«
-conv 
-groups
-
-input_263_groups_0
-weight
-
-
-const_80$
+conv$
 pad_type
 
-input_263_pad_type_0
-bias
-
-
-const_81
+input_263_pad_type_0"
+strides
+
+input_263_strides_0 
+groups
+
+input_263_groups_0
+x
+
+	input_261
 pad
 
 input_263_pad_0&
 	dilations
 
-input_263_dilations_0"
-strides
-
-input_263_strides_0
-x
-
-	input_261,
+input_263_dilations_0
+bias
+
+
+const_81
+weight
+
+
+const_80,
 	input_265
 
 
@@ -10175,16 +10176,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_16_beta_0$
 alpha
 
 sigmoid_hard_16_alpha_0
 x
 
-thresholded_relu_16"
-beta
-
-sigmoid_hard_16_beta_02
+thresholded_relu_162
 sigmoid_hard_16
 
 
@@ -10195,13 +10196,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_16Ç
-mul
-y
-
-sigmoid_hard_16
+mul
 x
 
-thresholded_relu_16'
+thresholded_relu_16
+y
+
+sigmoid_hard_16'
 x_29
 
 
@@ -10239,16 +10240,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_29
-axes
-
-input_267_axes_0&
+reduce_mean&
 	keep_dims
 
-input_267_keep_dims_0,
+input_267_keep_dims_0
+axes
+
+input_267_axes_0
+x
+
+x_29,
 	input_267
 
 
@@ -10327,31 +10328,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_269_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_1_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_269_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_1_se_conv_reduce_bias
+input_269_pad_type_0"
+strides
+
+input_269_strides_0 
+groups
+
+input_269_groups_0
+x
+
+	input_267
 pad
 
 input_269_pad_0&
 	dilations
 
-input_269_dilations_0"
-strides
-
-input_269_strides_0
-x
-
-	input_267,
+input_269_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_1_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_1_se_conv_reduce_weight,
 	input_269
 
 
@@ -10444,31 +10445,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_273_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_1_se_conv_expand_weight$
+conv$
 pad_type
 
-input_273_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_1_se_conv_expand_bias
+input_273_pad_type_0"
+strides
+
+input_273_strides_0 
+groups
+
+input_273_groups_0
+x
+
+	input_271
 pad
 
 input_273_pad_0&
 	dilations
 
-input_273_dilations_0"
-strides
-
-input_273_strides_0
-x
-
-	input_271,
+input_273_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_1_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_1_se_conv_expand_weight,
 	input_273
 
 
@@ -10505,16 +10506,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?¶
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_774_beta_0
 alpha
 
 var_774_alpha_0
 x
 
-	input_273
-beta
-
-var_774_beta_0*
+	input_273*
 var_774
 
 
@@ -10526,13 +10527,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 op_774u
-mul
-y
-	
-var_774
+mul
 x
 
-x_29,
+x_29
+y
+	
+var_774,
 	input_275
 
 
@@ -10643,33 +10644,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 †*%
 @model_path/weights/weight.binÄ∑®Ω
-conv 
-groups
-
-input_277_groups_0
-weight
-
-
-const_82$
+conv$
 pad_type
 
-input_277_pad_type_0
-bias
-
-
-const_83
+input_277_pad_type_0"
+strides
+
+input_277_strides_0 
+groups
+
+input_277_groups_0
+x
+
+	input_275
 pad
 
 input_277_pad_0&
 	dilations
 
-input_277_dilations_0"
-strides
-
-input_277_strides_0
-x
-
-	input_275'
+input_277_dilations_0
+bias
+
+
+const_83
+weight
+
+
+const_82'
 x_31
 
 
@@ -10681,13 +10682,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_31w
-add
-y
-
-	input_255
+add
 x
 
-x_31,
+x_31
+y
+
+	input_255,
 	input_279
 
 
@@ -10798,33 +10799,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ¿*%
 @model_path/weights/weight.binÄ˝Õ«
-conv 
-groups
-
-input_281_groups_0
-weight
-
-
-const_84$
+conv$
 pad_type
 
-input_281_pad_type_0
-bias
-
-
-const_85
+input_281_pad_type_0"
+strides
+
+input_281_strides_0 
+groups
+
+input_281_groups_0
+x
+
+	input_279
 pad
 
 input_281_pad_0&
 	dilations
 
-input_281_dilations_0"
-strides
-
-input_281_strides_0
-x
-
-	input_279,
+input_281_dilations_0
+bias
+
+
+const_85
+weight
+
+
+const_84,
 	input_283
 
 
@@ -10891,16 +10892,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_17_beta_0$
 alpha
 
 sigmoid_hard_17_alpha_0
 x
 
-thresholded_relu_17"
-beta
-
-sigmoid_hard_17_beta_02
+thresholded_relu_172
 sigmoid_hard_17
 
 
@@ -10911,13 +10912,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_17å
-mul
-y
-
-sigmoid_hard_17
+mul
 x
 
-thresholded_relu_17,
+thresholded_relu_17
+y
+
+sigmoid_hard_17,
 	input_285
 
 
@@ -11029,33 +11030,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ¿*%
 @model_path/weights/weight.binÄä‘«
-conv 
-groups
-
-input_287_groups_0
-weight
-
-
-const_86$
+conv$
 pad_type
 
-input_287_pad_type_0
-bias
-
-
-const_87
+input_287_pad_type_0"
+strides
+
+input_287_strides_0 
+groups
+
+input_287_groups_0
+x
+
+	input_285
 pad
 
 input_287_pad_0&
 	dilations
 
-input_287_dilations_0"
-strides
-
-input_287_strides_0
-x
-
-	input_285,
+input_287_dilations_0
+bias
+
+
+const_87
+weight
+
+
+const_86,
 	input_289
 
 
@@ -11122,16 +11123,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_18_beta_0$
 alpha
 
 sigmoid_hard_18_alpha_0
 x
 
-thresholded_relu_18"
-beta
-
-sigmoid_hard_18_beta_02
+thresholded_relu_182
 sigmoid_hard_18
 
 
@@ -11142,13 +11143,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_18Ç
-mul
-y
-
-sigmoid_hard_18
+mul
 x
 
-thresholded_relu_18'
+thresholded_relu_18
+y
+
+sigmoid_hard_18'
 x_33
 
 
@@ -11186,16 +11187,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_33
-axes
-
-input_291_axes_0&
+reduce_mean&
 	keep_dims
 
-input_291_keep_dims_0,
+input_291_keep_dims_0
+axes
+
+input_291_axes_0
+x
+
+x_33,
 	input_291
 
 
@@ -11274,31 +11275,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_293_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_2_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_293_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_2_se_conv_reduce_bias
+input_293_pad_type_0"
+strides
+
+input_293_strides_0 
+groups
+
+input_293_groups_0
+x
+
+	input_291
 pad
 
 input_293_pad_0&
 	dilations
 
-input_293_dilations_0"
-strides
-
-input_293_strides_0
-x
-
-	input_291,
+input_293_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_2_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_2_se_conv_reduce_weight,
 	input_293
 
 
@@ -11391,31 +11392,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_297_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_2_se_conv_expand_weight$
+conv$
 pad_type
 
-input_297_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_2_se_conv_expand_bias
+input_297_pad_type_0"
+strides
+
+input_297_strides_0 
+groups
+
+input_297_groups_0
+x
+
+	input_295
 pad
 
 input_297_pad_0&
 	dilations
 
-input_297_dilations_0"
-strides
-
-input_297_strides_0
-x
-
-	input_295,
+input_297_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_2_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_2_se_conv_expand_weight,
 	input_297
 
 
@@ -11452,16 +11453,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?¶
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_838_beta_0
 alpha
 
 var_838_alpha_0
 x
 
-	input_297
-beta
-
-var_838_beta_0*
+	input_297*
 var_838
 
 
@@ -11473,13 +11474,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 op_838u
-mul
-y
-	
-var_838
+mul
 x
 
-x_33,
+x_33
+y
+	
+var_838,
 	input_299
 
 
@@ -11590,33 +11591,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 †*%
 @model_path/weights/weight.binÄÈ˘Ω
-conv 
-groups
-
-input_301_groups_0
-weight
-
-
-const_88$
+conv$
 pad_type
 
-input_301_pad_type_0
-bias
-
-
-const_89
+input_301_pad_type_0"
+strides
+
+input_301_strides_0 
+groups
+
+input_301_groups_0
+x
+
+	input_299
 pad
 
 input_301_pad_0&
 	dilations
 
-input_301_dilations_0"
-strides
-
-input_301_strides_0
-x
-
-	input_299'
+input_301_dilations_0
+bias
+
+
+const_89
+weight
+
+
+const_88'
 x_35
 
 
@@ -11628,13 +11629,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_35w
-add
-y
-
-	input_279
+add
 x
 
-x_35,
+x_35
+y
+
+	input_279,
 	input_303
 
 
@@ -11745,33 +11746,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 ¿*%
 @model_path/weights/weight.binÄØü	«
-conv 
-groups
-
-input_305_groups_0
-weight
-
-
-const_90$
+conv$
 pad_type
 
-input_305_pad_type_0
-bias
-
-
-const_91
+input_305_pad_type_0"
+strides
+
+input_305_strides_0 
+groups
+
+input_305_groups_0
+x
+
+	input_303
 pad
 
 input_305_pad_0&
 	dilations
 
-input_305_dilations_0"
-strides
-
-input_305_strides_0
-x
-
-	input_303,
+input_305_dilations_0
+bias
+
+
+const_91
+weight
+
+
+const_90,
 	input_307
 
 
@@ -11838,16 +11839,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_19_beta_0$
 alpha
 
 sigmoid_hard_19_alpha_0
 x
 
-thresholded_relu_19"
-beta
-
-sigmoid_hard_19_beta_02
+thresholded_relu_192
 sigmoid_hard_19
 
 
@@ -11858,13 +11859,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_19å
-mul
-y
-
-sigmoid_hard_19
+mul
 x
 
-thresholded_relu_19,
+thresholded_relu_19
+y
+
+sigmoid_hard_19,
 	input_309
 
 
@@ -11901,16 +11902,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∂
-reduce_mean
-x
-
-	input_309
-axes
-
-input_311_axes_0&
+reduce_mean&
 	keep_dims
 
-input_311_keep_dims_0,
+input_311_keep_dims_0
+axes
+
+input_311_axes_0
+x
+
+	input_309,
 	input_311
 
 
@@ -11989,31 +11990,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 É
-conv 
-groups
-
-input_313_groups_05
-weight+
-)
-'siamese_model_backbone_conv_head_weight$
+conv$
 pad_type
 
-input_313_pad_type_01
-bias)
-'
-%siamese_model_backbone_conv_head_bias
+input_313_pad_type_0"
+strides
+
+input_313_strides_0 
+groups
+
+input_313_groups_0
+x
+
+	input_311
 pad
 
 input_313_pad_0&
 	dilations
 
-input_313_dilations_0"
-strides
-
-input_313_strides_0
-x
-
-	input_311,
+input_313_dilations_01
+bias)
+'
+%siamese_model_backbone_conv_head_bias5
+weight+
+)
+'siamese_model_backbone_conv_head_weight,
 	input_313
 
 
@@ -12082,16 +12083,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_20_beta_0$
 alpha
 
 sigmoid_hard_20_alpha_0
 x
 
-thresholded_relu_20"
-beta
-
-sigmoid_hard_20_beta_02
+thresholded_relu_202
 sigmoid_hard_20
 
 
@@ -12103,13 +12104,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_20å
-mul
-y
-
-sigmoid_hard_20
+mul
 x
 
-thresholded_relu_20,
+thresholded_relu_20
+y
+
+sigmoid_hard_20,
 	input_315
 
 
@@ -12138,14 +12139,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 Ä
 m
-reshape
+reshape
+x
+
+	input_315
 shape
 
 
-concat_0
-x
-
-	input_315
+concat_0
 x_37
 
 
@@ -12240,33 +12241,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.bin¿Õü	¬
-conv 
-groups
-
-input_317_groups_0
-weight
-	
-const_0$
+conv$
 pad_type
 
-input_317_pad_type_0
-bias
+input_317_pad_type_0"
+strides
+
+input_317_strides_0 
+groups
+
+input_317_groups_0
+x
 
-
-const_93
+
+image2
 pad
 
 input_317_pad_0&
 	dilations
 
-input_317_dilations_0"
-strides
-
-input_317_strides_0
-x
+input_317_dilations_0
+bias
 
-
-image2+
+
+const_93
+weight
+	
+const_0+
 	input_319
 
 
@@ -12333,16 +12334,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?–
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_21_beta_0$
 alpha
 
 sigmoid_hard_21_alpha_0
 x
 
-thresholded_relu_21"
-beta
-
-sigmoid_hard_21_beta_01
+thresholded_relu_211
 sigmoid_hard_21
 
 
@@ -12353,13 +12354,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_21ã
-mul
-y
-
-sigmoid_hard_21
+mul
 x
 
-thresholded_relu_21+
+thresholded_relu_21
+y
+
+sigmoid_hard_21+
 	input_321
 
 
@@ -12454,32 +12455,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.bin¿Œü	≈
-conv 
-groups
-
-input_323_groups_0
-weight
-	
-const_2$
+conv$
 pad_type
 
-input_323_pad_type_0
-bias
-
-
-const_95
+input_323_pad_type_0"
+strides
+
+input_323_strides_0 
+groups
+
+input_323_groups_0
+x
+
+	input_321
 pad
 
 input_323_pad_0&
 	dilations
 
-input_323_dilations_0"
-strides
-
-input_323_strides_0
-x
-
-	input_321+
+input_323_dilations_0
+bias
+
+
+const_95
+weight
+	
+const_2+
 	input_325
 
 
@@ -12587,32 +12588,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.bin¿œü	ª
-conv 
-groups
-
-input_329_groups_0
-weight
-	
-const_4$
+conv$
 pad_type
 
-input_329_pad_type_0
-bias
-
-
-const_97
+input_329_pad_type_0"
+strides
+
+input_329_strides_0 
+groups
+
+input_329_groups_0
+x
+
+	input_327
 pad
 
 input_329_pad_0&
 	dilations
 
-input_329_dilations_0"
-strides
-
-input_329_strides_0
-x
-
-	input_327&
+input_329_dilations_0
+bias
+
+
+const_97
+weight
+	
+const_4&
 x_39
 
 
@@ -12624,13 +12625,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_39v
-add
-y
-
-	input_321
+add
 x
 
-x_39+
+x_39
+y
+
+	input_321+
 	input_331
 
 
@@ -12724,32 +12725,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 @*%
 @model_path/weights/weight.bin¿–ü	≈
-conv 
-groups
-
-input_333_groups_0
-weight
-	
-const_6$
+conv$
 pad_type
 
-input_333_pad_type_0
-bias
-
-
-const_99
+input_333_pad_type_0"
+strides
+
+input_333_strides_0 
+groups
+
+input_333_groups_0
+x
+
+	input_331
 pad
 
 input_333_pad_0&
 	dilations
 
-input_333_dilations_0"
-strides
-
-input_333_strides_0
-x
-
-	input_331+
+input_333_dilations_0
+bias
+
+
+const_99
+weight
+	
+const_6+
 	input_335
 
 
@@ -12857,31 +12858,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 @*%
 @model_path/weights/weight.binÄ”ü	∆
-conv 
-groups
-
-input_339_groups_0
-weight
-	
-const_8$
+conv$
 pad_type
 
-input_339_pad_type_0
-bias
+input_339_pad_type_0"
+strides
+
+input_339_strides_0 
+groups
+
+input_339_groups_0
+x
 
-	const_101
+	input_337
 pad
 
 input_339_pad_0&
 	dilations
 
-input_339_dilations_0"
-strides
-
-input_339_strides_0
-x
+input_339_dilations_0
+bias
 
-	input_337+
+	const_101
+weight
+	
+const_8+
 	input_341
 
 
@@ -12988,32 +12989,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.bin¿’ü	«
-conv 
-groups
-
-input_345_groups_0
-weight
-
-
-const_10$
+conv$
 pad_type
 
-input_345_pad_type_0
-bias
+input_345_pad_type_0"
+strides
+
+input_345_strides_0 
+groups
+
+input_345_groups_0
+x
 
-	const_103
+	input_343
 pad
 
 input_345_pad_0&
 	dilations
 
-input_345_dilations_0"
-strides
-
-input_345_strides_0
-x
+input_345_dilations_0
+bias
 
-	input_343+
+	const_103
+weight
+
+
+const_10+
 	input_347
 
 
@@ -13106,32 +13107,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 H*%
 @model_path/weights/weight.binÄ◊ü	«
-conv 
-groups
-
-input_349_groups_0
-weight
-
-
-const_12$
+conv$
 pad_type
 
-input_349_pad_type_0
-bias
+input_349_pad_type_0"
+strides
+
+input_349_strides_0 
+groups
+
+input_349_groups_0
+x
 
-	const_105
+	input_347
 pad
 
 input_349_pad_0&
 	dilations
 
-input_349_dilations_0"
-strides
-
-input_349_strides_0
-x
+input_349_dilations_0
+bias
 
-	input_347+
+	const_105
+weight
+
+
+const_12+
 	input_351
 
 
@@ -13239,32 +13240,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 H*%
 @model_path/weights/weight.binÄ⁄ü	«
-conv 
-groups
-
-input_355_groups_0
-weight
-
-
-const_14$
+conv$
 pad_type
 
-input_355_pad_type_0
-bias
+input_355_pad_type_0"
+strides
+
+input_355_strides_0 
+groups
+
+input_355_groups_0
+x
 
-	const_107
+	input_353
 pad
 
 input_355_pad_0&
 	dilations
 
-input_355_dilations_0"
-strides
-
-input_355_strides_0
-x
+input_355_dilations_0
+bias
 
-	input_353+
+	const_107
+weight
+
+
+const_14+
 	input_357
 
 
@@ -13371,32 +13372,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 *%
 @model_path/weights/weight.binÄ›ü	Ω
-conv 
-groups
-
-input_361_groups_0
-weight
-
-
-const_16$
+conv$
 pad_type
 
-input_361_pad_type_0
-bias
+input_361_pad_type_0"
+strides
+
+input_361_strides_0 
+groups
+
+input_361_groups_0
+x
 
-	const_109
+	input_359
 pad
 
 input_361_pad_0&
 	dilations
 
-input_361_dilations_0"
-strides
-
-input_361_strides_0
-x
+input_361_dilations_0
+bias
 
-	input_359&
+	const_109
+weight
+
+
+const_16&
 x_41
 
 
@@ -13408,13 +13409,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_41v
-add
-y
-
-	input_347
+add
 x
 
-x_41+
+x_41
+y
+
+	input_347+
 	input_363
 
 
@@ -13507,32 +13508,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 H*%
 @model_path/weights/weight.bin¿ﬁü	«
-conv 
-groups
-
-input_365_groups_0
-weight
-
-
-const_18$
+conv$
 pad_type
 
-input_365_pad_type_0
-bias
+input_365_pad_type_0"
+strides
+
+input_365_strides_0 
+groups
+
+input_365_groups_0
+x
 
-	const_111
+	input_363
 pad
 
 input_365_pad_0&
 	dilations
 
-input_365_dilations_0"
-strides
-
-input_365_strides_0
-x
+input_365_dilations_0
+bias
 
-	input_363+
+	const_111
+weight
+
+
+const_18+
 	input_367
 
 
@@ -13640,32 +13641,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 H*%
 @model_path/weights/weight.bin¿·ü	«
-conv 
-groups
-
-input_371_groups_0
-weight
-
-
-const_20$
+conv$
 pad_type
 
-input_371_pad_type_0
-bias
+input_371_pad_type_0"
+strides
+
+input_371_strides_0 
+groups
+
+input_371_groups_0
+x
 
-	const_113
+	input_369
 pad
 
 input_371_pad_0&
 	dilations
 
-input_371_dilations_0"
-strides
-
-input_371_strides_0
-x
+input_371_dilations_0
+bias
 
-	input_369+
+	const_113
+weight
+
+
+const_20+
 	input_373
 
 
@@ -13717,16 +13718,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∞
-reduce_mean
-x
-
-x_43
-axes
-
-input_375_axes_0&
+reduce_mean&
 	keep_dims
 
-input_375_keep_dims_0+
+input_375_keep_dims_0
+axes
+
+input_375_axes_0
+x
+
+x_43+
 	input_375
 
 
@@ -13805,31 +13806,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_377_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_0_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_377_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_0_se_conv_reduce_bias
+input_377_pad_type_0"
+strides
+
+input_377_strides_0 
+groups
+
+input_377_groups_0
+x
+
+	input_375
 pad
 
 input_377_pad_0&
 	dilations
 
-input_377_dilations_0"
-strides
-
-input_377_strides_0
-x
-
-	input_375+
+input_377_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_0_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_0_se_conv_reduce_weight+
 	input_377
 
 
@@ -13922,31 +13923,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_381_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_0_se_conv_expand_weight$
+conv$
 pad_type
 
-input_381_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_0_se_conv_expand_bias
+input_381_pad_type_0"
+strides
+
+input_381_strides_0 
+groups
+
+input_381_groups_0
+x
+
+	input_379
 pad
 
 input_381_pad_0&
 	dilations
 
-input_381_dilations_0"
-strides
-
-input_381_strides_0
-x
-
-	input_379+
+input_381_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_0_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_0_se_conv_expand_weight+
 	input_381
 
 
@@ -13983,16 +13984,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?©
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_1068_beta_0
 alpha
 
 var_1068_alpha_0
 x
 
-	input_381
-beta
-
-var_1068_beta_0*
+	input_381*
 var_1068
 
 
@@ -14003,14 +14004,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "	
 op_1068u
-mul
+mul
+x
+
+x_43
 y
 
 
-var_1068
-x
-
-x_43+
+var_1068+
 	input_383
 
 
@@ -14103,32 +14104,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 (*%
 @model_path/weights/weight.bin¿‰ü	«
-conv 
-groups
-
-input_385_groups_0
-weight
-
-
-const_22$
+conv$
 pad_type
 
-input_385_pad_type_0
-bias
+input_385_pad_type_0"
+strides
+
+input_385_strides_0 
+groups
+
+input_385_groups_0
+x
 
-	const_115
+	input_383
 pad
 
 input_385_pad_0&
 	dilations
 
-input_385_dilations_0"
-strides
-
-input_385_strides_0
-x
+input_385_dilations_0
+bias
 
-	input_383+
+	const_115
+weight
+
+
+const_22+
 	input_387
 
 
@@ -14207,33 +14208,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∆
-conv 
-groups
-
-input_389_groups_0
-weight
-
-
-const_24$
+conv$
 pad_type
 
-input_389_pad_type_0
-bias
-
-
-const_25
+input_389_pad_type_0"
+strides
+
+input_389_strides_0 
+groups
+
+input_389_groups_0
+x
+
+	input_387
 pad
 
 input_389_pad_0&
 	dilations
 
-input_389_dilations_0"
-strides
-
-input_389_strides_0
-x
-
-	input_387+
+input_389_dilations_0
+bias
+
+
+const_25
+weight
+
+
+const_24+
 	input_391
 
 
@@ -14327,33 +14328,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∆
-conv 
-groups
-
-input_395_groups_0
-weight
-
-
-const_26$
+conv$
 pad_type
 
-input_395_pad_type_0
-bias
-
-
-const_27
+input_395_pad_type_0"
+strides
+
+input_395_strides_0 
+groups
+
+input_395_groups_0
+x
+
+	input_393
 pad
 
 input_395_pad_0&
 	dilations
 
-input_395_dilations_0"
-strides
-
-input_395_strides_0
-x
-
-	input_393+
+input_395_dilations_0
+bias
+
+
+const_27
+weight
+
+
+const_26+
 	input_397
 
 
@@ -14405,16 +14406,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∞
-reduce_mean
-x
-
-x_45
-axes
-
-input_399_axes_0&
+reduce_mean&
 	keep_dims
 
-input_399_keep_dims_0+
+input_399_keep_dims_0
+axes
+
+input_399_axes_0
+x
+
+x_45+
 	input_399
 
 
@@ -14493,31 +14494,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_401_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_1_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_401_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_1_se_conv_reduce_bias
+input_401_pad_type_0"
+strides
+
+input_401_strides_0 
+groups
+
+input_401_groups_0
+x
+
+	input_399
 pad
 
 input_401_pad_0&
 	dilations
 
-input_401_dilations_0"
-strides
-
-input_401_strides_0
-x
-
-	input_399+
+input_401_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_1_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_1_se_conv_reduce_weight+
 	input_401
 
 
@@ -14610,31 +14611,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_405_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_1_se_conv_expand_weight$
+conv$
 pad_type
 
-input_405_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_1_se_conv_expand_bias
+input_405_pad_type_0"
+strides
+
+input_405_strides_0 
+groups
+
+input_405_groups_0
+x
+
+	input_403
 pad
 
 input_405_pad_0&
 	dilations
 
-input_405_dilations_0"
-strides
-
-input_405_strides_0
-x
-
-	input_403+
+input_405_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_1_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_1_se_conv_expand_weight+
 	input_405
 
 
@@ -14671,16 +14672,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?©
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_1131_beta_0
 alpha
 
 var_1131_alpha_0
 x
 
-	input_405
-beta
-
-var_1131_beta_0*
+	input_405*
 var_1131
 
 
@@ -14691,14 +14692,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "	
 op_1131u
-mul
+mul
+x
+
+x_45
 y
 
 
-var_1131
-x
-
-x_45+
+var_1131+
 	input_407
 
 
@@ -14791,32 +14792,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 (*%
 @model_path/weights/weight.bin¿Êü	Ω
-conv 
-groups
-
-input_409_groups_0
-weight
-
-
-const_28$
+conv$
 pad_type
 
-input_409_pad_type_0
-bias
+input_409_pad_type_0"
+strides
+
+input_409_strides_0 
+groups
+
+input_409_groups_0
+x
 
-	const_121
+	input_407
 pad
 
 input_409_pad_0&
 	dilations
 
-input_409_dilations_0"
-strides
-
-input_409_strides_0
-x
+input_409_dilations_0
+bias
 
-	input_407&
+	const_121
+weight
+
+
+const_28&
 x_47
 
 
@@ -14828,13 +14829,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_47v
-add
-y
-
-	input_387
+add
 x
 
-x_47+
+x_47
+y
+
+	input_387+
 	input_411
 
 
@@ -14913,33 +14914,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∆
-conv 
-groups
-
-input_413_groups_0
-weight
-
-
-const_30$
+conv$
 pad_type
 
-input_413_pad_type_0
-bias
-
-
-const_31
+input_413_pad_type_0"
+strides
+
+input_413_strides_0 
+groups
+
+input_413_groups_0
+x
+
+	input_411
 pad
 
 input_413_pad_0&
 	dilations
 
-input_413_dilations_0"
-strides
-
-input_413_strides_0
-x
-
-	input_411+
+input_413_dilations_0
+bias
+
+
+const_31
+weight
+
+
+const_30+
 	input_415
 
 
@@ -15033,33 +15034,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∆
-conv 
-groups
-
-input_419_groups_0
-weight
-
-
-const_32$
+conv$
 pad_type
 
-input_419_pad_type_0
-bias
-
-
-const_33
+input_419_pad_type_0"
+strides
+
+input_419_strides_0 
+groups
+
+input_419_groups_0
+x
+
+	input_417
 pad
 
 input_419_pad_0&
 	dilations
 
-input_419_dilations_0"
-strides
-
-input_419_strides_0
-x
-
-	input_417+
+input_419_dilations_0
+bias
+
+
+const_33
+weight
+
+
+const_32+
 	input_421
 
 
@@ -15111,16 +15112,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∞
-reduce_mean
-x
-
-x_49
-axes
-
-input_423_axes_0&
+reduce_mean&
 	keep_dims
 
-input_423_keep_dims_0+
+input_423_keep_dims_0
+axes
+
+input_423_axes_0
+x
+
+x_49+
 	input_423
 
 
@@ -15199,31 +15200,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_425_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_2_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_425_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_2_se_conv_reduce_bias
+input_425_pad_type_0"
+strides
+
+input_425_strides_0 
+groups
+
+input_425_groups_0
+x
+
+	input_423
 pad
 
 input_425_pad_0&
 	dilations
 
-input_425_dilations_0"
-strides
-
-input_425_strides_0
-x
-
-	input_423+
+input_425_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_2_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_2_se_conv_reduce_weight+
 	input_425
 
 
@@ -15316,31 +15317,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_429_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_2_2_se_conv_expand_weight$
+conv$
 pad_type
 
-input_429_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_2_2_se_conv_expand_bias
+input_429_pad_type_0"
+strides
+
+input_429_strides_0 
+groups
+
+input_429_groups_0
+x
+
+	input_427
 pad
 
 input_429_pad_0&
 	dilations
 
-input_429_dilations_0"
-strides
-
-input_429_strides_0
-x
-
-	input_427+
+input_429_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_2_2_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_2_2_se_conv_expand_weight+
 	input_429
 
 
@@ -15377,16 +15378,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?©
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_1195_beta_0
 alpha
 
 var_1195_alpha_0
 x
 
-	input_429
-beta
-
-var_1195_beta_0*
+	input_429*
 var_1195
 
 
@@ -15397,14 +15398,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "	
 op_1195u
-mul
+mul
+x
+
+x_49
 y
 
 
-var_1195
-x
-
-x_49+
+var_1195+
 	input_431
 
 
@@ -15497,32 +15498,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 (*%
 @model_path/weights/weight.bin¿Ëü	Ω
-conv 
-groups
-
-input_433_groups_0
-weight
-
-
-const_34$
+conv$
 pad_type
 
-input_433_pad_type_0
-bias
+input_433_pad_type_0"
+strides
+
+input_433_strides_0 
+groups
+
+input_433_groups_0
+x
 
-	const_127
+	input_431
 pad
 
 input_433_pad_0&
 	dilations
 
-input_433_dilations_0"
-strides
-
-input_433_strides_0
-x
+input_433_dilations_0
+bias
 
-	input_431&
+	const_127
+weight
+
+
+const_34&
 x_51
 
 
@@ -15534,13 +15535,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_51v
-add
-y
-
-	input_411
+add
 x
 
-x_51+
+x_51
+y
+
+	input_411+
 	input_435
 
 
@@ -15619,33 +15620,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_437_groups_0
-weight
-
-
-const_36$
+conv$
 pad_type
 
-input_437_pad_type_0
-bias
-
-
-const_37
+input_437_pad_type_0"
+strides
+
+input_437_strides_0 
+groups
+
+input_437_groups_0
+x
+
+	input_435
 pad
 
 input_437_pad_0&
 	dilations
 
-input_437_dilations_0"
-strides
-
-input_437_strides_0
-x
-
-	input_435,
+input_437_dilations_0
+bias
+
+
+const_37
+weight
+
+
+const_36,
 	input_439
 
 
@@ -15712,16 +15713,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_22_beta_0$
 alpha
 
 sigmoid_hard_22_alpha_0
 x
 
-thresholded_relu_22"
-beta
-
-sigmoid_hard_22_beta_02
+thresholded_relu_222
 sigmoid_hard_22
 
 
@@ -15732,13 +15733,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_22å
-mul
-y
-
-sigmoid_hard_22
+mul
 x
 
-thresholded_relu_22,
+thresholded_relu_22
+y
+
+sigmoid_hard_22,
 	input_441
 
 
@@ -15818,33 +15819,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_443_groups_0
-weight
-
-
-const_38$
+conv$
 pad_type
 
-input_443_pad_type_0
-bias
-
-
-const_39
+input_443_pad_type_0"
+strides
+
+input_443_strides_0 
+groups
+
+input_443_groups_0
+x
+
+	input_441
 pad
 
 input_443_pad_0&
 	dilations
 
-input_443_dilations_0"
-strides
-
-input_443_strides_0
-x
-
-	input_441,
+input_443_dilations_0
+bias
+
+
+const_39
+weight
+
+
+const_38,
 	input_445
 
 
@@ -15911,16 +15912,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_23_beta_0$
 alpha
 
 sigmoid_hard_23_alpha_0
 x
 
-thresholded_relu_23"
-beta
-
-sigmoid_hard_23_beta_02
+thresholded_relu_232
 sigmoid_hard_23
 
 
@@ -15931,13 +15932,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_23å
-mul
-y
-
-sigmoid_hard_23
+mul
 x
 
-thresholded_relu_23,
+thresholded_relu_23
+y
+
+sigmoid_hard_23,
 	input_447
 
 
@@ -16030,32 +16031,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 P*%
 @model_path/weights/weight.bin¿Íü	«
-conv 
-groups
-
-input_449_groups_0
-weight
-
-
-const_40$
+conv$
 pad_type
 
-input_449_pad_type_0
-bias
+input_449_pad_type_0"
+strides
+
+input_449_strides_0 
+groups
+
+input_449_groups_0
+x
 
-	const_133
+	input_447
 pad
 
 input_449_pad_0&
 	dilations
 
-input_449_dilations_0"
-strides
-
-input_449_strides_0
-x
+input_449_dilations_0
+bias
 
-	input_447+
+	const_133
+weight
+
+
+const_40+
 	input_451
 
 
@@ -16134,33 +16135,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_453_groups_0
-weight
-
-
-const_42$
+conv$
 pad_type
 
-input_453_pad_type_0
-bias
-
-
-const_43
+input_453_pad_type_0"
+strides
+
+input_453_strides_0 
+groups
+
+input_453_groups_0
+x
+
+	input_451
 pad
 
 input_453_pad_0&
 	dilations
 
-input_453_dilations_0"
-strides
-
-input_453_strides_0
-x
-
-	input_451,
+input_453_dilations_0
+bias
+
+
+const_43
+weight
+
+
+const_42,
 	input_455
 
 
@@ -16227,16 +16228,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_24_beta_0$
 alpha
 
 sigmoid_hard_24_alpha_0
 x
 
-thresholded_relu_24"
-beta
-
-sigmoid_hard_24_beta_02
+thresholded_relu_242
 sigmoid_hard_24
 
 
@@ -16247,13 +16248,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_24å
-mul
-y
-
-sigmoid_hard_24
+mul
 x
 
-thresholded_relu_24,
+thresholded_relu_24
+y
+
+sigmoid_hard_24,
 	input_457
 
 
@@ -16333,33 +16334,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_459_groups_0
-weight
-
-
-const_44$
+conv$
 pad_type
 
-input_459_pad_type_0
-bias
-
-
-const_45
+input_459_pad_type_0"
+strides
+
+input_459_strides_0 
+groups
+
+input_459_groups_0
+x
+
+	input_457
 pad
 
 input_459_pad_0&
 	dilations
 
-input_459_dilations_0"
-strides
-
-input_459_strides_0
-x
-
-	input_457,
+input_459_dilations_0
+bias
+
+
+const_45
+weight
+
+
+const_44,
 	input_461
 
 
@@ -16426,16 +16427,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_25_beta_0$
 alpha
 
 sigmoid_hard_25_alpha_0
 x
 
-thresholded_relu_25"
-beta
-
-sigmoid_hard_25_beta_02
+thresholded_relu_252
 sigmoid_hard_25
 
 
@@ -16446,13 +16447,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_25å
-mul
-y
-
-sigmoid_hard_25
+mul
 x
 
-thresholded_relu_25,
+thresholded_relu_25
+y
+
+sigmoid_hard_25,
 	input_463
 
 
@@ -16545,32 +16546,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 P*%
 @model_path/weights/weight.bin¿Ìü	Ω
-conv 
-groups
-
-input_465_groups_0
-weight
-
-
-const_46$
+conv$
 pad_type
 
-input_465_pad_type_0
-bias
+input_465_pad_type_0"
+strides
+
+input_465_strides_0 
+groups
+
+input_465_groups_0
+x
 
-	const_139
+	input_463
 pad
 
 input_465_pad_0&
 	dilations
 
-input_465_dilations_0"
-strides
-
-input_465_strides_0
-x
+input_465_dilations_0
+bias
 
-	input_463&
+	const_139
+weight
+
+
+const_46&
 x_53
 
 
@@ -16582,13 +16583,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_53v
-add
-y
-
-	input_451
+add
 x
 
-x_53+
+x_53
+y
+
+	input_451+
 	input_467
 
 
@@ -16667,33 +16668,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_469_groups_0
-weight
-
-
-const_48$
+conv$
 pad_type
 
-input_469_pad_type_0
-bias
-
-
-const_49
+input_469_pad_type_0"
+strides
+
+input_469_strides_0 
+groups
+
+input_469_groups_0
+x
+
+	input_467
 pad
 
 input_469_pad_0&
 	dilations
 
-input_469_dilations_0"
-strides
-
-input_469_strides_0
-x
-
-	input_467,
+input_469_dilations_0
+bias
+
+
+const_49
+weight
+
+
+const_48,
 	input_471
 
 
@@ -16760,16 +16761,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_26_beta_0$
 alpha
 
 sigmoid_hard_26_alpha_0
 x
 
-thresholded_relu_26"
-beta
-
-sigmoid_hard_26_beta_02
+thresholded_relu_262
 sigmoid_hard_26
 
 
@@ -16780,13 +16781,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_26å
-mul
-y
-
-sigmoid_hard_26
+mul
 x
 
-thresholded_relu_26,
+thresholded_relu_26
+y
+
+sigmoid_hard_26,
 	input_473
 
 
@@ -16866,33 +16867,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_475_groups_0
-weight
-
-
-const_50$
+conv$
 pad_type
 
-input_475_pad_type_0
-bias
-
-
-const_51
+input_475_pad_type_0"
+strides
+
+input_475_strides_0 
+groups
+
+input_475_groups_0
+x
+
+	input_473
 pad
 
 input_475_pad_0&
 	dilations
 
-input_475_dilations_0"
-strides
-
-input_475_strides_0
-x
-
-	input_473,
+input_475_dilations_0
+bias
+
+
+const_51
+weight
+
+
+const_50,
 	input_477
 
 
@@ -16959,16 +16960,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_27_beta_0$
 alpha
 
 sigmoid_hard_27_alpha_0
 x
 
-thresholded_relu_27"
-beta
-
-sigmoid_hard_27_beta_02
+thresholded_relu_272
 sigmoid_hard_27
 
 
@@ -16979,13 +16980,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_27å
-mul
-y
-
-sigmoid_hard_27
+mul
 x
 
-thresholded_relu_27,
+thresholded_relu_27
+y
+
+sigmoid_hard_27,
 	input_479
 
 
@@ -17078,32 +17079,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 P*%
 @model_path/weights/weight.bin¿ü	Ω
-conv 
-groups
-
-input_481_groups_0
-weight
-
-
-const_52$
+conv$
 pad_type
 
-input_481_pad_type_0
-bias
+input_481_pad_type_0"
+strides
+
+input_481_strides_0 
+groups
+
+input_481_groups_0
+x
 
-	const_145
+	input_479
 pad
 
 input_481_pad_0&
 	dilations
 
-input_481_dilations_0"
-strides
-
-input_481_strides_0
-x
+input_481_dilations_0
+bias
 
-	input_479&
+	const_145
+weight
+
+
+const_52&
 x_55
 
 
@@ -17115,13 +17116,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_55v
-add
-y
-
-	input_467
+add
 x
 
-x_55+
+x_55
+y
+
+	input_467+
 	input_483
 
 
@@ -17200,33 +17201,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_485_groups_0
-weight
-
-
-const_54$
+conv$
 pad_type
 
-input_485_pad_type_0
-bias
-
-
-const_55
+input_485_pad_type_0"
+strides
+
+input_485_strides_0 
+groups
+
+input_485_groups_0
+x
+
+	input_483
 pad
 
 input_485_pad_0&
 	dilations
 
-input_485_dilations_0"
-strides
-
-input_485_strides_0
-x
-
-	input_483,
+input_485_dilations_0
+bias
+
+
+const_55
+weight
+
+
+const_54,
 	input_487
 
 
@@ -17293,16 +17294,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_28_beta_0$
 alpha
 
 sigmoid_hard_28_alpha_0
 x
 
-thresholded_relu_28"
-beta
-
-sigmoid_hard_28_beta_02
+thresholded_relu_282
 sigmoid_hard_28
 
 
@@ -17313,13 +17314,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_28å
-mul
-y
-
-sigmoid_hard_28
+mul
 x
 
-thresholded_relu_28,
+thresholded_relu_28
+y
+
+sigmoid_hard_28,
 	input_489
 
 
@@ -17399,33 +17400,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_491_groups_0
-weight
-
-
-const_56$
+conv$
 pad_type
 
-input_491_pad_type_0
-bias
-
-
-const_57
+input_491_pad_type_0"
+strides
+
+input_491_strides_0 
+groups
+
+input_491_groups_0
+x
+
+	input_489
 pad
 
 input_491_pad_0&
 	dilations
 
-input_491_dilations_0"
-strides
-
-input_491_strides_0
-x
-
-	input_489,
+input_491_dilations_0
+bias
+
+
+const_57
+weight
+
+
+const_56,
 	input_493
 
 
@@ -17492,16 +17493,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_29_beta_0$
 alpha
 
 sigmoid_hard_29_alpha_0
 x
 
-thresholded_relu_29"
-beta
-
-sigmoid_hard_29_beta_02
+thresholded_relu_292
 sigmoid_hard_29
 
 
@@ -17512,13 +17513,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_29å
-mul
-y
-
-sigmoid_hard_29
+mul
 x
 
-thresholded_relu_29,
+thresholded_relu_29
+y
+
+sigmoid_hard_29,
 	input_495
 
 
@@ -17611,32 +17612,32 @@ $com.github.apple.coremltools.version9.0¢:
 
 P*%
 @model_path/weights/weight.bin¿Ûü	Ω
-conv 
-groups
-
-input_497_groups_0
-weight
-
-
-const_58$
+conv$
 pad_type
 
-input_497_pad_type_0
-bias
+input_497_pad_type_0"
+strides
+
+input_497_strides_0 
+groups
+
+input_497_groups_0
+x
 
-	const_151
+	input_495
 pad
 
 input_497_pad_0&
 	dilations
 
-input_497_dilations_0"
-strides
-
-input_497_strides_0
-x
+input_497_dilations_0
+bias
 
-	input_495&
+	const_151
+weight
+
+
+const_58&
 x_57
 
 
@@ -17648,13 +17649,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_57v
-add
-y
-
-	input_483
+add
 x
 
-x_57+
+x_57
+y
+
+	input_483+
 	input_499
 
 
@@ -17733,33 +17734,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_501_groups_0
-weight
-
-
-const_60$
+conv$
 pad_type
 
-input_501_pad_type_0
-bias
-
-
-const_61
+input_501_pad_type_0"
+strides
+
+input_501_strides_0 
+groups
+
+input_501_groups_0
+x
+
+	input_499
 pad
 
 input_501_pad_0&
 	dilations
 
-input_501_dilations_0"
-strides
-
-input_501_strides_0
-x
-
-	input_499,
+input_501_dilations_0
+bias
+
+
+const_61
+weight
+
+
+const_60,
 	input_503
 
 
@@ -17826,16 +17827,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_30_beta_0$
 alpha
 
 sigmoid_hard_30_alpha_0
 x
 
-thresholded_relu_30"
-beta
-
-sigmoid_hard_30_beta_02
+thresholded_relu_302
 sigmoid_hard_30
 
 
@@ -17846,13 +17847,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_30å
-mul
-y
-
-sigmoid_hard_30
+mul
 x
 
-thresholded_relu_30,
+thresholded_relu_30
+y
+
+sigmoid_hard_30,
 	input_505
 
 
@@ -17932,33 +17933,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_507_groups_0
-weight
-
-
-const_62$
+conv$
 pad_type
 
-input_507_pad_type_0
-bias
-
-
-const_63
+input_507_pad_type_0"
+strides
+
+input_507_strides_0 
+groups
+
+input_507_groups_0
+x
+
+	input_505
 pad
 
 input_507_pad_0&
 	dilations
 
-input_507_dilations_0"
-strides
-
-input_507_strides_0
-x
-
-	input_505,
+input_507_dilations_0
+bias
+
+
+const_63
+weight
+
+
+const_62,
 	input_509
 
 
@@ -18025,16 +18026,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_31_beta_0$
 alpha
 
 sigmoid_hard_31_alpha_0
 x
 
-thresholded_relu_31"
-beta
-
-sigmoid_hard_31_beta_02
+thresholded_relu_312
 sigmoid_hard_31
 
 
@@ -18045,13 +18046,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_31Ç
-mul
-y
-
-sigmoid_hard_31
+mul
 x
 
-thresholded_relu_31'
+thresholded_relu_31
+y
+
+sigmoid_hard_31'
 x_59
 
 
@@ -18089,16 +18090,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_59
-axes
-
-input_511_axes_0&
+reduce_mean&
 	keep_dims
 
-input_511_keep_dims_0,
+input_511_keep_dims_0
+axes
+
+input_511_axes_0
+x
+
+x_59,
 	input_511
 
 
@@ -18177,31 +18178,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ¢
-conv 
-groups
-
-input_513_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_4_0_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_513_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_4_0_se_conv_reduce_bias
+input_513_pad_type_0"
+strides
+
+input_513_strides_0 
+groups
+
+input_513_groups_0
+x
+
+	input_511
 pad
 
 input_513_pad_0&
 	dilations
 
-input_513_dilations_0"
-strides
-
-input_513_strides_0
-x
-
-	input_511+
+input_513_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_4_0_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_4_0_se_conv_reduce_weight+
 	input_513
 
 
@@ -18294,31 +18295,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_517_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_4_0_se_conv_expand_weight$
+conv$
 pad_type
 
-input_517_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_4_0_se_conv_expand_bias
+input_517_pad_type_0"
+strides
+
+input_517_strides_0 
+groups
+
+input_517_groups_0
+x
+
+	input_515
 pad
 
 input_517_pad_0&
 	dilations
 
-input_517_dilations_0"
-strides
-
-input_517_strides_0
-x
-
-	input_515,
+input_517_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_4_0_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_4_0_se_conv_expand_weight,
 	input_517
 
 
@@ -18355,16 +18356,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?™
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_1432_beta_0
 alpha
 
 var_1432_alpha_0
 x
 
-	input_517
-beta
-
-var_1432_beta_0+
+	input_517+
 var_1432
 
 
@@ -18375,14 +18376,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "	
 op_1432v
-mul
+mul
+x
+
+x_59
 y
 
 
-var_1432
-x
-
-x_59,
+var_1432,
 	input_519
 
 
@@ -18461,33 +18462,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∆
-conv 
-groups
-
-input_521_groups_0
-weight
-
-
-const_64$
+conv$
 pad_type
 
-input_521_pad_type_0
-bias
-
-
-const_65
+input_521_pad_type_0"
+strides
+
+input_521_strides_0 
+groups
+
+input_521_groups_0
+x
+
+	input_519
 pad
 
 input_521_pad_0&
 	dilations
 
-input_521_dilations_0"
-strides
-
-input_521_strides_0
-x
-
-	input_519+
+input_521_dilations_0
+bias
+
+
+const_65
+weight
+
+
+const_64+
 	input_523
 
 
@@ -18566,33 +18567,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_525_groups_0
-weight
-
-
-const_66$
+conv$
 pad_type
 
-input_525_pad_type_0
-bias
-
-
-const_67
+input_525_pad_type_0"
+strides
+
+input_525_strides_0 
+groups
+
+input_525_groups_0
+x
+
+	input_523
 pad
 
 input_525_pad_0&
 	dilations
 
-input_525_dilations_0"
-strides
-
-input_525_strides_0
-x
-
-	input_523,
+input_525_dilations_0
+bias
+
+
+const_67
+weight
+
+
+const_66,
 	input_527
 
 
@@ -18659,16 +18660,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_32_beta_0$
 alpha
 
 sigmoid_hard_32_alpha_0
 x
 
-thresholded_relu_32"
-beta
-
-sigmoid_hard_32_beta_02
+thresholded_relu_322
 sigmoid_hard_32
 
 
@@ -18679,13 +18680,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_32å
-mul
-y
-
-sigmoid_hard_32
+mul
 x
 
-thresholded_relu_32,
+thresholded_relu_32
+y
+
+sigmoid_hard_32,
 	input_529
 
 
@@ -18765,33 +18766,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_531_groups_0
-weight
-
-
-const_68$
+conv$
 pad_type
 
-input_531_pad_type_0
-bias
-
-
-const_69
+input_531_pad_type_0"
+strides
+
+input_531_strides_0 
+groups
+
+input_531_groups_0
+x
+
+	input_529
 pad
 
 input_531_pad_0&
 	dilations
 
-input_531_dilations_0"
-strides
-
-input_531_strides_0
-x
-
-	input_529,
+input_531_dilations_0
+bias
+
+
+const_69
+weight
+
+
+const_68,
 	input_533
 
 
@@ -18858,16 +18859,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_33_beta_0$
 alpha
 
 sigmoid_hard_33_alpha_0
 x
 
-thresholded_relu_33"
-beta
-
-sigmoid_hard_33_beta_02
+thresholded_relu_332
 sigmoid_hard_33
 
 
@@ -18878,13 +18879,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_33Ç
-mul
-y
-
-sigmoid_hard_33
+mul
 x
 
-thresholded_relu_33'
+thresholded_relu_33
+y
+
+sigmoid_hard_33'
 x_61
 
 
@@ -18922,16 +18923,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_61
-axes
-
-input_535_axes_0&
+reduce_mean&
 	keep_dims
 
-input_535_keep_dims_0,
+input_535_keep_dims_0
+axes
+
+input_535_axes_0
+x
+
+x_61,
 	input_535
 
 
@@ -19010,31 +19011,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_537_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_4_1_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_537_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_4_1_se_conv_reduce_bias
+input_537_pad_type_0"
+strides
+
+input_537_strides_0 
+groups
+
+input_537_groups_0
+x
+
+	input_535
 pad
 
 input_537_pad_0&
 	dilations
 
-input_537_dilations_0"
-strides
-
-input_537_strides_0
-x
-
-	input_535,
+input_537_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_4_1_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_4_1_se_conv_reduce_weight,
 	input_537
 
 
@@ -19127,31 +19128,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_541_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_4_1_se_conv_expand_weight$
+conv$
 pad_type
 
-input_541_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_4_1_se_conv_expand_bias
+input_541_pad_type_0"
+strides
+
+input_541_strides_0 
+groups
+
+input_541_groups_0
+x
+
+	input_539
 pad
 
 input_541_pad_0&
 	dilations
 
-input_541_dilations_0"
-strides
-
-input_541_strides_0
-x
-
-	input_539,
+input_541_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_4_1_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_4_1_se_conv_expand_weight,
 	input_541
 
 
@@ -19188,16 +19189,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?™
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_1495_beta_0
 alpha
 
 var_1495_alpha_0
 x
 
-	input_541
-beta
-
-var_1495_beta_0+
+	input_541+
 var_1495
 
 
@@ -19208,14 +19209,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "	
 op_1495v
-mul
+mul
+x
+
+x_61
 y
 
 
-var_1495
-x
-
-x_61,
+var_1495,
 	input_543
 
 
@@ -19294,33 +19295,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 º
-conv 
-groups
-
-input_545_groups_0
-weight
-
-
-const_70$
+conv$
 pad_type
 
-input_545_pad_type_0
-bias
-
-
-const_71
+input_545_pad_type_0"
+strides
+
+input_545_strides_0 
+groups
+
+input_545_groups_0
+x
+
+	input_543
 pad
 
 input_545_pad_0&
 	dilations
 
-input_545_dilations_0"
-strides
-
-input_545_strides_0
-x
-
-	input_543&
+input_545_dilations_0
+bias
+
+
+const_71
+weight
+
+
+const_70&
 x_63
 
 
@@ -19332,13 +19333,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_63v
-add
-y
-
-	input_523
+add
 x
 
-x_63+
+x_63
+y
+
+	input_523+
 	input_547
 
 
@@ -19417,33 +19418,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_549_groups_0
-weight
-
-
-const_72$
+conv$
 pad_type
 
-input_549_pad_type_0
-bias
-
-
-const_73
+input_549_pad_type_0"
+strides
+
+input_549_strides_0 
+groups
+
+input_549_groups_0
+x
+
+	input_547
 pad
 
 input_549_pad_0&
 	dilations
 
-input_549_dilations_0"
-strides
-
-input_549_strides_0
-x
-
-	input_547,
+input_549_dilations_0
+bias
+
+
+const_73
+weight
+
+
+const_72,
 	input_551
 
 
@@ -19510,16 +19511,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_34_beta_0$
 alpha
 
 sigmoid_hard_34_alpha_0
 x
 
-thresholded_relu_34"
-beta
-
-sigmoid_hard_34_beta_02
+thresholded_relu_342
 sigmoid_hard_34
 
 
@@ -19530,13 +19531,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_34å
-mul
-y
-
-sigmoid_hard_34
+mul
 x
 
-thresholded_relu_34,
+thresholded_relu_34
+y
+
+sigmoid_hard_34,
 	input_553
 
 
@@ -19616,33 +19617,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_555_groups_0
-weight
-
-
-const_74$
+conv$
 pad_type
 
-input_555_pad_type_0
-bias
-
-
-const_75
+input_555_pad_type_0"
+strides
+
+input_555_strides_0 
+groups
+
+input_555_groups_0
+x
+
+	input_553
 pad
 
 input_555_pad_0&
 	dilations
 
-input_555_dilations_0"
-strides
-
-input_555_strides_0
-x
-
-	input_553,
+input_555_dilations_0
+bias
+
+
+const_75
+weight
+
+
+const_74,
 	input_557
 
 
@@ -19709,16 +19710,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_35_beta_0$
 alpha
 
 sigmoid_hard_35_alpha_0
 x
 
-thresholded_relu_35"
-beta
-
-sigmoid_hard_35_beta_02
+thresholded_relu_352
 sigmoid_hard_35
 
 
@@ -19729,13 +19730,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_35Ç
-mul
-y
-
-sigmoid_hard_35
+mul
 x
 
-thresholded_relu_35'
+thresholded_relu_35
+y
+
+sigmoid_hard_35'
 x_65
 
 
@@ -19773,16 +19774,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_65
-axes
-
-input_559_axes_0&
+reduce_mean&
 	keep_dims
 
-input_559_keep_dims_0,
+input_559_keep_dims_0
+axes
+
+input_559_axes_0
+x
+
+x_65,
 	input_559
 
 
@@ -19861,31 +19862,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_561_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_0_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_561_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_0_se_conv_reduce_bias
+input_561_pad_type_0"
+strides
+
+input_561_strides_0 
+groups
+
+input_561_groups_0
+x
+
+	input_559
 pad
 
 input_561_pad_0&
 	dilations
 
-input_561_dilations_0"
-strides
-
-input_561_strides_0
-x
-
-	input_559,
+input_561_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_0_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_0_se_conv_reduce_weight,
 	input_561
 
 
@@ -19978,31 +19979,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_565_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_0_se_conv_expand_weight$
+conv$
 pad_type
 
-input_565_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_0_se_conv_expand_bias
+input_565_pad_type_0"
+strides
+
+input_565_strides_0 
+groups
+
+input_565_groups_0
+x
+
+	input_563
 pad
 
 input_565_pad_0&
 	dilations
 
-input_565_dilations_0"
-strides
-
-input_565_strides_0
-x
-
-	input_563,
+input_565_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_0_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_0_se_conv_expand_weight,
 	input_565
 
 
@@ -20039,16 +20040,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?™
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_1562_beta_0
 alpha
 
 var_1562_alpha_0
 x
 
-	input_565
-beta
-
-var_1562_beta_0+
+	input_565+
 var_1562
 
 
@@ -20059,14 +20060,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "	
 op_1562v
-mul
+mul
+x
+
+x_65
 y
 
 
-var_1562
-x
-
-x_65,
+var_1562,
 	input_567
 
 
@@ -20145,33 +20146,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_569_groups_0
-weight
-
-
-const_76$
+conv$
 pad_type
 
-input_569_pad_type_0
-bias
-
-
-const_77
+input_569_pad_type_0"
+strides
+
+input_569_strides_0 
+groups
+
+input_569_groups_0
+x
+
+	input_567
 pad
 
 input_569_pad_0&
 	dilations
 
-input_569_dilations_0"
-strides
-
-input_569_strides_0
-x
-
-	input_567,
+input_569_dilations_0
+bias
+
+
+const_77
+weight
+
+
+const_76,
 	input_571
 
 
@@ -20250,33 +20251,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_573_groups_0
-weight
-
-
-const_78$
+conv$
 pad_type
 
-input_573_pad_type_0
-bias
-
-
-const_79
+input_573_pad_type_0"
+strides
+
+input_573_strides_0 
+groups
+
+input_573_groups_0
+x
+
+	input_571
 pad
 
 input_573_pad_0&
 	dilations
 
-input_573_dilations_0"
-strides
-
-input_573_strides_0
-x
-
-	input_571,
+input_573_dilations_0
+bias
+
+
+const_79
+weight
+
+
+const_78,
 	input_575
 
 
@@ -20343,16 +20344,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_36_beta_0$
 alpha
 
 sigmoid_hard_36_alpha_0
 x
 
-thresholded_relu_36"
-beta
-
-sigmoid_hard_36_beta_02
+thresholded_relu_362
 sigmoid_hard_36
 
 
@@ -20363,13 +20364,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_36å
-mul
-y
-
-sigmoid_hard_36
+mul
 x
 
-thresholded_relu_36,
+thresholded_relu_36
+y
+
+sigmoid_hard_36,
 	input_577
 
 
@@ -20449,33 +20450,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_579_groups_0
-weight
-
-
-const_80$
+conv$
 pad_type
 
-input_579_pad_type_0
-bias
-
-
-const_81
+input_579_pad_type_0"
+strides
+
+input_579_strides_0 
+groups
+
+input_579_groups_0
+x
+
+	input_577
 pad
 
 input_579_pad_0&
 	dilations
 
-input_579_dilations_0"
-strides
-
-input_579_strides_0
-x
-
-	input_577,
+input_579_dilations_0
+bias
+
+
+const_81
+weight
+
+
+const_80,
 	input_581
 
 
@@ -20542,16 +20543,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_37_beta_0$
 alpha
 
 sigmoid_hard_37_alpha_0
 x
 
-thresholded_relu_37"
-beta
-
-sigmoid_hard_37_beta_02
+thresholded_relu_372
 sigmoid_hard_37
 
 
@@ -20562,13 +20563,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_37Ç
-mul
-y
-
-sigmoid_hard_37
+mul
 x
 
-thresholded_relu_37'
+thresholded_relu_37
+y
+
+sigmoid_hard_37'
 x_67
 
 
@@ -20606,16 +20607,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_67
-axes
-
-input_583_axes_0&
+reduce_mean&
 	keep_dims
 
-input_583_keep_dims_0,
+input_583_keep_dims_0
+axes
+
+input_583_axes_0
+x
+
+x_67,
 	input_583
 
 
@@ -20694,31 +20695,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_585_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_1_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_585_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_1_se_conv_reduce_bias
+input_585_pad_type_0"
+strides
+
+input_585_strides_0 
+groups
+
+input_585_groups_0
+x
+
+	input_583
 pad
 
 input_585_pad_0&
 	dilations
 
-input_585_dilations_0"
-strides
-
-input_585_strides_0
-x
-
-	input_583,
+input_585_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_1_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_1_se_conv_reduce_weight,
 	input_585
 
 
@@ -20811,31 +20812,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_589_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_1_se_conv_expand_weight$
+conv$
 pad_type
 
-input_589_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_1_se_conv_expand_bias
+input_589_pad_type_0"
+strides
+
+input_589_strides_0 
+groups
+
+input_589_groups_0
+x
+
+	input_587
 pad
 
 input_589_pad_0&
 	dilations
 
-input_589_dilations_0"
-strides
-
-input_589_strides_0
-x
-
-	input_587,
+input_589_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_1_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_1_se_conv_expand_weight,
 	input_589
 
 
@@ -20872,16 +20873,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?™
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_1625_beta_0
 alpha
 
 var_1625_alpha_0
 x
 
-	input_589
-beta
-
-var_1625_beta_0+
+	input_589+
 var_1625
 
 
@@ -20892,14 +20893,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "	
 op_1625v
-mul
+mul
+x
+
+x_67
 y
 
 
-var_1625
-x
-
-x_67,
+var_1625,
 	input_591
 
 
@@ -20978,33 +20979,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 Ω
-conv 
-groups
-
-input_593_groups_0
-weight
-
-
-const_82$
+conv$
 pad_type
 
-input_593_pad_type_0
-bias
-
-
-const_83
+input_593_pad_type_0"
+strides
+
+input_593_strides_0 
+groups
+
+input_593_groups_0
+x
+
+	input_591
 pad
 
 input_593_pad_0&
 	dilations
 
-input_593_dilations_0"
-strides
-
-input_593_strides_0
-x
-
-	input_591'
+input_593_dilations_0
+bias
+
+
+const_83
+weight
+
+
+const_82'
 x_69
 
 
@@ -21016,13 +21017,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_69w
-add
-y
-
-	input_571
+add
 x
 
-x_69,
+x_69
+y
+
+	input_571,
 	input_595
 
 
@@ -21101,33 +21102,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_597_groups_0
-weight
-
-
-const_84$
+conv$
 pad_type
 
-input_597_pad_type_0
-bias
-
-
-const_85
+input_597_pad_type_0"
+strides
+
+input_597_strides_0 
+groups
+
+input_597_groups_0
+x
+
+	input_595
 pad
 
 input_597_pad_0&
 	dilations
 
-input_597_dilations_0"
-strides
-
-input_597_strides_0
-x
-
-	input_595,
+input_597_dilations_0
+bias
+
+
+const_85
+weight
+
+
+const_84,
 	input_599
 
 
@@ -21194,16 +21195,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_38_beta_0$
 alpha
 
 sigmoid_hard_38_alpha_0
 x
 
-thresholded_relu_38"
-beta
-
-sigmoid_hard_38_beta_02
+thresholded_relu_382
 sigmoid_hard_38
 
 
@@ -21214,13 +21215,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_38å
-mul
-y
-
-sigmoid_hard_38
+mul
 x
 
-thresholded_relu_38,
+thresholded_relu_38
+y
+
+sigmoid_hard_38,
 	input_601
 
 
@@ -21300,33 +21301,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_603_groups_0
-weight
-
-
-const_86$
+conv$
 pad_type
 
-input_603_pad_type_0
-bias
-
-
-const_87
+input_603_pad_type_0"
+strides
+
+input_603_strides_0 
+groups
+
+input_603_groups_0
+x
+
+	input_601
 pad
 
 input_603_pad_0&
 	dilations
 
-input_603_dilations_0"
-strides
-
-input_603_strides_0
-x
-
-	input_601,
+input_603_dilations_0
+bias
+
+
+const_87
+weight
+
+
+const_86,
 	input_605
 
 
@@ -21393,16 +21394,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_39_beta_0$
 alpha
 
 sigmoid_hard_39_alpha_0
 x
 
-thresholded_relu_39"
-beta
-
-sigmoid_hard_39_beta_02
+thresholded_relu_392
 sigmoid_hard_39
 
 
@@ -21413,13 +21414,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_39Ç
-mul
-y
-
-sigmoid_hard_39
+mul
 x
 
-thresholded_relu_39'
+thresholded_relu_39
+y
+
+sigmoid_hard_39'
 x_71
 
 
@@ -21457,16 +21458,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ±
-reduce_mean
-x
-
-x_71
-axes
-
-input_607_axes_0&
+reduce_mean&
 	keep_dims
 
-input_607_keep_dims_0,
+input_607_keep_dims_0
+axes
+
+input_607_axes_0
+x
+
+x_71,
 	input_607
 
 
@@ -21545,31 +21546,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_609_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_2_se_conv_reduce_weight$
+conv$
 pad_type
 
-input_609_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_2_se_conv_reduce_bias
+input_609_pad_type_0"
+strides
+
+input_609_strides_0 
+groups
+
+input_609_groups_0
+x
+
+	input_607
 pad
 
 input_609_pad_0&
 	dilations
 
-input_609_dilations_0"
-strides
-
-input_609_strides_0
-x
-
-	input_607,
+input_609_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_2_se_conv_reduce_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_2_se_conv_reduce_weight,
 	input_609
 
 
@@ -21662,31 +21663,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 £
-conv 
-groups
-
-input_613_groups_0E
-weight;
-9
-7siamese_model_backbone_blocks_5_2_se_conv_expand_weight$
+conv$
 pad_type
 
-input_613_pad_type_0A
-bias9
-7
-5siamese_model_backbone_blocks_5_2_se_conv_expand_bias
+input_613_pad_type_0"
+strides
+
+input_613_strides_0 
+groups
+
+input_613_groups_0
+x
+
+	input_611
 pad
 
 input_613_pad_0&
 	dilations
 
-input_613_dilations_0"
-strides
-
-input_613_strides_0
-x
-
-	input_611,
+input_613_dilations_0A
+bias9
+7
+5siamese_model_backbone_blocks_5_2_se_conv_expand_biasE
+weight;
+9
+7siamese_model_backbone_blocks_5_2_se_conv_expand_weight,
 	input_613
 
 
@@ -21723,16 +21724,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?™
-sigmoid_hard
+sigmoid_hard
+beta
+
+var_1689_beta_0
 alpha
 
 var_1689_alpha_0
 x
 
-	input_613
-beta
-
-var_1689_beta_0+
+	input_613+
 var_1689
 
 
@@ -21743,14 +21744,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 "	
 op_1689v
-mul
+mul
+x
+
+x_71
 y
 
 
-var_1689
-x
-
-x_71,
+var_1689,
 	input_615
 
 
@@ -21829,33 +21830,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 Ω
-conv 
-groups
-
-input_617_groups_0
-weight
-
-
-const_88$
+conv$
 pad_type
 
-input_617_pad_type_0
-bias
-
-
-const_89
+input_617_pad_type_0"
+strides
+
+input_617_strides_0 
+groups
+
+input_617_groups_0
+x
+
+	input_615
 pad
 
 input_617_pad_0&
 	dilations
 
-input_617_dilations_0"
-strides
-
-input_617_strides_0
-x
-
-	input_615'
+input_617_dilations_0
+bias
+
+
+const_89
+weight
+
+
+const_88'
 x_73
 
 
@@ -21867,13 +21868,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 x_73w
-add
-y
-
-	input_595
+add
 x
 
-x_73,
+x_73
+y
+
+	input_595,
 	input_619
 
 
@@ -21952,33 +21953,33 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 «
-conv 
-groups
-
-input_621_groups_0
-weight
-
-
-const_90$
+conv$
 pad_type
 
-input_621_pad_type_0
-bias
-
-
-const_91
+input_621_pad_type_0"
+strides
+
+input_621_strides_0 
+groups
+
+input_621_groups_0
+x
+
+	input_619
 pad
 
 input_621_pad_0&
 	dilations
 
-input_621_dilations_0"
-strides
-
-input_621_strides_0
-x
-
-	input_619,
+input_621_dilations_0
+bias
+
+
+const_91
+weight
+
+
+const_90,
 	input_623
 
 
@@ -22045,16 +22046,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_40_beta_0$
 alpha
 
 sigmoid_hard_40_alpha_0
 x
 
-thresholded_relu_40"
-beta
-
-sigmoid_hard_40_beta_02
+thresholded_relu_402
 sigmoid_hard_40
 
 
@@ -22065,13 +22066,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_40å
-mul
-y
-
-sigmoid_hard_40
+mul
 x
 
-thresholded_relu_40,
+thresholded_relu_40
+y
+
+sigmoid_hard_40,
 	input_625
 
 
@@ -22108,16 +22109,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 ∂
-reduce_mean
-x
-
-	input_625
-axes
-
-input_627_axes_0&
+reduce_mean&
 	keep_dims
 
-input_627_keep_dims_0,
+input_627_keep_dims_0
+axes
+
+input_627_axes_0
+x
+
+	input_625,
 	input_627
 
 
@@ -22196,31 +22197,31 @@ $com.github.apple.coremltools.version9.0¢:
 
 
 É
-conv 
-groups
-
-input_629_groups_05
-weight+
-)
-'siamese_model_backbone_conv_head_weight$
+conv$
 pad_type
 
-input_629_pad_type_01
-bias)
-'
-%siamese_model_backbone_conv_head_bias
+input_629_pad_type_0"
+strides
+
+input_629_strides_0 
+groups
+
+input_629_groups_0
+x
+
+	input_627
 pad
 
 input_629_pad_0&
 	dilations
 
-input_629_dilations_0"
-strides
-
-input_629_strides_0
-x
-
-	input_627,
+input_629_dilations_01
+bias)
+'
+%siamese_model_backbone_conv_head_bias5
+weight+
+)
+'siamese_model_backbone_conv_head_weight,
 	input_629
 
 
@@ -22289,16 +22290,16 @@ $com.github.apple.coremltools.version9.0¢:
 
 
    ?—
-sigmoid_hard$
+sigmoid_hard"
+beta
+
+sigmoid_hard_41_beta_0$
 alpha
 
 sigmoid_hard_41_alpha_0
 x
 
-thresholded_relu_41"
-beta
-
-sigmoid_hard_41_beta_02
+thresholded_relu_412
 sigmoid_hard_41
 
 
@@ -22310,13 +22311,13 @@ $com.github.apple.coremltools.version9.0¢:
 
 "
 sigmoid_hard_41å
-mul
-y
-
-sigmoid_hard_41
+mul
 x
 
-thresholded_relu_41,
+thresholded_relu_41
+y
+
+sigmoid_hard_41,
 	input_631
 
 
@@ -22345,14 +22346,14 @@ $com.github.apple.coremltools.version9.0¢:
 
 Ä
 g
-reshape
+reshape
+x
+
+	input_631
 shape
 
 
-concat_1
-x
-
-	input_631
+concat_1
 x
 
 
@@ -22373,19 +22374,19 @@ $com.github.apple.coremltools.version9.0¢:
 
 
  °
-concat(
-
-interleave
-
-input_633_interleave_0
-axis	
-
-var_8
+concat
 values
 
 x_37
 
-x 
+x
+axis	
+
+var_8(
+
+interleave
+
+input_633_interleave_0 
 	input_633
 
 
@@ -22394,16 +22395,16 @@ interleave
 
 "
 	input_633º
-linear/
-weight%
-#
-!siamese_model_classifier_0_weight
+linear
 x
 
 	input_633+
 bias#
 !
-siamese_model_classifier_0_bias 
+siamese_model_classifier_0_bias/
+weight%
+#
+!siamese_model_classifier_0_weight 
 	input_635
 
 
@@ -22425,16 +22426,16 @@ interleave
 
 "
 	input_637∑
-linear/
-weight%
-#
-!siamese_model_classifier_3_weight
+linear
 x
 
 	input_637+
 bias#
 !
-siamese_model_classifier_3_bias
+siamese_model_classifier_3_bias/
+weight%
+#
+!siamese_model_classifier_3_weight
 input
 
 

@@ -14,6 +14,7 @@ import torch.optim as optim
 from PIL import Image
 from torch.utils.data import DataLoader, Dataset, random_split
 from torchvision import transforms
+from tqdm import tqdm
 
 # Configuration Defaults
 IMAGE_EXTS = ["*.jpg", "*.jpeg", "*.png", "*.webp"]
@@ -293,7 +294,7 @@ def main():
         f"Dataset split: Train={len(train_dataset)}, Val={len(val_dataset)}, Test={len(test_dataset)}"
     )
 
-    use_pin_memory = device.type in ["cuda", "mps"]
+    use_pin_memory = device.type in ["cuda"]
     use_persistent_workers = args.workers > 0
 
     train_loader = DataLoader(
@@ -335,12 +336,14 @@ def main():
 
     epochs_run = 0
     for epoch in range(args.epochs):
+        epoch_start_time = time.time()
         epochs_run = epoch + 1
         model.train()
         running_loss = 0.0
 
         print(f"\nEpoch {epoch + 1}/{args.epochs}")
-        for i, (img1, img2, labels) in enumerate(train_loader):
+        train_loop = tqdm(train_loader, desc=f"Training Epoch {epoch + 1}")
+        for i, (img1, img2, labels) in enumerate(train_loop):
             img1, img2, labels = img1.to(device), img2.to(device), labels.to(device)
             labels = labels.unsqueeze(1)  # Match output shape (Batch, 1)
 
@@ -351,9 +354,7 @@ def main():
             optimizer.step()
 
             running_loss += loss.item()
-
-            if i % 10 == 0:
-                print(f"  Step {i}/{len(train_loader)}, Loss: {loss.item():.4f}")
+            train_loop.set_postfix(loss=loss.item())
 
         avg_train_loss = running_loss / len(train_loader)
 
@@ -363,7 +364,7 @@ def main():
         correct = 0
         total = 0
         with torch.no_grad():
-            for img1, img2, labels in val_loader:
+            for img1, img2, labels in tqdm(val_loader, desc="Validating"):
                 img1, img2, labels = img1.to(device), img2.to(device), labels.to(device)
                 labels = labels.unsqueeze(1)
 
@@ -382,6 +383,14 @@ def main():
         print(f"  Train Loss: {avg_train_loss:.4f}")
         print(f"  Val Loss: {avg_val_loss:.4f}")
         print(f"  Val Acc: {acc:.2f}%")
+
+        epoch_end_time = time.time()
+        epoch_duration = epoch_end_time - epoch_start_time
+        remaining_epochs = args.epochs - (epoch + 1)
+        estimated_time = remaining_epochs * epoch_duration
+
+        print(f"  Epoch Time: {epoch_duration:.2f}s")
+        print(f"  Estimated Time Remaining: {estimated_time // 60:.0f}m {estimated_time % 60:.0f}s")
 
         # Visualization
         save_validation_plot(args.results, model, val_loader, epoch + 1, device)
@@ -419,7 +428,7 @@ def main():
     fn = 0
 
     with torch.no_grad():
-        for img1, img2, labels in test_loader:
+        for img1, img2, labels in tqdm(test_loader, desc="Testing"):
             img1, img2, labels = img1.to(device), img2.to(device), labels.to(device)
             labels = labels.unsqueeze(1)
 

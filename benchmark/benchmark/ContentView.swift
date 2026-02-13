@@ -168,7 +168,7 @@ struct ContentView: View {
             isPresented: $showExporter,
             document: BenchmarkResultsDocument(results: runner.results),
             contentType: .json,
-            defaultFilename: "benchmark_results.json"
+            defaultFilename: "inference_benchmark_results.json"
         ) { result in
             if case let .failure(error) = result {
                 print("Export failed: \(error)")
