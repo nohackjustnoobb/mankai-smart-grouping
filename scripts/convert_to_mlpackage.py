@@ -14,14 +14,14 @@ from PIL import Image
 
 sys.path.append("src")
 from siamese_network import SiameseNetwork
+from merged_classifier import MergedClassifier
+
+# Supported model types
+MODEL_TYPE_SIAMESE = "siamese"
+MODEL_TYPE_MERGED = "merged"
 
 
 class SiameseNetworkWrapper(nn.Module):
-    """
-    Wrapper class to handle the dual-input structure for Core ML conversion.
-    Core ML works better with models that have a single forward method.
-    """
-
     def __init__(self, siamese_model: SiameseNetwork):
         super().__init__()
         self.siamese_model = siamese_model
@@ -31,16 +31,17 @@ class SiameseNetworkWrapper(nn.Module):
         return self.siamese_model(input1, input2)
 
 
+class MergedClassifierWrapper(nn.Module):
+    def __init__(self, merged_model: MergedClassifier):
+        super().__init__()
+        self.merged_model = merged_model
+
+    def forward(self, input1: torch.Tensor) -> torch.Tensor:
+        """Forward pass with single merged image input."""
+        return self.merged_model(input1)
+
+
 def get_model_name_from_metrics(model_dir: str) -> Optional[str]:
-    """
-    Read the model name from metrics.json in the same directory as the model.
-
-    Args:
-        model_dir: Directory containing the model and metrics.json
-
-    Returns:
-        Model name from metrics.json, or None if not found
-    """
     metrics_path = os.path.join(model_dir, "metrics.json")
 
     if not os.path.exists(metrics_path):
@@ -62,28 +63,22 @@ def get_model_name_from_metrics(model_dir: str) -> Optional[str]:
         return None
 
 
-def load_pytorch_model(model_path: str, model_name: str = "resnet18") -> SiameseNetwork:
-    """
-    Load the PyTorch model from checkpoint.
-
-    The SiameseNetwork class automatically detects the feature dimensions
-    using its built-in auto-detection mechanism.
-
-    Args:
-        model_path: Path to the .pth file
-        model_name: Name of the backbone model (e.g., 'resnet18', 'efficientnet_b0')
-
-    Returns:
-        Loaded SiameseNetwork model
-    """
+def load_pytorch_model(
+    model_path: str,
+    model_name: str = "resnet18",
+    model_type: str = MODEL_TYPE_SIAMESE,
+) -> nn.Module:
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Model file not found: {model_path}")
 
     print(f"Loading model from {model_path}")
     print(f"Using backbone: {model_name}")
+    print(f"Model type: {model_type}")
 
-    # SiameseNetwork automatically detects feature dimensions
-    model = SiameseNetwork(model_name=model_name)
+    if model_type == MODEL_TYPE_MERGED:
+        model = MergedClassifier(model_name=model_name)
+    else:
+        model = SiameseNetwork(model_name=model_name)
 
     state_dict = torch.load(model_path, map_location="cpu")
     model.load_state_dict(state_dict)
@@ -94,24 +89,20 @@ def load_pytorch_model(model_path: str, model_name: str = "resnet18") -> Siamese
 
 
 def convert_to_mlpackage(
-    pytorch_model: SiameseNetwork,
+    pytorch_model: nn.Module,
     output_path: str,
     use_image_type: bool = False,
     compute_precision: Optional[str] = "float32",
+    model_type: str = MODEL_TYPE_SIAMESE,
 ) -> None:
-    """
-    Convert PyTorch model to MLPackage format.
-
-    Args:
-        pytorch_model: The PyTorch SiameseNetwork model
-        output_path: Path where MLPackage should be saved
-        use_image_type: Whether to use ImageType for inputs (expecting PIL images in app)
-        compute_precision: Compute precision (float32 or float16)
-    """
     print("Starting conversion to MLPackage...")
+    is_merged = model_type == MODEL_TYPE_MERGED
 
     # Wrap the model
-    wrapped_model = SiameseNetworkWrapper(pytorch_model)
+    if is_merged:
+        wrapped_model = MergedClassifierWrapper(pytorch_model)
+    else:
+        wrapped_model = SiameseNetworkWrapper(pytorch_model)
     wrapped_model.eval()
 
     # Auto-detect input shape from the model's attributes
@@ -125,19 +116,32 @@ def convert_to_mlpackage(
     # Create example inputs
     batch_size = 1
     example_input1 = torch.randn(batch_size, *input_shape)
-    example_input2 = torch.randn(batch_size, *input_shape)
 
-    print(f"Input shapes: {example_input1.shape}, {example_input2.shape}")
+    if is_merged:
+        print(f"Input shape: {example_input1.shape}")
 
-    # Test the model works
-    with torch.no_grad():
-        test_output = wrapped_model(example_input1, example_input2)
-        print(f"Test output shape: {test_output.shape}")
-        print(f"Test output value: {test_output.item():.4f}")
+        # Test the model works
+        with torch.no_grad():
+            test_output = wrapped_model(example_input1)
+            print(f"Test output shape: {test_output.shape}")
+            print(f"Test output value: {test_output.item():.4f}")
 
-    # Trace the model
-    print("Tracing the model...")
-    traced_model = torch.jit.trace(wrapped_model, (example_input1, example_input2))
+        # Trace the model
+        print("Tracing the model...")
+        traced_model = torch.jit.trace(wrapped_model, (example_input1,))
+    else:
+        example_input2 = torch.randn(batch_size, *input_shape)
+        print(f"Input shapes: {example_input1.shape}, {example_input2.shape}")
+
+        # Test the model works
+        with torch.no_grad():
+            test_output = wrapped_model(example_input1, example_input2)
+            print(f"Test output shape: {test_output.shape}")
+            print(f"Test output value: {test_output.item():.4f}")
+
+        # Trace the model
+        print("Tracing the model...")
+        traced_model = torch.jit.trace(wrapped_model, (example_input1, example_input2))
 
     # Convert to Core ML
     print("Converting to Core ML format...")
@@ -146,7 +150,7 @@ def convert_to_mlpackage(
     if use_image_type:
         avg_std = 0.226
         scale = 1.0 / (avg_std * 255.0)
-        
+
         # Per-channel bias
         bias = [
             -0.485 / 0.229,
@@ -154,16 +158,32 @@ def convert_to_mlpackage(
             -0.406 / 0.225,
         ]
 
-        input_descriptions = [
-            ct.ImageType(name="image1", shape=example_input1.shape, scale=scale, bias=bias),
-            ct.ImageType(name="image2", shape=example_input2.shape, scale=scale, bias=bias),
-        ]
+        if is_merged:
+            input_descriptions = [
+                ct.ImageType(
+                    name="image", shape=example_input1.shape, scale=scale, bias=bias
+                ),
+            ]
+        else:
+            input_descriptions = [
+                ct.ImageType(
+                    name="image1", shape=example_input1.shape, scale=scale, bias=bias
+                ),
+                ct.ImageType(
+                    name="image2", shape=example_input2.shape, scale=scale, bias=bias
+                ),
+            ]
         print("Using ImageType for inputs (expecting PIL images in app)")
     else:
-        input_descriptions = [
-            ct.TensorType(name="image1", shape=example_input1.shape),
-            ct.TensorType(name="image2", shape=example_input2.shape),
-        ]
+        if is_merged:
+            input_descriptions = [
+                ct.TensorType(name="image", shape=example_input1.shape),
+            ]
+        else:
+            input_descriptions = [
+                ct.TensorType(name="image1", shape=example_input1.shape),
+                ct.TensorType(name="image2", shape=example_input2.shape),
+            ]
 
     # Define output description
     output_descriptions = [ct.TensorType(name="adjacency_score")]
@@ -187,12 +207,18 @@ def convert_to_mlpackage(
     # Add metadata
     mlmodel.author = "Mankai"
     mlmodel.license = "MIT"
-    mlmodel.short_description = "Siamese Network for image similarity"
+    if is_merged:
+        mlmodel.short_description = "Merged Classifier for image adjacency detection"
+        mlmodel.input_description["image"] = (
+            "Merged image patch (two patches side-by-side)"
+        )
+    else:
+        mlmodel.short_description = "Siamese Network for image similarity"
+        mlmodel.input_description["image1"] = "First image patch (left or reference)"
+        mlmodel.input_description["image2"] = "Second image patch (right or comparison)"
     mlmodel.version = "1.0.0"
 
-    # Add input/output descriptions
-    mlmodel.input_description["image1"] = "First image patch (left or reference)"
-    mlmodel.input_description["image2"] = "Second image patch (right or comparison)"
+    # Add output description
     mlmodel.output_description["adjacency_score"] = (
         "Probability that the two patches are adjacent (0.0-1.0)"
     )
@@ -214,23 +240,21 @@ def convert_to_mlpackage(
     return mlmodel
 
 
-def validate_mlpackage(mlpackage_path: str, pytorch_model: SiameseNetwork) -> None:
-    """
-    Validate the converted MLPackage by comparing outputs with PyTorch model.
-
-    Args:
-        mlpackage_path: Path to the MLPackage
-        pytorch_model: Original PyTorch model for comparison
-    """
+def validate_mlpackage(
+    mlpackage_path: str,
+    pytorch_model: nn.Module,
+    model_type: str = MODEL_TYPE_SIAMESE,
+) -> None:
     print("\nValidating converted model...")
+    is_merged = model_type == MODEL_TYPE_MERGED
 
     # Load the MLPackage
     mlmodel = ct.models.MLModel(mlpackage_path, compute_units=ct.ComputeUnit.CPU_ONLY)
 
     # Check if inputs are ImageType
     spec = mlmodel.get_spec()
-    input_type_spec = spec.description.input[0].type.WhichOneof('Type')
-    is_image_input = (input_type_spec == 'imageType')
+    input_type_spec = spec.description.input[0].type.WhichOneof("Type")
+    is_image_input = input_type_spec == "imageType"
 
     pytorch_model.eval()
 
@@ -239,45 +263,60 @@ def validate_mlpackage(mlpackage_path: str, pytorch_model: SiameseNetwork) -> No
         height = int(spec.description.input[0].type.imageType.height)
         width = int(spec.description.input[0].type.imageType.width)
 
-        # Generate random uint8 data
-        img1_np = np.random.randint(0, 255, (height, width, 3), dtype=np.uint8)
-        img2_np = np.random.randint(0, 255, (height, width, 3), dtype=np.uint8)
-
-        # Create PIL images for Core ML
-        pil_img1 = Image.fromarray(img1_np)
-        pil_img2 = Image.fromarray(img2_np)
-
-        coreml_input = {"image1": pil_img1, "image2": pil_img2}
-
-        # Create normalized tensors for PyTorch
-        # Standard ImageNet normalization: mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]
+        # Standard ImageNet normalization
         mean = torch.tensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1).float()
         std = torch.tensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1).float()
 
-        # Convert to float tensor (0-1 range)
-        input1_tensor = torch.from_numpy(img1_np).float().permute(2, 0, 1).unsqueeze(0) / 255.0
-        input2_tensor = torch.from_numpy(img2_np).float().permute(2, 0, 1).unsqueeze(0) / 255.0
+        if is_merged:
+            img_np = np.random.randint(0, 255, (height, width, 3), dtype=np.uint8)
+            pil_img = Image.fromarray(img_np)
+            coreml_input = {"image": pil_img}
 
-        # Normalize
-        test_input1 = (input1_tensor - mean) / std
-        test_input2 = (input2_tensor - mean) / std
+            input_tensor = (
+                torch.from_numpy(img_np).float().permute(2, 0, 1).unsqueeze(0) / 255.0
+            )
+            test_input1 = (input_tensor - mean) / std
+        else:
+            img1_np = np.random.randint(0, 255, (height, width, 3), dtype=np.uint8)
+            img2_np = np.random.randint(0, 255, (height, width, 3), dtype=np.uint8)
+
+            pil_img1 = Image.fromarray(img1_np)
+            pil_img2 = Image.fromarray(img2_np)
+            coreml_input = {"image1": pil_img1, "image2": pil_img2}
+
+            input1_tensor = (
+                torch.from_numpy(img1_np).float().permute(2, 0, 1).unsqueeze(0) / 255.0
+            )
+            input2_tensor = (
+                torch.from_numpy(img2_np).float().permute(2, 0, 1).unsqueeze(0) / 255.0
+            )
+            test_input1 = (input1_tensor - mean) / std
+            test_input2 = (input2_tensor - mean) / std
 
     else:
         print("Model expects tensor inputs. Generating random tensors...")
-        # Determine shape
         test_input1 = torch.randn(1, 3, 224, 224)
-        test_input2 = torch.randn(1, 3, 224, 224)
-        
-        coreml_input = {"image1": test_input1.numpy(), "image2": test_input2.numpy()}
+
+        if is_merged:
+            coreml_input = {"image": test_input1.numpy()}
+        else:
+            test_input2 = torch.randn(1, 3, 224, 224)
+            coreml_input = {
+                "image1": test_input1.numpy(),
+                "image2": test_input2.numpy(),
+            }
 
     # Get PyTorch prediction
     with torch.no_grad():
-        pytorch_output = pytorch_model(test_input1, test_input2)
+        if is_merged:
+            pytorch_output = pytorch_model(test_input1)
+        else:
+            pytorch_output = pytorch_model(test_input1, test_input2)
         pytorch_score = pytorch_output.item()
 
     # Get Core ML prediction
     coreml_output = mlmodel.predict(coreml_input)
-    
+
     # Extract score from output dictionary
     if "adjacency_score" in coreml_output:
         coreml_score_raw = coreml_output["adjacency_score"]
@@ -285,9 +324,9 @@ def validate_mlpackage(mlpackage_path: str, pytorch_model: SiameseNetwork) -> No
         if hasattr(coreml_score_raw, "item"):
             coreml_score = coreml_score_raw.item()
         elif isinstance(coreml_score_raw, list):
-             coreml_score = coreml_score_raw[0]
+            coreml_score = coreml_score_raw[0]
         else:
-             coreml_score = float(coreml_score_raw)
+            coreml_score = float(coreml_score_raw)
     else:
         # Fallback if output name is different (unlikely given conversion code)
         coreml_score = list(coreml_output.values())[0]
@@ -308,16 +347,32 @@ def validate_mlpackage(mlpackage_path: str, pytorch_model: SiameseNetwork) -> No
     return difference
 
 
-def find_model_files(directory: str) -> List[str]:
+def detect_model_type_from_path(path: str) -> Optional[str]:
     """
-    Recursively find all model.pth files under a directory.
+    Auto-detect model type based on directory path components.
+
+    Looks for 'siamese' or 'merged' in the path to determine model type.
+    E.g. 'results/siamese/model.pth' -> 'siamese'
+         'results/merged/model.pth'  -> 'merged'
 
     Args:
-        directory: Root directory to search
+        path: Path to model file or its containing directory
 
     Returns:
-        List of paths to model.pth files
+        Detected model type string, or None if unable to determine
     """
+    normalized = os.path.normpath(path).lower()
+    parts = normalized.split(os.sep)
+
+    if MODEL_TYPE_MERGED in parts:
+        return MODEL_TYPE_MERGED
+    if MODEL_TYPE_SIAMESE in parts:
+        return MODEL_TYPE_SIAMESE
+
+    return None
+
+
+def find_model_files(directory: str) -> List[str]:
     model_files = []
     for root, dirs, files in os.walk(directory):
         for file in files:
@@ -334,19 +389,8 @@ def convert_single_model(
     validate: bool,
     use_image_type: bool,
     compute_precision: str,
+    model_type: str = MODEL_TYPE_SIAMESE,
 ) -> bool:
-    """
-    Convert a single model file to MLPackage.
-
-    Args:
-        model_path: Path to the .pth file
-        output_path: Output path for MLPackage (optional)
-        model_name: Backbone model name (optional)
-        validate: Whether to validate the conversion
-
-    Returns:
-        True if conversion succeeded, False otherwise
-    """
     try:
         # Set default output path if not provided
         if output_path is None:
@@ -364,16 +408,16 @@ def convert_single_model(
                 print(f"Using default model name: {model_name}")
 
         # Load PyTorch model
-        pytorch_model = load_pytorch_model(model_path, model_name)
+        pytorch_model = load_pytorch_model(model_path, model_name, model_type)
 
         # Convert to MLPackage
         convert_to_mlpackage(
-            pytorch_model, output_path, use_image_type, compute_precision
+            pytorch_model, output_path, use_image_type, compute_precision, model_type
         )
 
         # Validate if requested
         if validate:
-            validate_mlpackage(output_path, pytorch_model)
+            validate_mlpackage(output_path, pytorch_model, model_type)
 
         print(f"\n✓ Successfully converted {model_path} to {output_path}")
         return True
@@ -385,7 +429,7 @@ def convert_single_model(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Convert PyTorch Siamese Network to MLPackage"
+        description="Convert PyTorch model (Siamese Network or Merged Classifier) to MLPackage"
     )
     parser.add_argument(
         "--model_path",
@@ -404,6 +448,13 @@ def main():
         type=str,
         default=None,
         help="Backbone model name (resnet18, efficientnet_b0, mobilenetv3_large_100, etc.). If not specified, will try to read from metrics.json",
+    )
+    parser.add_argument(
+        "--model_type",
+        type=str,
+        default=None,
+        choices=[MODEL_TYPE_SIAMESE, MODEL_TYPE_MERGED],
+        help="Type of model to convert: 'siamese' (dual-input) or 'merged' (single-input). If not specified, auto-detected from path (e.g. results/siamese/, results/merged/). Defaults to 'siamese' if detection fails.",
     )
     parser.add_argument(
         "--validate",
@@ -457,6 +508,20 @@ def main():
                 print(f"\n[{i}/{len(model_files)}] Converting {model_file}")
                 print("-" * 80)
 
+                # Determine model type: use CLI arg, auto-detect from path, or default
+                effective_model_type = args.model_type
+                if effective_model_type is None:
+                    effective_model_type = detect_model_type_from_path(model_file)
+                    if effective_model_type:
+                        print(
+                            f"Auto-detected model type from path: {effective_model_type}"
+                        )
+                    else:
+                        effective_model_type = MODEL_TYPE_SIAMESE
+                        print(
+                            f"Could not detect model type from path, defaulting to: {effective_model_type}"
+                        )
+
                 # Convert each model (output_path is None, so it will be auto-generated)
                 if convert_single_model(
                     model_file,
@@ -465,6 +530,7 @@ def main():
                     args.validate,
                     args.optimize,
                     "float16" if args.optimize else "float32",
+                    effective_model_type,
                 ):
                     successful += 1
                 else:
@@ -488,6 +554,18 @@ def main():
                 print(f"Error: Model file not found: {args.model_path}")
                 return
 
+            # Determine model type: use CLI arg, auto-detect from path, or default
+            effective_model_type = args.model_type
+            if effective_model_type is None:
+                effective_model_type = detect_model_type_from_path(args.model_path)
+                if effective_model_type:
+                    print(f"Auto-detected model type from path: {effective_model_type}")
+                else:
+                    effective_model_type = MODEL_TYPE_SIAMESE
+                    print(
+                        f"Could not detect model type from path, defaulting to: {effective_model_type}"
+                    )
+
             # Convert single model
             convert_single_model(
                 args.model_path,
@@ -496,6 +574,7 @@ def main():
                 args.validate,
                 args.optimize,
                 "float16" if args.optimize else "float32",
+                effective_model_type,
             )
 
     except Exception as e:

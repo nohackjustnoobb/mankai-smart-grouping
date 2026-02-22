@@ -13,9 +13,12 @@ from itertools import product
 print_lock = threading.Lock()
 
 # Configuration
-SIAMESE_SCRIPT = "src/siamese_network.py"
-RESULTS_BASE_DIR = "results/benchmark_runs"
-SUMMARY_FILE = f"{RESULTS_BASE_DIR}/benchmark_results.json"
+SCRIPTS = {
+    "siamese": "src/siamese_network.py",
+    "merged": "src/merged_classifier.py",
+}
+RESULTS_BASE_DIR = "results/{script}/benchmark_runs"
+SUMMARY_FILE = "benchmark_results.json"
 
 # Parameters to sweep
 PARAMETERS = {
@@ -32,11 +35,12 @@ PARAMETERS = {
 
 def run_experiment(args):
     """Runs a single experiment with the given parameters."""
-    if len(args) == 4:
-        i, total_combinations, params, run_id = args
-    else:
-        i, total_combinations, params = args
-        run_id = None
+    i = args["index"]
+    total_combinations = args["total"]
+    params = args["params"]
+    script = args["script"]
+    results_base_dir = args["results_base_dir"]
+    run_id = args.get("run_id")
 
     print(f"\n--- Starting Experiment {i + 1}/{total_combinations} ---")
     print(f"Parameters: {params}")
@@ -49,14 +53,14 @@ def run_experiment(args):
 
         thread_id = threading.get_ident()
         run_id = f"run_{i + 1}_{timestamp}_{thread_id}"
-    run_dir = os.path.join(RESULTS_BASE_DIR, run_id)
+    run_dir = os.path.join(results_base_dir, run_id)
     os.makedirs(run_dir, exist_ok=True)
 
     # Construct command
     cmd = [
         "uv",
         "run",
-        SIAMESE_SCRIPT,
+        script,
         "--results",
         run_dir,
         "--dev",
@@ -68,6 +72,8 @@ def run_experiment(args):
         str(params["learning_rate"]),
         "--model",
         str(params["model"]),
+        "--workers",
+        "0",
     ]
 
     # Run the script
@@ -139,19 +145,32 @@ def run_benchmark():
         action="store_true",
         help="Retry the last failed experiment from benchmark_results.json",
     )
+    parser.add_argument(
+        "--script",
+        type=str,
+        choices=list(SCRIPTS.keys()),
+        default="siamese",
+        help=f"Training script to use (default: siamese). Choices: {', '.join(SCRIPTS.keys())}",
+    )
     args = parser.parse_args()
+
+    script_path = SCRIPTS[args.script]
+    results_base_dir = RESULTS_BASE_DIR.format(script=args.script)
+    summary_file = os.path.join(results_base_dir, SUMMARY_FILE)
+    print(f"Using training script: {script_path}")
+    print(f"Results directory: {results_base_dir}")
 
     if args.retry_failed:
         print("Retrying failed experiments...")
-        if not os.path.exists(SUMMARY_FILE):
-            print(f"Error: {SUMMARY_FILE} not found. Cannot retry.")
+        if not os.path.exists(summary_file):
+            print(f"Error: {summary_file} not found. Cannot retry.")
             return
 
-        with open(SUMMARY_FILE, "r") as f:
+        with open(summary_file, "r") as f:
             try:
                 previous_results = json.load(f)
             except json.JSONDecodeError:
-                print(f"Error: Could not decode {SUMMARY_FILE}.")
+                print(f"Error: Could not decode {summary_file}.")
                 return
 
         # Find all failed experiments
@@ -174,27 +193,36 @@ def run_benchmark():
 
             params = failed_entry["parameters"]
             # We'll treat this as a single experiment run
-            new_result = run_experiment((0, 1, params, failed_entry["run_id"]))
+            new_result = run_experiment(
+                {
+                    "index": 0,
+                    "total": 1,
+                    "params": params,
+                    "run_id": failed_entry["run_id"],
+                    "script": script_path,
+                    "results_base_dir": results_base_dir,
+                }
+            )
 
             # Update the entry
             previous_results[idx] = new_result
 
             # Save immediately
-            with open(SUMMARY_FILE, "w") as f:
+            with open(summary_file, "w") as f:
                 json.dump(previous_results, f, indent=4)
 
-        print(f"Updated {SUMMARY_FILE} with new results.")
+        print(f"Updated {summary_file} with new results.")
         all_results = previous_results
 
     else:
         # Standard benchmark run
         # Clear previous results directory if it exists
-        if os.path.exists(RESULTS_BASE_DIR):
-            print(f"Removing existing results directory: {RESULTS_BASE_DIR}")
-            shutil.rmtree(RESULTS_BASE_DIR)
+        if os.path.exists(results_base_dir):
+            print(f"Removing existing results directory: {results_base_dir}")
+            shutil.rmtree(results_base_dir)
 
         # create results directory
-        os.makedirs(RESULTS_BASE_DIR, exist_ok=True)
+        os.makedirs(results_base_dir, exist_ok=True)
 
         # Generate all combinations of parameters
         keys = PARAMETERS.keys()
@@ -208,7 +236,14 @@ def run_benchmark():
 
         # Prepare arguments for each task
         experiment_args = [
-            (i, len(combinations), params) for i, params in enumerate(combinations)
+            {
+                "index": i,
+                "total": len(combinations),
+                "params": params,
+                "script": script_path,
+                "results_base_dir": results_base_dir,
+            }
+            for i, params in enumerate(combinations)
         ]
 
         with concurrent.futures.ThreadPoolExecutor(
@@ -225,10 +260,10 @@ def run_benchmark():
                     print(f"Experiment generated an exception: {e}")
 
                 # Save summary
-                with open(SUMMARY_FILE, "w") as f:
+                with open(summary_file, "w") as f:
                     json.dump(all_results, f, indent=4)
 
-        print(f"\nBenchmark complete. Summary saved to {SUMMARY_FILE}")
+        print(f"\nBenchmark complete. Summary saved to {summary_file}")
 
     # Print a quick table
     print("\nSummary Table:")

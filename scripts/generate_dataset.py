@@ -161,21 +161,21 @@ def process_image_batch(
         List of patch dictionaries for successfully processed images
     """
     results = []
-    
+
     # Create a progress bar for this worker
     with tqdm(
         total=len(image_paths_with_indices),
         desc=f"Worker {worker_id}",
         position=worker_id,
         leave=True,
-        unit="img"
+        unit="img",
     ) as pbar:
         for image_path, image_index in image_paths_with_indices:
             patches = process_image(image_path, output_dir, image_index, patch_size)
             if patches:
                 results.append(patches)
             pbar.update(1)
-    
+
     return results
 
 
@@ -219,19 +219,21 @@ def generate_dataset(
     chunk_size = (len(image_files) + num_workers - 1) // num_workers
     image_chunks = []
     for i in range(0, len(image_files), chunk_size):
-        chunk = [(image_files[j], j) for j in range(i, min(i + chunk_size, len(image_files)))]
+        chunk = [
+            (image_files[j], j) for j in range(i, min(i + chunk_size, len(image_files)))
+        ]
         image_chunks.append(chunk)
 
     # Process all images and collect patches using multithreading
     all_patches = []
-    
+
     with ThreadPoolExecutor(max_workers=num_workers) as executor:
         # Submit one task per worker with unique worker ID
         futures = [
             executor.submit(process_image_batch, chunk, output_path, patch_size, i)
             for i, chunk in enumerate(image_chunks)
         ]
-        
+
         # Collect results as they complete
         for future in as_completed(futures):
             batch_results = future.result()
@@ -287,6 +289,111 @@ def generate_dataset(
     print(f"  CSV saved to: {csv_path}")
 
 
+def _merge_pair(
+    args: tuple,
+) -> tuple[int, str | None, str | None]:
+    """
+    Merge a single pair of images into one composite image.
+
+    Returns:
+        (index, merged_filename, label) on success, or (index, None, error_msg) on failure.
+    """
+    i, row, images_path, output_path = args
+    left_path = images_path / row["left_image"]
+    right_path = images_path / row["right_image"]
+
+    if not left_path.exists():
+        return (i, None, f"Missing left image: {left_path}")
+    if not right_path.exists():
+        return (i, None, f"Missing right image: {right_path}")
+
+    try:
+        left_img = (
+            Image.open(left_path)
+            .convert("RGB")
+            .resize((224, 224), Image.Resampling.LANCZOS)
+        )
+        right_img = (
+            Image.open(right_path)
+            .convert("RGB")
+            .resize((224, 224), Image.Resampling.LANCZOS)
+        )
+    except Exception as e:
+        return (i, None, f"Error loading pair {i}: {e}")
+
+    # Compose a 448x224 image and scale to 224x224
+    composite = Image.new("RGB", (448, 224))
+    composite.paste(left_img, (0, 0))
+    composite.paste(right_img, (224, 0))
+    merged = composite.resize((224, 224), Image.Resampling.LANCZOS)
+
+    merged_filename = f"{i:06d}_merged.webp"
+    merged.save(output_path / merged_filename, "WEBP")
+    return (i, merged_filename, row["label"])
+
+
+def merge_pairs(
+    images_dir: str,
+    csv_path: str,
+    merged_output_dir: str,
+    num_workers: int,
+    merged_csv_path: str,
+):
+    images_path = Path(images_dir)
+    csv_path = Path(csv_path)
+    output_path = Path(merged_output_dir)
+    output_path.mkdir(parents=True, exist_ok=True)
+
+    if not csv_path.exists():
+        print(f"CSV file not found: {csv_path}")
+        return
+
+    rows = []
+    with open(csv_path, newline="") as f:
+        reader = csv.DictReader(f)
+        rows = list(reader)
+
+    print(f"Merging {len(rows)} pairs from {csv_path} ...")
+    print(f"Using {num_workers} workers for parallel processing")
+
+    task_args = [(i, row, images_path, output_path) for i, row in enumerate(rows)]
+
+    results: list[tuple[int, str | None, str | None]] = [None] * len(rows)
+    skipped = 0
+
+    with ThreadPoolExecutor(max_workers=num_workers) as executor:
+        futures = {executor.submit(_merge_pair, arg): arg[0] for arg in task_args}
+        with tqdm(total=len(rows), desc="Merging pairs", unit="pair") as pbar:
+            for future in as_completed(futures):
+                result = future.result()
+                results[result[0]] = result
+                pbar.update(1)
+
+    # Collect results in original order, printing errors as we go
+    merged_rows = []
+    for i, merged_filename, label_or_error in results:
+        if merged_filename is None:
+            print(label_or_error)
+            skipped += 1
+        else:
+            merged_rows.append([merged_filename, label_or_error])
+
+    # Write a companion CSV for the merged images
+    merged_csv_path = Path(merged_csv_path)
+    merged_csv_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(merged_csv_path, "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerow(["image", "label"])
+        writer.writerows(merged_rows)
+
+    print("\nMerge complete!")
+    print(f"  Merged images saved to: {output_path}")
+    print(f"  Merged CSV saved to: {merged_csv_path}")
+    print(f"  Pairs merged: {len(merged_rows)}")
+    if skipped:
+        print(f"  Pairs skipped: {skipped}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Generate dataset by splitting images and creating matching/non-matching pairs"
@@ -327,17 +434,44 @@ def main():
         default=os.cpu_count() or 4,
         help="Number of parallel workers for processing (default: number of CPU cores)",
     )
+    parser.add_argument(
+        "--merge-pairs",
+        action="store_true",
+        default=False,
+        help="After dataset generation, merge each pair from the CSV into a single 224x224 image",
+    )
+    parser.add_argument(
+        "--merged-output-dir",
+        type=str,
+        default="./merged_images",
+        help="Directory to save the merged pair images (default: ./merged_images)",
+    )
+    parser.add_argument(
+        "--merge-csv-path",
+        type=str,
+        default="./merged_pairs.csv",
+        help="Path for the output CSV of merged pairs (default: <merged-output-dir>/merged_pairs.csv)",
+    )
 
     args = parser.parse_args()
 
-    generate_dataset(
-        input_dir=args.input_dir,
-        output_dir=args.output_dir,
-        csv_path=args.csv_path,
-        patch_size=args.patch_size,
-        max_images=args.max_images,
-        num_workers=args.num_workers,
-    )
+    if args.merge_pairs:
+        merge_pairs(
+            images_dir=args.output_dir,
+            csv_path=args.csv_path,
+            merged_output_dir=args.merged_output_dir,
+            num_workers=args.num_workers,
+            merged_csv_path=args.merge_csv_path,
+        )
+    else:
+        generate_dataset(
+            input_dir=args.input_dir,
+            output_dir=args.output_dir,
+            csv_path=args.csv_path,
+            patch_size=args.patch_size,
+            max_images=args.max_images,
+            num_workers=args.num_workers,
+        )
 
 
 if __name__ == "__main__":

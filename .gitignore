@@ -229,5 +229,7 @@ xcuserdata/
 # Custom
 /raw_images
 /images
+/merged_images
 /results
 pairs.csv
+merged_pairs.csv

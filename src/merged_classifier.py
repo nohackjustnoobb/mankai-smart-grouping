@@ -17,10 +17,9 @@ from torchvision import transforms
 from tqdm import tqdm
 
 # Configuration Defaults
-IMAGE_EXTS = ["*.jpg", "*.jpeg", "*.png", "*.webp"]
-DEFAULT_IMAGE_DIR = "./images"
-DEFAULT_CSV_PATH = "./pairs.csv"
-DEFAULT_RESULTS_DIR = "./results/siamese"
+DEFAULT_IMAGE_DIR = "./merged_images"
+DEFAULT_CSV_PATH = "./merged_pairs.csv"
+DEFAULT_RESULTS_DIR = "./results/merged"
 IMG_SIZE = (224, 224)
 BATCH_SIZE = 32
 LEARNING_RATE = 0.001
@@ -28,68 +27,66 @@ EPOCHS = 50
 DEV_DATASET_SIZE = 10000
 
 
-class AdjacencyDataset(Dataset):
+class MergedImageDataset(Dataset):
     def __init__(self, csv_path, image_dir, transform=None, dev_mode=False):
-        self.pairs = []
+        self.samples = []
         self.transform = transform
         self.image_dir = image_dir
 
-        # Load pairs from CSV
+        # Load samples from CSV
         if not os.path.exists(csv_path):
             raise FileNotFoundError(f"CSV file not found: {csv_path}")
 
         with open(csv_path, "r") as f:
             reader = csv.DictReader(f)
             for row in reader:
-                left_path = os.path.join(image_dir, row["left_image"])
-                right_path = os.path.join(image_dir, row["right_image"])
+                image_path = os.path.join(image_dir, row["image"])
                 label = float(row["label"])
 
-                # Verify both images exist
-                if os.path.exists(left_path) and os.path.exists(right_path):
-                    self.pairs.append((left_path, right_path, label))
+                # Verify image exists
+                if os.path.exists(image_path):
+                    self.samples.append((image_path, label))
                 else:
-                    print(
-                        f"Warning: Skipping pair - image not found: {left_path} or {right_path}"
-                    )
+                    print(f"Warning: Skipping - image not found: {image_path}")
 
-        # Shuffle pairs for randomization
-        random.shuffle(self.pairs)
+        # Shuffle samples for randomization
+        random.shuffle(self.samples)
 
         # In DEV_MODE, limit dataset size
         if dev_mode:
             print(
-                f"[DEV_MODE] Limiting dataset to {DEV_DATASET_SIZE} pairs (found {len(self.pairs)})"
+                f"[DEV_MODE] Limiting dataset to {DEV_DATASET_SIZE} samples (found {len(self.samples)})"
             )
-            self.pairs = self.pairs[:DEV_DATASET_SIZE]
+            self.samples = self.samples[:DEV_DATASET_SIZE]
         else:
-            print(f"Found {len(self.pairs)} image pairs.")
+            print(f"Found {len(self.samples)} merged image samples.")
 
     def __len__(self):
-        return len(self.pairs)
+        return len(self.samples)
 
     def __getitem__(self, idx):
-        left_path, right_path, label = self.pairs[idx]
+        image_path, label = self.samples[idx]
 
-        # Load pre-processed images (already 224x224)
-        patch_left = Image.open(left_path).convert("RGB")
-        patch_right = Image.open(right_path).convert("RGB")
+        # Load merged image and resize to expected input size
+        image = Image.open(image_path).convert("RGB")
+        image = image.resize(IMG_SIZE, Image.BILINEAR)
 
         # Apply transforms (ToTensor, Normalize)
         if self.transform:
-            patch_left = self.transform(patch_left)
-            patch_right = self.transform(patch_right)
+            image = self.transform(image)
 
-        return patch_left, patch_right, torch.tensor(label, dtype=torch.float32)
+        return image, torch.tensor(label, dtype=torch.float32)
 
 
-class SiameseNetwork(nn.Module):
+class MergedClassifier(nn.Module):
     """
-    Siamese Network with configurable backbone (ResNet18 or timm models).
+    Single-input binary classifier using a timm backbone.
+    Takes a single merged image (two patches side-by-side) and outputs
+    a probability of adjacency.
     """
 
     def __init__(self, model_name="resnet18"):
-        super(SiameseNetwork, self).__init__()
+        super(MergedClassifier, self).__init__()
 
         self.model_name = model_name
 
@@ -117,34 +114,24 @@ class SiameseNetwork(nn.Module):
             f"Input size: {self.input_channels} x {self.input_size[0]} x {self.input_size[1]}"
         )
 
-        # Classifier
+        # Classifier head
         self.classifier = nn.Sequential(
-            nn.Linear(feature_dim * 2, 256),
+            nn.Linear(feature_dim, 256),
             nn.ReLU(inplace=True),
             nn.Dropout(0.5),
             nn.Linear(256, 1),
             nn.Sigmoid(),
         )
 
-    def forward_one(self, x):
+    def forward(self, x):
         # x shape: (Batch, 3, H, W)
         x = self.backbone(x)
 
-        # ResNet backbone from torchvision returns (Batch, 512, 1, 1)
-        # timm models with num_classes=0 usually return (Batch, Features)
+        # Handle different output shapes
         if len(x.shape) == 4:
             x = x.view(x.size(0), -1)
 
-        return x
-
-    def forward(self, x1, x2):
-        feat1 = self.forward_one(x1)
-        feat2 = self.forward_one(x2)
-
-        # Concatenate features
-        combined = torch.cat((feat1, feat2), dim=1)
-
-        output = self.classifier(combined)
+        output = self.classifier(x)
         return output
 
 
@@ -153,40 +140,31 @@ def save_validation_plot(results_dir, model, dataloader, epoch, device):
     Saves a plot of a few validation examples with predictions.
     """
     model.eval()
-    images1, images2, labels = next(iter(dataloader))
+    images, labels = next(iter(dataloader))
 
     # Move to device
-    images1 = images1.to(device)
-    images2 = images2.to(device)
+    images = images.to(device)
     labels = labels.to(device)
 
     with torch.no_grad():
-        outputs = model(images1, images2)
+        outputs = model(images)
 
     # Plot first 4 samples
     fig, axes = plt.subplots(4, 1, figsize=(6, 12))
     for i in range(min(4, len(labels))):
-        img1 = images1[i].cpu().numpy().transpose((1, 2, 0))
-        img2 = images2[i].cpu().numpy().transpose((1, 2, 0))
+        img = images[i].cpu().numpy().transpose((1, 2, 0))
 
         # Un-normalize for display (approximate)
         mean = np.array([0.485, 0.456, 0.406])
         std = np.array([0.229, 0.224, 0.225])
-        img1 = std * img1 + mean
-        img2 = std * img2 + mean
-        img1 = np.clip(img1, 0, 1)
-        img2 = np.clip(img2, 0, 1)
-
-        # Concatenate for display with a small black gap
-        h, w, c = img1.shape
-        gap = np.zeros((h, 10, c))
-        combined_img = np.hstack((img1, gap, img2))
+        img = std * img + mean
+        img = np.clip(img, 0, 1)
 
         lbl = labels[i].item()
         pred = outputs[i].item()
 
         ax = axes[i] if isinstance(axes, np.ndarray) else axes
-        ax.imshow(combined_img)
+        ax.imshow(img)
         ax.set_title(f"Label: {int(lbl)} (Adjacent=1), Pred: {pred:.3f}")
         ax.axis("off")
 
@@ -198,15 +176,20 @@ def save_validation_plot(results_dir, model, dataloader, epoch, device):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Train Adjacency Detection Model")
+    parser = argparse.ArgumentParser(
+        description="Train Merged Image Adjacency Classifier"
+    )
     parser.add_argument(
-        "--images", type=str, default=DEFAULT_IMAGE_DIR, help="Path to image directory"
+        "--images",
+        type=str,
+        default=DEFAULT_IMAGE_DIR,
+        help="Path to merged image directory",
     )
     parser.add_argument(
         "--csv",
         type=str,
         default=DEFAULT_CSV_PATH,
-        help="Path to CSV file with image pairs",
+        help="Path to CSV file with merged image labels",
     )
     parser.add_argument(
         "--results",
@@ -270,12 +253,12 @@ def main():
     )
 
     # Dataset
-    full_dataset = AdjacencyDataset(
+    full_dataset = MergedImageDataset(
         csv_path=args.csv, image_dir=args.images, transform=transform, dev_mode=args.dev
     )
 
     if len(full_dataset) == 0:
-        print(f"No image pairs found. Please check {args.csv} and {args.images}.")
+        print(f"No images found. Please check {args.csv} and {args.images}.")
         return
 
     # Split
@@ -323,7 +306,7 @@ def main():
     )
 
     # Model
-    model = SiameseNetwork(model_name=args.model).to(device)
+    model = MergedClassifier(model_name=args.model).to(device)
 
     # Criterion & Optimizer
     criterion = nn.BCELoss()
@@ -343,12 +326,12 @@ def main():
 
         print(f"\nEpoch {epoch + 1}/{args.epochs}")
         train_loop = tqdm(train_loader, desc=f"Training Epoch {epoch + 1}")
-        for i, (img1, img2, labels) in enumerate(train_loop):
-            img1, img2, labels = img1.to(device), img2.to(device), labels.to(device)
+        for i, (images, labels) in enumerate(train_loop):
+            images, labels = images.to(device), labels.to(device)
             labels = labels.unsqueeze(1)  # Match output shape (Batch, 1)
 
             optimizer.zero_grad()
-            outputs = model(img1, img2)
+            outputs = model(images)
             loss = criterion(outputs, labels)
             loss.backward()
             optimizer.step()
@@ -364,11 +347,11 @@ def main():
         correct = 0
         total = 0
         with torch.no_grad():
-            for img1, img2, labels in tqdm(val_loader, desc="Validating"):
-                img1, img2, labels = img1.to(device), img2.to(device), labels.to(device)
+            for images, labels in tqdm(val_loader, desc="Validating"):
+                images, labels = images.to(device), labels.to(device)
                 labels = labels.unsqueeze(1)
 
-                outputs = model(img1, img2)
+                outputs = model(images)
                 loss = criterion(outputs, labels)
                 val_loss += loss.item()
 
@@ -430,11 +413,11 @@ def main():
     fn = 0
 
     with torch.no_grad():
-        for img1, img2, labels in tqdm(test_loader, desc="Testing"):
-            img1, img2, labels = img1.to(device), img2.to(device), labels.to(device)
+        for images, labels in tqdm(test_loader, desc="Testing"):
+            images, labels = images.to(device), labels.to(device)
             labels = labels.unsqueeze(1)
 
-            outputs = model(img1, img2)
+            outputs = model(images)
             loss = criterion(outputs, labels)
             test_loss += loss.item()
 
