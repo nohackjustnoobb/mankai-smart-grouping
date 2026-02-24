@@ -1,3 +1,20 @@
+"""Merge training and inference benchmark results into a unified report.
+
+This script reads the training benchmark results and inference benchmark results
+from their respective JSON files, merges them by run ID into a single JSON
+structure, and prints summary tables for the top training and inference results.
+
+Usage:
+    python scripts/merge_benchmark_results.py
+
+Expected input files:
+    - results/benchmark_runs/benchmark_results.json   (training metrics)
+    - results/benchmark_runs/inference_benchmark_results.json  (inference timings)
+
+Output:
+    - benchmark_results.json  (merged results with training + inference data)
+"""
+
 import json
 import os
 import re
@@ -9,6 +26,14 @@ MERGED_RESULTS_PATH = "benchmark_results.json"
 
 
 def load_json(path):
+    """Load and parse a JSON file.
+
+    Args:
+        path: Path to the JSON file.
+
+    Returns:
+        Parsed JSON data, or an empty list if the file does not exist.
+    """
     if not os.path.exists(path):
         print(f"Warning: File not found: {path}")
         return []
@@ -17,12 +42,29 @@ def load_json(path):
 
 
 def save_json(data, path):
+    """Save data to a JSON file with pretty formatting.
+
+    Args:
+        data: Python object to serialize.
+        path: Output file path.
+    """
     with open(path, "w") as f:
         json.dump(data, f, indent=2)
     print(f"Saved merged results to {path}")
 
 
 def merge_results():
+    """Merge training and inference results into a unified list.
+
+    Reads training results and inference results from their respective JSON
+    files, correlates them by run ID, and produces a list of merged entries
+    each containing training metrics and inference benchmarks (both optimized
+    and standard variants).
+
+    Returns:
+        Sorted list of merged result dictionaries, each with keys:
+        'modelId', 'settings', 'training', and 'inference'.
+    """
     training_data = load_json(TRAINING_RESULTS_PATH)
     inference_data = load_json(INFERENCE_RESULTS_PATH)
 
@@ -95,6 +137,16 @@ def merge_results():
 
 
 def generate_inference_table(merged_data):
+    """Generate a Markdown table of the top 5 inference benchmark results.
+
+    Results are sorted by inferences per second (descending).
+
+    Args:
+        merged_data: List of merged result dictionaries.
+
+    Returns:
+        Markdown-formatted table string.
+    """
     # Header
     table = "| Model | Type | Batch Size | Learning Rate | Accuracy | Avg Time (ms) | Inf/Sec |\n"
     table += "| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n"
@@ -142,6 +194,16 @@ def generate_inference_table(merged_data):
 
 
 def generate_training_table(merged_data):
+    """Generate a Markdown table of the top 5 training results by accuracy.
+
+    Only includes runs with a 'success' status.
+
+    Args:
+        merged_data: List of merged result dictionaries.
+
+    Returns:
+        Markdown-formatted table string.
+    """
     # Filter only those with training metrics
     valid_runs = [
         x
@@ -180,6 +242,7 @@ def generate_training_table(merged_data):
 
 
 def main():
+    """Entry point: merge results, save to JSON, and print summary tables."""
     merged_data = merge_results()
     save_json(merged_data, MERGED_RESULTS_PATH)
 

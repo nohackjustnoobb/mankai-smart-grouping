@@ -1,3 +1,19 @@
+"""Convert PyTorch models to Apple Core ML MLPackage format.
+
+This script converts trained PyTorch adjacency detection models (either
+Siamese network or merged classifier) to the Core ML MLPackage format for
+deployment on Apple platforms (iOS/macOS). It supports both single-file and
+recursive batch conversion, optional ImageType input optimization for iOS,
+float16 precision, and post-conversion validation.
+
+Usage:
+    # Convert a single model
+    python scripts/convert_to_mlpackage.py --model_path results/merged/model.pth
+
+    # Recursively convert all models with iOS optimization
+    python scripts/convert_to_mlpackage.py --model_path results/ -r --optimize --validate
+"""
+
 import argparse
 import json
 import os
@@ -22,26 +38,77 @@ MODEL_TYPE_MERGED = "merged"
 
 
 class SiameseNetworkWrapper(nn.Module):
+    """TorchScript-compatible wrapper for the SiameseNetwork model.
+
+    Wraps the SiameseNetwork to provide a clean forward signature
+    suitable for tracing with torch.jit.trace.
+
+    Attributes:
+        siamese_model: The underlying SiameseNetwork instance.
+    """
+
     def __init__(self, siamese_model: SiameseNetwork):
+        """Initialize the wrapper.
+
+        Args:
+            siamese_model: A trained SiameseNetwork instance.
+        """
         super().__init__()
         self.siamese_model = siamese_model
 
     def forward(self, input1: torch.Tensor, input2: torch.Tensor) -> torch.Tensor:
-        """Forward pass with two image inputs."""
+        """Forward pass through the Siamese network.
+
+        Args:
+            input1: First image tensor of shape (1, 3, H, W).
+            input2: Second image tensor of shape (1, 3, H, W).
+
+        Returns:
+            Adjacency probability tensor of shape (1, 1).
+        """
         return self.siamese_model(input1, input2)
 
 
 class MergedClassifierWrapper(nn.Module):
+    """TorchScript-compatible wrapper for the MergedClassifier model.
+
+    Wraps the MergedClassifier to provide a clean forward signature
+    suitable for tracing with torch.jit.trace.
+
+    Attributes:
+        merged_model: The underlying MergedClassifier instance.
+    """
+
     def __init__(self, merged_model: MergedClassifier):
+        """Initialize the wrapper.
+
+        Args:
+            merged_model: A trained MergedClassifier instance.
+        """
         super().__init__()
         self.merged_model = merged_model
 
     def forward(self, input1: torch.Tensor) -> torch.Tensor:
-        """Forward pass with single merged image input."""
+        """Forward pass through the merged classifier.
+
+        Args:
+            input1: Merged image tensor of shape (1, 3, H, W).
+
+        Returns:
+            Adjacency probability tensor of shape (1, 1).
+        """
         return self.merged_model(input1)
 
 
 def get_model_name_from_metrics(model_dir: str) -> Optional[str]:
+    """Read the backbone model name from a metrics.json file.
+
+    Args:
+        model_dir: Directory containing the metrics.json file.
+
+    Returns:
+        The model name string if found, or None otherwise.
+    """
     metrics_path = os.path.join(model_dir, "metrics.json")
 
     if not os.path.exists(metrics_path):
@@ -68,6 +135,19 @@ def load_pytorch_model(
     model_name: str = "resnet18",
     model_type: str = MODEL_TYPE_SIAMESE,
 ) -> nn.Module:
+    """Load a trained PyTorch model from a .pth file.
+
+    Args:
+        model_path: Path to the saved model weights (.pth file).
+        model_name: Name of the timm backbone architecture.
+        model_type: Either 'siamese' or 'merged' to determine the model class.
+
+    Returns:
+        The loaded model in eval mode.
+
+    Raises:
+        FileNotFoundError: If the model file does not exist.
+    """
     if not os.path.exists(model_path):
         raise FileNotFoundError(f"Model file not found: {model_path}")
 
@@ -95,6 +175,24 @@ def convert_to_mlpackage(
     compute_precision: Optional[str] = "float32",
     model_type: str = MODEL_TYPE_SIAMESE,
 ) -> None:
+    """Convert a PyTorch model to Apple Core ML MLPackage format.
+
+    Traces the model, converts it using coremltools, adds metadata, and
+    saves the result as an MLPackage.
+
+    Args:
+        pytorch_model: The trained PyTorch model to convert.
+        output_path: File path for the output .mlpackage.
+        use_image_type: If True, use ct.ImageType inputs (optimized for iOS
+            apps that pass PIL images directly).
+        compute_precision: Either 'float32' or 'float16' for the Core ML
+            compute precision.
+        model_type: Either 'siamese' or 'merged' to determine input/output
+            configuration.
+
+    Returns:
+        The converted coremltools MLModel.
+    """
     print("Starting conversion to MLPackage...")
     is_merged = model_type == MODEL_TYPE_MERGED
 
@@ -245,6 +343,19 @@ def validate_mlpackage(
     pytorch_model: nn.Module,
     model_type: str = MODEL_TYPE_SIAMESE,
 ) -> None:
+    """Validate a converted MLPackage by comparing its output to PyTorch.
+
+    Generates random input(s) and feeds them through both the PyTorch model
+    and the Core ML model, then reports the numerical difference.
+
+    Args:
+        mlpackage_path: Path to the saved .mlpackage file.
+        pytorch_model: The original PyTorch model for comparison.
+        model_type: Either 'siamese' or 'merged'.
+
+    Returns:
+        The absolute difference between the PyTorch and Core ML outputs.
+    """
     print("\nValidating converted model...")
     is_merged = model_type == MODEL_TYPE_MERGED
 
@@ -348,18 +459,15 @@ def validate_mlpackage(
 
 
 def detect_model_type_from_path(path: str) -> Optional[str]:
-    """
-    Auto-detect model type based on directory path components.
+    """Auto-detect the model type from the file path.
 
-    Looks for 'siamese' or 'merged' in the path to determine model type.
-    E.g. 'results/siamese/model.pth' -> 'siamese'
-         'results/merged/model.pth'  -> 'merged'
+    Checks if the path contains 'merged' or 'siamese' as a directory component.
 
     Args:
-        path: Path to model file or its containing directory
+        path: File path to analyze.
 
     Returns:
-        Detected model type string, or None if unable to determine
+        'merged', 'siamese', or None if neither is detected.
     """
     normalized = os.path.normpath(path).lower()
     parts = normalized.split(os.sep)
@@ -373,6 +481,14 @@ def detect_model_type_from_path(path: str) -> Optional[str]:
 
 
 def find_model_files(directory: str) -> List[str]:
+    """Recursively find all model.pth files under a directory.
+
+    Args:
+        directory: Root directory to search.
+
+    Returns:
+        List of absolute paths to model.pth files.
+    """
     model_files = []
     for root, dirs, files in os.walk(directory):
         for file in files:
@@ -391,6 +507,24 @@ def convert_single_model(
     compute_precision: str,
     model_type: str = MODEL_TYPE_SIAMESE,
 ) -> bool:
+    """Convert a single PyTorch model to MLPackage.
+
+    Handles loading, conversion, and optional validation for one model file.
+    If output_path or model_name are not provided, they are inferred from
+    the model directory and its metrics.json.
+
+    Args:
+        model_path: Path to the .pth model file.
+        output_path: Output path for the .mlpackage, or None to auto-generate.
+        model_name: Backbone model name, or None to read from metrics.json.
+        validate: Whether to validate the converted model against PyTorch.
+        use_image_type: Whether to use ImageType inputs for iOS optimization.
+        compute_precision: 'float32' or 'float16'.
+        model_type: Either 'siamese' or 'merged'.
+
+    Returns:
+        True if conversion succeeded, False otherwise.
+    """
     try:
         # Set default output path if not provided
         if output_path is None:
@@ -428,6 +562,13 @@ def convert_single_model(
 
 
 def main():
+    """Entry point for the MLPackage conversion CLI.
+
+    Parses command-line arguments and runs either a single model conversion
+    or a recursive batch conversion of all model.pth files under a directory.
+    Supports auto-detection of model type from path and optional iOS
+    optimization (ImageType inputs + float16 precision).
+    """
     parser = argparse.ArgumentParser(
         description="Convert PyTorch model (Siamese Network or Merged Classifier) to MLPackage"
     )

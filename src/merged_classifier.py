@@ -1,3 +1,22 @@
+"""Merged image classifier for adjacency detection.
+
+This module implements a single-input image classifier that determines whether
+two image patches are adjacent by analyzing a single merged image (the two
+patches concatenated side-by-side and resized to 224x224). This approach
+contrasts with the Siamese architecture by processing both patches in one
+forward pass through a standard classifier.
+
+Usage:
+    python src/merged_classifier.py --images ./merged_images --csv ./merged_pairs.csv --results ./results/merged
+
+The training pipeline includes:
+    - Loading merged images with adjacency labels from a CSV file
+    - Training with BCE loss and Adam optimizer
+    - Validation with early stopping
+    - Test set evaluation with precision, recall, and F1 metrics
+    - Periodic visualization of predictions
+"""
+
 import argparse
 import csv
 import json
@@ -28,7 +47,31 @@ DEV_DATASET_SIZE = 10000
 
 
 class MergedImageDataset(Dataset):
+    """Dataset of merged image pairs with adjacency labels.
+
+    Each sample is a single image formed by concatenating two patches
+    side-by-side and resizing to 224x224, paired with a binary label
+    (1 = adjacent, 0 = not adjacent).
+
+    Attributes:
+        samples: List of (image_path, label) tuples.
+        transform: Optional torchvision transforms to apply to each image.
+        image_dir: Root directory containing the merged image files.
+    """
+
     def __init__(self, csv_path, image_dir, transform=None, dev_mode=False):
+        """Initialize the dataset by loading samples from a CSV file.
+
+        Args:
+            csv_path: Path to CSV file with columns 'image' and 'label'.
+            image_dir: Directory containing the referenced merged image files.
+            transform: Optional torchvision transforms to apply to each image.
+            dev_mode: If True, limits the dataset to DEV_DATASET_SIZE samples
+                for faster iteration during development.
+
+        Raises:
+            FileNotFoundError: If the CSV file does not exist.
+        """
         self.samples = []
         self.transform = transform
         self.image_dir = image_dir
@@ -62,9 +105,18 @@ class MergedImageDataset(Dataset):
             print(f"Found {len(self.samples)} merged image samples.")
 
     def __len__(self):
+        """Return the number of samples in the dataset."""
         return len(self.samples)
 
     def __getitem__(self, idx):
+        """Return the image and label for the given index.
+
+        Args:
+            idx: Index of the sample to retrieve.
+
+        Returns:
+            Tuple of (image_tensor, label_tensor).
+        """
         image_path, label = self.samples[idx]
 
         # Load merged image and resize to expected input size
@@ -79,13 +131,28 @@ class MergedImageDataset(Dataset):
 
 
 class MergedClassifier(nn.Module):
-    """
-    Single-input binary classifier using a timm backbone.
-    Takes a single merged image (two patches side-by-side) and outputs
-    a probability of adjacency.
+    """Single-input classifier for merged image adjacency detection.
+
+    Takes a single merged image (two patches side-by-side, resized to 224x224)
+    and classifies whether the original patches were adjacent. Uses a timm
+    backbone for feature extraction followed by a classifier head.
+
+    Attributes:
+        model_name: Name of the timm backbone model.
+        input_size: Spatial dimensions of the input images (H, W).
+        input_channels: Number of input channels (3 for RGB).
+        backbone: Feature extractor from timm.
+        classifier: MLP head that maps features to an adjacency probability.
     """
 
     def __init__(self, model_name="resnet18"):
+        """Initialize the classifier with the specified backbone.
+
+        Args:
+            model_name: Name of a timm model to use as the backbone.
+                Loaded with pretrained ImageNet weights and num_classes=0
+                to output features directly.
+        """
         super(MergedClassifier, self).__init__()
 
         self.model_name = model_name
@@ -124,6 +191,14 @@ class MergedClassifier(nn.Module):
         )
 
     def forward(self, x):
+        """Compute the adjacency probability for a merged image.
+
+        Args:
+            x: Input tensor of shape (Batch, 3, H, W).
+
+        Returns:
+            Tensor of shape (Batch, 1) with adjacency probabilities in [0, 1].
+        """
         # x shape: (Batch, 3, H, W)
         x = self.backbone(x)
 
@@ -136,8 +211,17 @@ class MergedClassifier(nn.Module):
 
 
 def save_validation_plot(results_dir, model, dataloader, epoch, device):
-    """
-    Saves a plot of a few validation examples with predictions.
+    """Generate and save a visualization of model predictions on validation data.
+
+    Plots the first 4 merged images from the dataloader with their true labels
+    and predicted adjacency scores, saving the figure as a PNG file.
+
+    Args:
+        results_dir: Directory in which to save the output image.
+        model: The trained MergedClassifier model.
+        dataloader: DataLoader yielding (images, labels) batches.
+        epoch: Current epoch number (used in the output filename).
+        device: Torch device to run inference on.
     """
     model.eval()
     images, labels = next(iter(dataloader))
@@ -176,6 +260,12 @@ def save_validation_plot(results_dir, model, dataloader, epoch, device):
 
 
 def main():
+    """Entry point for training the merged image adjacency classifier.
+
+    Parses command-line arguments, sets up the dataset and data loaders,
+    trains the model with early stopping, evaluates on the test set, and
+    saves both the best model weights and a metrics JSON file.
+    """
     parser = argparse.ArgumentParser(
         description="Train Merged Image Adjacency Classifier"
     )

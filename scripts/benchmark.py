@@ -1,3 +1,18 @@
+"""Benchmark runner for hyperparameter sweep experiments.
+
+This script automates training runs across a grid of hyperparameters
+(learning rate, batch size, and model architecture) for both the Siamese
+network and merged classifier models. It supports parallel execution via
+a configurable thread pool and can retry failed experiments.
+
+Usage:
+    python scripts/benchmark.py --script merged --workers 2
+    python scripts/benchmark.py --retry-failed --script merged
+
+The script produces a JSON summary file (benchmark_results.json) containing
+the parameters, status, duration, and test metrics for each experiment run.
+"""
+
 import argparse
 import concurrent.futures
 import json
@@ -34,7 +49,25 @@ PARAMETERS = {
 
 
 def run_experiment(args):
-    """Runs a single experiment with the given parameters."""
+    """Run a single training experiment with the given parameters.
+
+    Spawns a subprocess to execute the training script with the specified
+    hyperparameters, streams its output with a labeled prefix, and collects
+    the resulting metrics.
+
+    Args:
+        args: Dictionary containing:
+            - index: Zero-based experiment index.
+            - total: Total number of experiments in the sweep.
+            - params: Dict of hyperparameters (learning_rate, batch_size, model).
+            - script: Path to the training script to execute.
+            - results_base_dir: Base directory for storing experiment outputs.
+            - run_id (optional): Specific run ID to use (for retries).
+
+    Returns:
+        Dictionary with keys 'run_id', 'parameters', 'status', 'duration',
+        and optionally 'metrics' (loaded from the experiment's metrics.json).
+    """
     i = args["index"]
     total_combinations = args["total"]
     params = args["params"]
@@ -133,6 +166,12 @@ def run_experiment(args):
 
 
 def run_benchmark():
+    """Main entry point for the benchmark runner.
+
+    Parses CLI arguments and either performs a full hyperparameter grid sweep
+    or retries previously failed experiments. Results are saved incrementally
+    to a JSON summary file and printed as a summary table upon completion.
+    """
     parser = argparse.ArgumentParser(description="Run benchmark experiments.")
     parser.add_argument(
         "--workers",

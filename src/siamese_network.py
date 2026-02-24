@@ -1,3 +1,22 @@
+"""Siamese Network for image adjacency detection.
+
+This module implements a Siamese neural network architecture that determines
+whether two image patches are adjacent (i.e., were originally neighbors in a
+larger image). The network uses a shared backbone (from the timm library) to
+extract features from both patches, concatenates them, and feeds the result
+through a classifier head that outputs an adjacency probability.
+
+Usage:
+    python src/siamese_network.py --images ./images --csv ./pairs.csv --results ./results/siamese
+
+The training pipeline includes:
+    - Loading image pairs with adjacency labels from a CSV file
+    - Training with BCE loss and Adam optimizer
+    - Validation with early stopping
+    - Test set evaluation with precision, recall, and F1 metrics
+    - Periodic visualization of predictions
+"""
+
 import argparse
 import csv
 import json
@@ -29,7 +48,31 @@ DEV_DATASET_SIZE = 10000
 
 
 class AdjacencyDataset(Dataset):
+    """Dataset of image pairs with adjacency labels for Siamese network training.
+
+    Loads pairs of left/right image patches from a CSV file and provides them
+    as tensors along with a binary label indicating adjacency (1 = adjacent,
+    0 = not adjacent).
+
+    Attributes:
+        pairs: List of (left_path, right_path, label) tuples.
+        transform: Optional torchvision transforms to apply to each image.
+        image_dir: Root directory containing the image patch files.
+    """
+
     def __init__(self, csv_path, image_dir, transform=None, dev_mode=False):
+        """Initialize the dataset by loading image pairs from a CSV file.
+
+        Args:
+            csv_path: Path to CSV file with columns 'left_image', 'right_image', 'label'.
+            image_dir: Directory containing the referenced image files.
+            transform: Optional torchvision transforms to apply to each image.
+            dev_mode: If True, limits the dataset to DEV_DATASET_SIZE pairs for
+                faster iteration during development.
+
+        Raises:
+            FileNotFoundError: If the CSV file does not exist.
+        """
         self.pairs = []
         self.transform = transform
         self.image_dir = image_dir
@@ -66,9 +109,18 @@ class AdjacencyDataset(Dataset):
             print(f"Found {len(self.pairs)} image pairs.")
 
     def __len__(self):
+        """Return the number of image pairs in the dataset."""
         return len(self.pairs)
 
     def __getitem__(self, idx):
+        """Return the left image, right image, and label for the given index.
+
+        Args:
+            idx: Index of the pair to retrieve.
+
+        Returns:
+            Tuple of (left_image_tensor, right_image_tensor, label_tensor).
+        """
         left_path, right_path, label = self.pairs[idx]
 
         # Load pre-processed images (already 224x224)
@@ -84,11 +136,28 @@ class AdjacencyDataset(Dataset):
 
 
 class SiameseNetwork(nn.Module):
-    """
-    Siamese Network with configurable backbone (ResNet18 or timm models).
+    """Siamese neural network for pairwise image adjacency classification.
+
+    Uses a shared backbone from the timm library to extract features from two
+    input image patches. The features are concatenated and passed through a
+    classifier head that outputs the probability that the patches are adjacent.
+
+    Attributes:
+        model_name: Name of the timm backbone model.
+        input_size: Spatial dimensions of the input images (H, W).
+        input_channels: Number of input channels (3 for RGB).
+        backbone: Shared feature extractor from timm.
+        classifier: MLP head that maps concatenated features to a probability.
     """
 
     def __init__(self, model_name="resnet18"):
+        """Initialize the Siamese network with the specified backbone.
+
+        Args:
+            model_name: Name of a timm model to use as the shared backbone.
+                Loaded with pretrained ImageNet weights and num_classes=0
+                to output features directly.
+        """
         super(SiameseNetwork, self).__init__()
 
         self.model_name = model_name
@@ -127,6 +196,14 @@ class SiameseNetwork(nn.Module):
         )
 
     def forward_one(self, x):
+        """Extract features from a single image through the shared backbone.
+
+        Args:
+            x: Input tensor of shape (Batch, 3, H, W).
+
+        Returns:
+            Feature tensor of shape (Batch, feature_dim).
+        """
         # x shape: (Batch, 3, H, W)
         x = self.backbone(x)
 
@@ -138,6 +215,15 @@ class SiameseNetwork(nn.Module):
         return x
 
     def forward(self, x1, x2):
+        """Compute the adjacency probability for a pair of images.
+
+        Args:
+            x1: First image tensor of shape (Batch, 3, H, W).
+            x2: Second image tensor of shape (Batch, 3, H, W).
+
+        Returns:
+            Tensor of shape (Batch, 1) with adjacency probabilities in [0, 1].
+        """
         feat1 = self.forward_one(x1)
         feat2 = self.forward_one(x2)
 
@@ -149,8 +235,17 @@ class SiameseNetwork(nn.Module):
 
 
 def save_validation_plot(results_dir, model, dataloader, epoch, device):
-    """
-    Saves a plot of a few validation examples with predictions.
+    """Generate and save a visualization of model predictions on validation data.
+
+    Plots the first 4 image pairs from the dataloader with their true labels
+    and predicted adjacency scores, saving the figure as a PNG file.
+
+    Args:
+        results_dir: Directory in which to save the output image.
+        model: The trained SiameseNetwork model.
+        dataloader: DataLoader yielding (images1, images2, labels) batches.
+        epoch: Current epoch number (used in the output filename).
+        device: Torch device to run inference on.
     """
     model.eval()
     images1, images2, labels = next(iter(dataloader))
@@ -198,6 +293,12 @@ def save_validation_plot(results_dir, model, dataloader, epoch, device):
 
 
 def main():
+    """Entry point for training the Siamese adjacency detection model.
+
+    Parses command-line arguments, sets up the dataset and data loaders,
+    trains the model with early stopping, evaluates on the test set, and
+    saves both the best model weights and a metrics JSON file.
+    """
     parser = argparse.ArgumentParser(description="Train Adjacency Detection Model")
     parser.add_argument(
         "--images", type=str, default=DEFAULT_IMAGE_DIR, help="Path to image directory"

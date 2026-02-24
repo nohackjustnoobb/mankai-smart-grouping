@@ -1,3 +1,22 @@
+"""Dataset generation pipeline for image adjacency detection.
+
+This script processes raw images to create training datasets for the adjacency
+detection models. It splits each image into left/right halves, extracts edge
+patches, and produces:
+
+1. **Patch pairs** (for the Siamese network): Pairs of 224x224 patches with
+   adjacency labels, saved alongside a CSV mapping file.
+2. **Merged images** (for the merged classifier): Each pair concatenated
+   side-by-side into a single 224x224 image with a companion CSV.
+
+Usage:
+    # Generate patch pairs
+    python scripts/generate_dataset.py --input-dir ./raw_images --output-dir ./images
+
+    # Generate merged pair images from existing patches
+    python scripts/generate_dataset.py --merge-pairs
+"""
+
 import argparse
 import csv
 import random
@@ -11,7 +30,20 @@ from tqdm import tqdm
 
 
 def get_image_files(directory: str) -> List[Path]:
-    """Get all image files from the directory."""
+    """Find all image files in a directory (non-recursive).
+
+    Searches for files with common image extensions (.jpg, .jpeg, .png,
+    .webp, .bmp, .gif) in both lower and upper case.
+
+    Args:
+        directory: Path to the directory to search.
+
+    Returns:
+        Sorted list of Path objects for each image file found.
+
+    Raises:
+        FileNotFoundError: If the directory does not exist.
+    """
     image_extensions = {".jpg", ".jpeg", ".png", ".webp", ".bmp", ".gif"}
     directory_path = Path(directory)
 
@@ -33,18 +65,21 @@ def extract_patch(
     patch_width: int = 224,
     patch_height: int = 224,
 ) -> Image.Image:
-    """
-    Extract a patch from the image.
+    """Extract an edge patch from one half of an image.
+
+    The image is first split into left and right halves at the horizontal
+    midpoint. Then a patch of the specified size is cropped from either
+    the left or right edge of the selected half.
 
     Args:
-        image: PIL Image
-        side: 'left' or 'right' (which half of the image)
-        part: 'left' or 'right' (which edge of that half)
-        patch_width: Width of the output patch (default 224)
-        patch_height: Height of the output patch (default 224)
+        image: Source PIL image.
+        side: Which half to use ('left' or 'right').
+        part: Which edge of the half to crop from ('left' or 'right').
+        patch_width: Width of the output patch in pixels.
+        patch_height: Height of the output patch in pixels.
 
     Returns:
-        PIL Image of size (patch_width, patch_height)
+        A PIL image of size (patch_width, patch_height).
     """
     width, height = image.size
     mid_x = width // 2
@@ -85,18 +120,20 @@ def extract_patch(
 def process_image(
     image_path: Path, output_dir: Path, image_index: int, patch_size: int = 224
 ) -> Dict[str, str]:
-    """
-    Process a single image and extract patches.
+    """Extract all four edge patches from a single image and save them.
+
+    Extracts patches from: left-half left-edge (ll), left-half right-edge (lr),
+    right-half left-edge (rl), and right-half right-edge (rr).
 
     Args:
-        image_path: Path to the input image
-        output_dir: Directory to save the patches
-        image_index: Index for naming the output files
-        patch_size: Size of the output patches (default 224)
+        image_path: Path to the source image.
+        output_dir: Directory in which to save the patch files.
+        image_index: Numeric index used to generate unique filenames.
+        patch_size: Size of each square patch in pixels.
 
     Returns:
-        Dictionary with patch filenames: {'lr': filename, 'rl': filename, 'll': filename, 'rr': filename}
-        Returns empty dict if processing fails
+        Dictionary mapping patch positions ('ll', 'lr', 'rl', 'rr') to their
+        filenames, or an empty dict if the image could not be processed.
     """
     try:
         image = Image.open(image_path).convert("RGB")
@@ -148,17 +185,16 @@ def process_image_batch(
     patch_size: int,
     worker_id: int,
 ) -> List[Dict[str, str]]:
-    """
-    Process a batch of images.
+    """Process a batch of images for a single worker thread.
 
     Args:
-        image_paths_with_indices: List of tuples (image_path, image_index)
-        output_dir: Directory to save the patches
-        patch_size: Size of the output patches
-        worker_id: ID of the worker thread for progress bar positioning
+        image_paths_with_indices: List of (image_path, index) tuples to process.
+        output_dir: Directory for saving output patches.
+        patch_size: Size of each square patch in pixels.
+        worker_id: Worker identifier for progress bar labeling.
 
     Returns:
-        List of patch dictionaries for successfully processed images
+        List of patch dictionaries (one per successfully processed image).
     """
     results = []
 
@@ -187,16 +223,19 @@ def generate_dataset(
     max_images: int = None,
     num_workers: int = 4,
 ):
-    """
-    Generate dataset from images directory.
+    """Generate a dataset of image patch pairs for adjacency detection.
+
+    Processes all images in the input directory, extracts edge patches,
+    creates true pairs (adjacent edges from the same image) and false pairs
+    (edges from different images), and writes the results to a CSV file.
 
     Args:
-        input_dir: Directory containing input images
-        output_dir: Directory to save the patches
-        csv_path: Path to save the CSV file with pairs
-        patch_size: Size of the output patches (default 224)
-        max_images: Maximum number of images to process (None for all)
-        num_workers: Number of parallel workers for processing (default 4)
+        input_dir: Directory containing the raw source images.
+        output_dir: Directory in which to save the extracted patches.
+        csv_path: Path for the output CSV file mapping pairs to labels.
+        patch_size: Size of each square patch in pixels.
+        max_images: Maximum number of images to process, or None for all.
+        num_workers: Number of parallel threads for image processing.
     """
     # Create output directory
     output_path = Path(output_dir)
@@ -292,11 +331,16 @@ def generate_dataset(
 def _merge_pair(
     args: tuple,
 ) -> tuple[int, str | None, str | None]:
-    """
-    Merge a single pair of images into one composite image.
+    """Merge a single pair of patch images into one composite image.
+
+    Loads the left and right patches, places them side-by-side in a
+    448x224 canvas, then resizes to 224x224 and saves as WebP.
+
+    Args:
+        args: Tuple of (index, csv_row_dict, images_path, output_path).
 
     Returns:
-        (index, merged_filename, label) on success, or (index, None, error_msg) on failure.
+        Tuple of (index, merged_filename_or_None, label_or_error_message).
     """
     i, row, images_path, output_path = args
     left_path = images_path / row["left_image"]
@@ -339,6 +383,20 @@ def merge_pairs(
     num_workers: int,
     merged_csv_path: str,
 ):
+    """Merge all patch pairs into single composite images.
+
+    Reads the pairs CSV, merges each left/right patch pair into a single
+    224x224 image, and writes a new CSV mapping merged images to labels.
+
+    Args:
+        images_dir: Directory containing the individual patch images.
+        csv_path: Path to the pairs CSV file with 'left_image' and
+            'right_image' columns.
+        merged_output_dir: Directory in which to save merged images.
+        num_workers: Number of parallel threads.
+        merged_csv_path: Path for the output CSV mapping merged images
+            to labels.
+    """
     images_path = Path(images_dir)
     csv_path = Path(csv_path)
     output_path = Path(merged_output_dir)
@@ -395,6 +453,12 @@ def merge_pairs(
 
 
 def main():
+    """Entry point for the dataset generation CLI.
+
+    Parses command-line arguments and runs either patch extraction
+    (generating pairs) or pair merging (generating merged images),
+    depending on the --merge-pairs flag.
+    """
     parser = argparse.ArgumentParser(
         description="Generate dataset by splitting images and creating matching/non-matching pairs"
     )
