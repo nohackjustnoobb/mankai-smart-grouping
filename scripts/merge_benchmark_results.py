@@ -4,25 +4,26 @@ This script reads the training benchmark results and inference benchmark results
 from their respective JSON files, merges them by run ID into a single JSON
 structure, and prints summary tables for the top training and inference results.
 
+It automatically discovers classifier types (e.g., siamese, merged) by scanning
+subdirectories under results/.
+
 Usage:
     python scripts/merge_benchmark_results.py
 
-Expected input files:
-    - results/benchmark_runs/benchmark_results.json   (training metrics)
-    - results/benchmark_runs/inference_benchmark_results.json  (inference timings)
+Expected input files (per classifier type):
+    - results/<type>/benchmark_runs/benchmark_results.json   (training metrics)
+    - results/<type>/benchmark_runs/inference_benchmark_results.json  (inference timings)
 
-Output:
-    - benchmark_results.json  (merged results with training + inference data)
+Output (per classifier type):
+    - <type>_benchmark_results.json  (merged results with training + inference data)
 """
 
 import json
 import os
 import re
 
-# Paths
-TRAINING_RESULTS_PATH = "results/benchmark_runs/benchmark_results.json"
-INFERENCE_RESULTS_PATH = "results/benchmark_runs/inference_benchmark_results.json"
-MERGED_RESULTS_PATH = "benchmark_results.json"
+# Base results directory
+RESULTS_BASE_DIR = "results"
 
 
 def load_json(path):
@@ -53,7 +54,26 @@ def save_json(data, path):
     print(f"Saved merged results to {path}")
 
 
-def merge_results():
+def discover_classifier_types():
+    """Discover classifier types by scanning subdirectories under results/.
+
+    Returns:
+        List of classifier type names (e.g., ['merged', 'siamese']).
+    """
+    if not os.path.exists(RESULTS_BASE_DIR):
+        print(f"Warning: Results directory not found: {RESULTS_BASE_DIR}")
+        return []
+
+    types = []
+    for entry in sorted(os.listdir(RESULTS_BASE_DIR)):
+        subdir = os.path.join(RESULTS_BASE_DIR, entry, "benchmark_runs")
+        if os.path.isdir(subdir):
+            types.append(entry)
+
+    return types
+
+
+def merge_results(classifier_type):
     """Merge training and inference results into a unified list.
 
     Reads training results and inference results from their respective JSON
@@ -61,12 +81,19 @@ def merge_results():
     each containing training metrics and inference benchmarks (both optimized
     and standard variants).
 
+    Args:
+        classifier_type: The classifier type name (e.g., 'siamese', 'merged').
+
     Returns:
         Sorted list of merged result dictionaries, each with keys:
         'modelId', 'settings', 'training', and 'inference'.
     """
-    training_data = load_json(TRAINING_RESULTS_PATH)
-    inference_data = load_json(INFERENCE_RESULTS_PATH)
+    base = os.path.join(RESULTS_BASE_DIR, classifier_type, "benchmark_runs")
+    training_path = os.path.join(base, "benchmark_results.json")
+    inference_path = os.path.join(base, "inference_benchmark_results.json")
+
+    training_data = load_json(training_path)
+    inference_data = load_json(inference_path)
 
     merged_map = {}
 
@@ -242,17 +269,29 @@ def generate_training_table(merged_data):
 
 
 def main():
-    """Entry point: merge results, save to JSON, and print summary tables."""
-    merged_data = merge_results()
-    save_json(merged_data, MERGED_RESULTS_PATH)
+    """Entry point: discover classifiers, merge results, save to JSON, and print summary tables."""
+    classifier_types = discover_classifier_types()
 
-    print("\n\n### Top Results Summary (Training)")
-    train_table = generate_training_table(merged_data)
-    print(train_table)
+    if not classifier_types:
+        print("No classifier types found under results/.")
+        return
 
-    print("\n### Runtime Benchmark (Inference)")
-    inf_table = generate_inference_table(merged_data)
-    print(inf_table)
+    for classifier_type in classifier_types:
+        print(f"\n{'=' * 60}")
+        print(f"Processing classifier: {classifier_type}")
+        print(f"{'=' * 60}")
+
+        merged_data = merge_results(classifier_type)
+        output_path = f"{classifier_type}_benchmark_results.json"
+        save_json(merged_data, output_path)
+
+        print(f"\n\n### Top Results Summary (Training) - {classifier_type}")
+        train_table = generate_training_table(merged_data)
+        print(train_table)
+
+        print(f"\n### Runtime Benchmark (Inference) - {classifier_type}")
+        inf_table = generate_inference_table(merged_data)
+        print(inf_table)
 
 
 if __name__ == "__main__":

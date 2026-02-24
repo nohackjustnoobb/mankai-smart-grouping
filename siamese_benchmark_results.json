@@ -1,0 +1,1472 @@
+[
+  {
+    "modelId": "run_10_20260212_133822_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 314.7918348312378,
+      "metrics": {
+        "test_loss": 0.16382843372412026,
+        "test_acc": 94.5,
+        "precision": 0.9891540130151844,
+        "recall": 0.9011857707509882,
+        "f1_score": 0.9431230610134437,
+        "training_time": 298.74289178848267,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 91.4,
+        "avgTimeMs": 8.147571802139282,
+        "inferencePerSecond": 122.73595425540566,
+        "maxTimeMs": 10.072946548461914,
+        "minTimeMs": 4.687070846557617,
+        "totalInferences": 1000,
+        "totalTimeMs": 8147.571802139282
+      },
+      "standard": {
+        "accuracy": 91.3,
+        "avgTimeMs": 18.64678978919983,
+        "inferencePerSecond": 53.62853398922303,
+        "maxTimeMs": 27.140021324157715,
+        "minTimeMs": 11.97195053100586,
+        "totalInferences": 1000,
+        "totalTimeMs": 18646.78978919983
+      }
+    }
+  },
+  {
+    "modelId": "run_11_20260212_133822_128197228668608",
+    "settings": {
+      "learning_rate": 0.001,
+      "batch_size": 64,
+      "model": "efficientnet_b0"
+    },
+    "training": {
+      "status": "failed",
+      "duration": 91.3092954158783,
+      "metrics": {}
+    },
+    "inference": {
+      "optimized": null,
+      "standard": null
+    }
+  },
+  {
+    "modelId": "run_12_20260212_133956_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 362.53941535949707,
+      "metrics": {
+        "test_loss": 0.137176763266325,
+        "test_acc": 94.7,
+        "precision": 0.9613034623217923,
+        "recall": 0.932806324110672,
+        "f1_score": 0.9468405215646941,
+        "training_time": 350.0453779697418,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 86.9,
+        "avgTimeMs": 5.350802540779114,
+        "inferencePerSecond": 186.8878532479715,
+        "maxTimeMs": 7.266998291015625,
+        "minTimeMs": 3.4799575805664062,
+        "totalInferences": 1000,
+        "totalTimeMs": 5350.802540779114
+      },
+      "standard": {
+        "accuracy": 87,
+        "avgTimeMs": 13.138084888458252,
+        "inferencePerSecond": 76.11459421140562,
+        "maxTimeMs": 21.788954734802246,
+        "minTimeMs": 8.682012557983398,
+        "totalInferences": 1000,
+        "totalTimeMs": 13138.084888458252
+      }
+    }
+  },
+  {
+    "modelId": "run_13_20260212_133956_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 398.3494465351105,
+      "metrics": {
+        "test_loss": 0.21147063853485243,
+        "test_acc": 92.7,
+        "precision": 0.9596602972399151,
+        "recall": 0.8932806324110671,
+        "f1_score": 0.925281473899693,
+        "training_time": 387.1245701313019,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 78.9,
+        "avgTimeMs": 8.272652626037598,
+        "inferencePerSecond": 120.88021160861628,
+        "maxTimeMs": 9.713053703308105,
+        "minTimeMs": 5.322933197021484,
+        "totalInferences": 1000,
+        "totalTimeMs": 8272.652626037598
+      },
+      "standard": {
+        "accuracy": 78.9,
+        "avgTimeMs": 25.415708899497986,
+        "inferencePerSecond": 39.34574494673065,
+        "maxTimeMs": 35.470008850097656,
+        "minTimeMs": 13.924956321716309,
+        "totalInferences": 1000,
+        "totalTimeMs": 25415.708899497986
+      }
+    }
+  },
+  {
+    "modelId": "run_14_20260212_134559_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 597.1630167961121,
+      "metrics": {
+        "test_loss": 0.11679535944546972,
+        "test_acc": 96.2,
+        "precision": 0.9588235294117647,
+        "recall": 0.9664031620553359,
+        "f1_score": 0.9625984251968503,
+        "training_time": 583.3655977249146,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 85.7,
+        "avgTimeMs": 8.19053339958191,
+        "inferencePerSecond": 122.09217046243235,
+        "maxTimeMs": 9.859919548034668,
+        "minTimeMs": 5.023002624511719,
+        "totalInferences": 1000,
+        "totalTimeMs": 8190.533399581909
+      },
+      "standard": {
+        "accuracy": 86.1,
+        "avgTimeMs": 18.877121925354004,
+        "inferencePerSecond": 52.974177099364525,
+        "maxTimeMs": 25.658011436462402,
+        "minTimeMs": 11.931896209716797,
+        "totalInferences": 1000,
+        "totalTimeMs": 18877.121925354004
+      }
+    }
+  },
+  {
+    "modelId": "run_15_20260212_134635_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 593.1261508464813,
+      "metrics": {
+        "test_loss": 0.18102241746064032,
+        "test_acc": 96.8,
+        "precision": 0.9817073170731707,
+        "recall": 0.9545454545454546,
+        "f1_score": 0.967935871743487,
+        "training_time": 580.8218429088593,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 87.8,
+        "avgTimeMs": 7.61461615562439,
+        "inferencePerSecond": 131.3263833084179,
+        "maxTimeMs": 9.467005729675293,
+        "minTimeMs": 4.870057106018066,
+        "totalInferences": 1000,
+        "totalTimeMs": 7614.61615562439
+      },
+      "standard": {
+        "accuracy": 87.5,
+        "avgTimeMs": 17.24922251701355,
+        "inferencePerSecond": 57.97362744979739,
+        "maxTimeMs": 22.644996643066406,
+        "minTimeMs": 9.425997734069824,
+        "totalInferences": 1000,
+        "totalTimeMs": 17249.22251701355
+      }
+    }
+  },
+  {
+    "modelId": "run_16_20260212_135556_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 398.4019079208374,
+      "metrics": {
+        "test_loss": 0.09675828445959644,
+        "test_acc": 97.2,
+        "precision": 0.9723320158102767,
+        "recall": 0.9723320158102767,
+        "f1_score": 0.9723320158102767,
+        "training_time": 385.92196583747864,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 86,
+        "avgTimeMs": 5.349846005439758,
+        "inferencePerSecond": 186.9212681978497,
+        "maxTimeMs": 6.946086883544922,
+        "minTimeMs": 3.571033477783203,
+        "totalInferences": 1000,
+        "totalTimeMs": 5349.846005439758
+      },
+      "standard": {
+        "accuracy": 86.3,
+        "avgTimeMs": 13.626522302627563,
+        "inferencePerSecond": 73.38629606228824,
+        "maxTimeMs": 21.75295352935791,
+        "minTimeMs": 8.358955383300781,
+        "totalInferences": 1000,
+        "totalTimeMs": 13626.522302627563
+      }
+    }
+  },
+  {
+    "modelId": "run_17_20260212_135628_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 379.5461974143982,
+      "metrics": {
+        "test_loss": 0.273572601377964,
+        "test_acc": 90.2,
+        "precision": 0.9573991031390134,
+        "recall": 0.8438735177865613,
+        "f1_score": 0.8970588235294118,
+        "training_time": 366.7601764202118,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 77.8,
+        "avgTimeMs": 8.175302028656006,
+        "inferencePerSecond": 122.31963987321907,
+        "maxTimeMs": 10.641932487487793,
+        "minTimeMs": 5.366086959838867,
+        "totalInferences": 1000,
+        "totalTimeMs": 8175.302028656006
+      },
+      "standard": {
+        "accuracy": 76.5,
+        "avgTimeMs": 18.826070070266724,
+        "inferencePerSecond": 53.11783055452275,
+        "maxTimeMs": 24.900078773498535,
+        "minTimeMs": 15.913963317871094,
+        "totalInferences": 1000,
+        "totalTimeMs": 18826.070070266724
+      }
+    }
+  },
+  {
+    "modelId": "run_18_20260212_140234_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 485.36966943740845,
+      "metrics": {
+        "test_loss": 0.11294561292015715,
+        "test_acc": 97.4,
+        "precision": 0.9958677685950413,
+        "recall": 0.9525691699604744,
+        "f1_score": 0.9737373737373738,
+        "training_time": 470.2354681491852,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 87,
+        "avgTimeMs": 8.095319986343384,
+        "inferencePerSecond": 123.52816215875058,
+        "maxTimeMs": 9.353041648864746,
+        "minTimeMs": 4.86600399017334,
+        "totalInferences": 1000,
+        "totalTimeMs": 8095.319986343384
+      },
+      "standard": {
+        "accuracy": 87.1,
+        "avgTimeMs": 18.545244812965393,
+        "inferencePerSecond": 53.92217843901838,
+        "maxTimeMs": 26.78096294403076,
+        "minTimeMs": 13.224005699157715,
+        "totalInferences": 1000,
+        "totalTimeMs": 18545.244812965393
+      }
+    }
+  },
+  {
+    "modelId": "run_19_20260212_140247_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 303.55324506759644,
+      "metrics": {
+        "test_loss": 0.2141662836947944,
+        "test_acc": 96.4,
+        "precision": 0.9718875502008032,
+        "recall": 0.9565217391304348,
+        "f1_score": 0.9641434262948207,
+        "training_time": 293.3714015483856,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 85.5,
+        "avgTimeMs": 7.433292746543884,
+        "inferencePerSecond": 134.529882529509,
+        "maxTimeMs": 9.024977684020996,
+        "minTimeMs": 4.804015159606934,
+        "totalInferences": 1000,
+        "totalTimeMs": 7433.292746543884
+      },
+      "standard": {
+        "accuracy": 86.1,
+        "avgTimeMs": 18.43959927558899,
+        "inferencePerSecond": 54.231113434435436,
+        "maxTimeMs": 27.801036834716797,
+        "minTimeMs": 12.073993682861328,
+        "totalInferences": 1000,
+        "totalTimeMs": 18439.59927558899
+      }
+    }
+  },
+  {
+    "modelId": "run_1_20260212_130702_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 411.6871690750122,
+      "metrics": {
+        "test_loss": 0.12396135031326955,
+        "test_acc": 95.5,
+        "precision": 0.9675456389452333,
+        "recall": 0.9426877470355731,
+        "f1_score": 0.9549549549549551,
+        "training_time": 394.3388020992279,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 86.6,
+        "avgTimeMs": 8.122162818908691,
+        "inferencePerSecond": 123.11991550722962,
+        "maxTimeMs": 14.966011047363281,
+        "minTimeMs": 4.178047180175781,
+        "totalInferences": 1000,
+        "totalTimeMs": 8122.162818908691
+      },
+      "standard": {
+        "accuracy": 86.9,
+        "avgTimeMs": 19.077800512313843,
+        "inferencePerSecond": 52.416943942492004,
+        "maxTimeMs": 27.627944946289062,
+        "minTimeMs": 14.642000198364258,
+        "totalInferences": 1000,
+        "totalTimeMs": 19077.800512313843
+      }
+    }
+  },
+  {
+    "modelId": "run_20_20260212_140419_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 388.7405815124512,
+      "metrics": {
+        "test_loss": 0.12360294867539778,
+        "test_acc": 95.7,
+        "precision": 0.9530332681017613,
+        "recall": 0.9624505928853755,
+        "f1_score": 0.9577187807276303,
+        "training_time": 372.93497228622437,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 84.2,
+        "avgTimeMs": 5.397002816200256,
+        "inferencePerSecond": 185.28802634645407,
+        "maxTimeMs": 7.297992706298828,
+        "minTimeMs": 3.6880970001220703,
+        "totalInferences": 1000,
+        "totalTimeMs": 5397.002816200256
+      },
+      "standard": {
+        "accuracy": 83.6,
+        "avgTimeMs": 13.192022204399109,
+        "inferencePerSecond": 75.8033896930929,
+        "maxTimeMs": 22.08995819091797,
+        "minTimeMs": 8.908987045288086,
+        "totalInferences": 1000,
+        "totalTimeMs": 13192.022204399109
+      }
+    }
+  },
+  {
+    "modelId": "run_21_20260212_141040_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 227.1105968952179,
+      "metrics": {
+        "test_loss": 0.30382947716861963,
+        "test_acc": 89.5,
+        "precision": 0.9651972157772621,
+        "recall": 0.8221343873517787,
+        "f1_score": 0.887940234791889,
+        "training_time": 214.05701065063477,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 79.7,
+        "avgTimeMs": 6.895627021789551,
+        "inferencePerSecond": 145.01944447402556,
+        "maxTimeMs": 11.106014251708984,
+        "minTimeMs": 3.710031509399414,
+        "totalInferences": 1000,
+        "totalTimeMs": 6895.627021789551
+      },
+      "standard": {
+        "accuracy": 78.7,
+        "avgTimeMs": 18.112221240997314,
+        "inferencePerSecond": 55.21133971886802,
+        "maxTimeMs": 40.24696350097656,
+        "minTimeMs": 11.090993881225586,
+        "totalInferences": 1000,
+        "totalTimeMs": 18112.221240997314
+      }
+    }
+  },
+  {
+    "modelId": "run_22_20260212_141048_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 310.64717841148376,
+      "metrics": {
+        "test_loss": 0.15526145533658564,
+        "test_acc": 94.9,
+        "precision": 0.987152034261242,
+        "recall": 0.9110671936758893,
+        "f1_score": 0.9475847893114081,
+        "training_time": 299.50118589401245,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 85.2,
+        "avgTimeMs": 8.045706868171692,
+        "inferencePerSecond": 124.2898873131877,
+        "maxTimeMs": 9.685039520263672,
+        "minTimeMs": 4.462003707885742,
+        "totalInferences": 1000,
+        "totalTimeMs": 8045.706868171692
+      },
+      "standard": {
+        "accuracy": 86,
+        "avgTimeMs": 19.013056993484497,
+        "inferencePerSecond": 52.5954348289539,
+        "maxTimeMs": 25.08401870727539,
+        "minTimeMs": 15.637040138244629,
+        "totalInferences": 1000,
+        "totalTimeMs": 19013.056993484497
+      }
+    }
+  },
+  {
+    "modelId": "run_23_20260212_141225_128197220275904",
+    "settings": {
+      "learning_rate": 0.0001,
+      "batch_size": 64,
+      "model": "efficientnet_b0"
+    },
+    "training": {
+      "status": "failed",
+      "duration": 91.22211956977844,
+      "metrics": {}
+    },
+    "inference": {
+      "optimized": null,
+      "standard": null
+    }
+  },
+  {
+    "modelId": "run_24_20260212_141359_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 210.04782700538635,
+      "metrics": {
+        "test_loss": 0.153164824238047,
+        "test_acc": 94.8,
+        "precision": 0.9468503937007874,
+        "recall": 0.950592885375494,
+        "f1_score": 0.9487179487179487,
+        "training_time": 199.65311241149902,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 80.5,
+        "avgTimeMs": 5.405431389808655,
+        "inferencePerSecond": 184.9991106880738,
+        "maxTimeMs": 7.023096084594727,
+        "minTimeMs": 3.791928291320801,
+        "totalInferences": 1000,
+        "totalTimeMs": 5405.431389808655
+      },
+      "standard": {
+        "accuracy": 81.89999999999999,
+        "avgTimeMs": 13.002777695655823,
+        "inferencePerSecond": 76.90664436523406,
+        "maxTimeMs": 21.283984184265137,
+        "minTimeMs": 8.409976959228516,
+        "totalInferences": 1000,
+        "totalTimeMs": 13002.777695655823
+      }
+    }
+  },
+  {
+    "modelId": "run_25_20260212_141427_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 330.2132933139801,
+      "metrics": {
+        "test_loss": 0.32379289207950473,
+        "test_acc": 87.4,
+        "precision": 0.902542372881356,
+        "recall": 0.841897233201581,
+        "f1_score": 0.8711656441717792,
+        "training_time": 319.19148087501526,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 76.8,
+        "avgTimeMs": 8.195900559425354,
+        "inferencePerSecond": 122.01221729685234,
+        "maxTimeMs": 10.861039161682129,
+        "minTimeMs": 5.202054977416992,
+        "totalInferences": 1000,
+        "totalTimeMs": 8195.900559425354
+      },
+      "standard": {
+        "accuracy": 76.1,
+        "avgTimeMs": 18.999385714530945,
+        "inferencePerSecond": 52.63328062418295,
+        "maxTimeMs": 29.881000518798828,
+        "minTimeMs": 13.363957405090332,
+        "totalInferences": 1000,
+        "totalTimeMs": 18999.385714530945
+      }
+    }
+  },
+  {
+    "modelId": "run_26_20260212_141536_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 602.7005207538605,
+      "metrics": {
+        "test_loss": 0.14477322417651378,
+        "test_acc": 95.2,
+        "precision": 0.9654471544715447,
+        "recall": 0.9387351778656127,
+        "f1_score": 0.9519038076152304,
+        "training_time": 584.2539732456207,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 75.9,
+        "avgTimeMs": 8.257367014884949,
+        "inferencePerSecond": 121.10397881036091,
+        "maxTimeMs": 10.692000389099121,
+        "minTimeMs": 4.055976867675781,
+        "totalInferences": 1000,
+        "totalTimeMs": 8257.367014884949
+      },
+      "standard": {
+        "accuracy": 84.5,
+        "avgTimeMs": 18.489547729492188,
+        "inferencePerSecond": 54.08461118845685,
+        "maxTimeMs": 24.396061897277832,
+        "minTimeMs": 12.527942657470703,
+        "totalInferences": 1000,
+        "totalTimeMs": 18489.547729492188
+      }
+    }
+  },
+  {
+    "modelId": "run_27_20260212_141957_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 589.6955373287201,
+      "metrics": {
+        "test_loss": 0.21275034369457335,
+        "test_acc": 92.6,
+        "precision": 0.8985239852398524,
+        "recall": 0.9624505928853755,
+        "f1_score": 0.9293893129770994,
+        "training_time": 577.0128953456879,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 76,
+        "avgTimeMs": 7.355629086494446,
+        "inferencePerSecond": 135.9503025833758,
+        "maxTimeMs": 9.36901569366455,
+        "minTimeMs": 3.926992416381836,
+        "totalInferences": 1000,
+        "totalTimeMs": 7355.629086494446
+      },
+      "standard": {
+        "accuracy": 74.1,
+        "avgTimeMs": 19.647241592407227,
+        "inferencePerSecond": 50.89773011120579,
+        "maxTimeMs": 31.257987022399902,
+        "minTimeMs": 12.03310489654541,
+        "totalInferences": 1000,
+        "totalTimeMs": 19647.241592407227
+      }
+    }
+  },
+  {
+    "modelId": "run_28_20260212_142539_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 390.7229070663452,
+      "metrics": {
+        "test_loss": 0.1667462396657183,
+        "test_acc": 94.4,
+        "precision": 0.9573170731707317,
+        "recall": 0.9308300395256917,
+        "f1_score": 0.9438877755511021,
+        "training_time": 377.83569145202637,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 80,
+        "avgTimeMs": 5.3731502294540405,
+        "inferencePerSecond": 186.11056034098806,
+        "maxTimeMs": 99.52700138092041,
+        "minTimeMs": 2.665996551513672,
+        "totalInferences": 1000,
+        "totalTimeMs": 5373.1502294540405
+      },
+      "standard": {
+        "accuracy": 79.7,
+        "avgTimeMs": 12.977036833763123,
+        "inferencePerSecond": 77.05919408337049,
+        "maxTimeMs": 21.723031997680664,
+        "minTimeMs": 8.597970008850098,
+        "totalInferences": 1000,
+        "totalTimeMs": 12977.036833763123
+      }
+    }
+  },
+  {
+    "modelId": "run_29_20260212_142947_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 375.246741771698,
+      "metrics": {
+        "test_loss": 0.36175782373175025,
+        "test_acc": 86.7,
+        "precision": 0.8909853249475891,
+        "recall": 0.8399209486166008,
+        "f1_score": 0.8646998982706001,
+        "training_time": 362.8470149040222,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 75.7,
+        "avgTimeMs": 7.926051616668701,
+        "inferencePerSecond": 126.1662235326569,
+        "maxTimeMs": 10.57589054107666,
+        "minTimeMs": 3.8269758224487305,
+        "totalInferences": 1000,
+        "totalTimeMs": 7926.051616668701
+      },
+      "standard": {
+        "accuracy": 75.5,
+        "avgTimeMs": 21.146491408348083,
+        "inferencePerSecond": 47.28916871785293,
+        "maxTimeMs": 35.22300720214844,
+        "minTimeMs": 15.321016311645508,
+        "totalInferences": 1000,
+        "totalTimeMs": 21146.491408348083
+      }
+    }
+  },
+  {
+    "modelId": "run_2_20260212_130702_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 607.1753926277161,
+      "metrics": {
+        "test_loss": 0.16379603923904518,
+        "test_acc": 94.3,
+        "precision": 0.9609856262833676,
+        "recall": 0.924901185770751,
+        "f1_score": 0.9425981873111783,
+        "training_time": 589.341726064682,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 88.2,
+        "avgTimeMs": 8.206037521362305,
+        "inferencePerSecond": 121.86149495377734,
+        "maxTimeMs": 9.323954582214355,
+        "minTimeMs": 4.669070243835449,
+        "totalInferences": 1000,
+        "totalTimeMs": 8206.037521362305
+      },
+      "standard": {
+        "accuracy": 87.9,
+        "avgTimeMs": 18.773188591003418,
+        "inferencePerSecond": 53.26745614643349,
+        "maxTimeMs": 26.193976402282715,
+        "minTimeMs": 10.333895683288574,
+        "totalInferences": 1000,
+        "totalTimeMs": 18773.188591003418
+      }
+    }
+  },
+  {
+    "modelId": "run_30_20260212_143209_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 495.8497769832611,
+      "metrics": {
+        "test_loss": 0.21495697717182338,
+        "test_acc": 93.7,
+        "precision": 0.9604989604989606,
+        "recall": 0.9130434782608695,
+        "f1_score": 0.9361702127659575,
+        "training_time": 478.5080659389496,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 82.3,
+        "avgTimeMs": 8.04555344581604,
+        "inferencePerSecond": 124.2922574232645,
+        "maxTimeMs": 9.668946266174316,
+        "minTimeMs": 4.551053047180176,
+        "totalInferences": 1000,
+        "totalTimeMs": 8045.55344581604
+      },
+      "standard": {
+        "accuracy": 85.8,
+        "avgTimeMs": 18.815598487854004,
+        "inferencePerSecond": 53.147392608612904,
+        "maxTimeMs": 25.770068168640137,
+        "minTimeMs": 11.691927909851074,
+        "totalInferences": 1000,
+        "totalTimeMs": 18815.598487854004
+      }
+    }
+  },
+  {
+    "modelId": "run_31_20260212_143602_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 308.14401936531067,
+      "metrics": {
+        "test_loss": 0.24342412315309048,
+        "test_acc": 91.3,
+        "precision": 0.8901303538175046,
+        "recall": 0.9446640316205533,
+        "f1_score": 0.9165867689357622,
+        "training_time": 292.9560079574585,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 77.4,
+        "avgTimeMs": 7.0546019077301025,
+        "inferencePerSecond": 141.75144297004866,
+        "maxTimeMs": 10.936975479125977,
+        "minTimeMs": 3.4650564193725586,
+        "totalInferences": 1000,
+        "totalTimeMs": 7054.6019077301025
+      },
+      "standard": {
+        "accuracy": 76.2,
+        "avgTimeMs": 18.465914726257324,
+        "inferencePerSecond": 54.15382962740889,
+        "maxTimeMs": 25.321006774902344,
+        "minTimeMs": 11.469006538391113,
+        "totalInferences": 1000,
+        "totalTimeMs": 18465.914726257324
+      }
+    }
+  },
+  {
+    "modelId": "run_32_20260212_143736_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 386.27676033973694,
+      "metrics": {
+        "test_loss": 0.19580501480959356,
+        "test_acc": 93.8,
+        "precision": 0.9493927125506073,
+        "recall": 0.9268774703557312,
+        "f1_score": 0.9380000000000001,
+        "training_time": 369.8454518318176,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 77.9,
+        "avgTimeMs": 5.391943573951721,
+        "inferencePerSecond": 185.4618814690426,
+        "maxTimeMs": 6.893038749694824,
+        "minTimeMs": 3.4819841384887695,
+        "totalInferences": 1000,
+        "totalTimeMs": 5391.943573951721
+      },
+      "standard": {
+        "accuracy": 77.4,
+        "avgTimeMs": 13.053396344184875,
+        "inferencePerSecond": 76.60841467098236,
+        "maxTimeMs": 21.175026893615723,
+        "minTimeMs": 8.547067642211914,
+        "totalInferences": 1000,
+        "totalTimeMs": 13053.396344184875
+      }
+    }
+  },
+  {
+    "modelId": "run_33_20260212_144025_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 303.0988883972168,
+      "metrics": {
+        "test_loss": 0.39417760632932186,
+        "test_acc": 83.3,
+        "precision": 0.864516129032258,
+        "recall": 0.7944664031620553,
+        "f1_score": 0.8280123583934088,
+        "training_time": 291.23065638542175,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 74.9,
+        "avgTimeMs": 7.911446452140808,
+        "inferencePerSecond": 126.39913649790346,
+        "maxTimeMs": 13.282060623168945,
+        "minTimeMs": 3.965020179748535,
+        "totalInferences": 1000,
+        "totalTimeMs": 7911.446452140808
+      },
+      "standard": {
+        "accuracy": 74.1,
+        "avgTimeMs": 18.822479009628296,
+        "inferencePerSecond": 53.12796467927887,
+        "maxTimeMs": 47.63305187225342,
+        "minTimeMs": 14.526009559631348,
+        "totalInferences": 1000,
+        "totalTimeMs": 18822.479009628296
+      }
+    }
+  },
+  {
+    "modelId": "run_34_20260212_144402_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 311.3620927333832,
+      "metrics": {
+        "test_loss": 0.19050032552331686,
+        "test_acc": 93.7,
+        "precision": 0.9456740442655935,
+        "recall": 0.9288537549407114,
+        "f1_score": 0.9371884346959122,
+        "training_time": 300.36501836776733,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 76.5,
+        "avgTimeMs": 8.203135967254639,
+        "inferencePerSecond": 121.90459892312039,
+        "maxTimeMs": 9.613990783691406,
+        "minTimeMs": 4.480957984924316,
+        "totalInferences": 1000,
+        "totalTimeMs": 8203.135967254639
+      },
+      "standard": {
+        "accuracy": 82.19999999999999,
+        "avgTimeMs": 18.913398265838623,
+        "inferencePerSecond": 52.872571387987946,
+        "maxTimeMs": 27.364015579223633,
+        "minTimeMs": 13.100028038024902,
+        "totalInferences": 1000,
+        "totalTimeMs": 18913.398265838623
+      }
+    }
+  },
+  {
+    "modelId": "run_35_20260212_144528_128197220275904",
+    "settings": {
+      "learning_rate": 1e-05,
+      "batch_size": 64,
+      "model": "efficientnet_b0"
+    },
+    "training": {
+      "status": "failed",
+      "duration": 91.2590320110321,
+      "metrics": {}
+    },
+    "inference": {
+      "optimized": null,
+      "standard": null
+    }
+  },
+  {
+    "modelId": "run_36_20260212_144543_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 208.55505657196045,
+      "metrics": {
+        "test_loss": 0.20941494312137365,
+        "test_acc": 91.9,
+        "precision": 0.9292929292929293,
+        "recall": 0.9090909090909091,
+        "f1_score": 0.9190809190809192,
+        "training_time": 198.1368386745453,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 76.4,
+        "avgTimeMs": 5.38395619392395,
+        "inferencePerSecond": 185.73702385033286,
+        "maxTimeMs": 6.9580078125,
+        "minTimeMs": 3.692030906677246,
+        "totalInferences": 1000,
+        "totalTimeMs": 5383.95619392395
+      },
+      "standard": {
+        "accuracy": 77,
+        "avgTimeMs": 13.29275381565094,
+        "inferencePerSecond": 75.22895660811804,
+        "maxTimeMs": 21.845102310180664,
+        "minTimeMs": 8.51905345916748,
+        "totalInferences": 1000,
+        "totalTimeMs": 13292.75381565094
+      }
+    }
+  },
+  {
+    "modelId": "run_3_20260212_131354_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 597.138946056366,
+      "metrics": {
+        "test_loss": 0.09013126221381956,
+        "test_acc": 96.7,
+        "precision": 0.9797160243407708,
+        "recall": 0.9545454545454546,
+        "f1_score": 0.9669669669669669,
+        "training_time": 582.8825504779816,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 89.9,
+        "avgTimeMs": 7.5794031620025635,
+        "inferencePerSecond": 131.93650985782747,
+        "maxTimeMs": 8.93402099609375,
+        "minTimeMs": 4.848957061767578,
+        "totalInferences": 1000,
+        "totalTimeMs": 7579.4031620025635
+      },
+      "standard": {
+        "accuracy": 90.10000000000001,
+        "avgTimeMs": 18.22885799407959,
+        "inferencePerSecond": 54.858071763178046,
+        "maxTimeMs": 25.278091430664062,
+        "minTimeMs": 9.975910186767578,
+        "totalInferences": 1000,
+        "totalTimeMs": 18228.85799407959
+      }
+    }
+  },
+  {
+    "modelId": "run_4_20260212_131709_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 397.963951587677,
+      "metrics": {
+        "test_loss": 0.15086502736316076,
+        "test_acc": 95.9,
+        "precision": 0.9813664596273292,
+        "recall": 0.9367588932806324,
+        "f1_score": 0.9585439838220424,
+        "training_time": 385.4401593208313,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 86.7,
+        "avgTimeMs": 5.354101181030273,
+        "inferencePerSecond": 186.77271239158262,
+        "maxTimeMs": 7.244110107421875,
+        "minTimeMs": 3.5619735717773438,
+        "totalInferences": 1000,
+        "totalTimeMs": 5354.101181030273
+      },
+      "standard": {
+        "accuracy": 87.8,
+        "avgTimeMs": 13.240737915039062,
+        "inferencePerSecond": 75.52449164212989,
+        "maxTimeMs": 22.0339298248291,
+        "minTimeMs": 8.847951889038086,
+        "totalInferences": 1000,
+        "totalTimeMs": 13240.737915039062
+      }
+    }
+  },
+  {
+    "modelId": "run_5_20260212_132347_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 390.8863823413849,
+      "metrics": {
+        "test_loss": 0.20468605181667954,
+        "test_acc": 94.5,
+        "precision": 0.9747368421052631,
+        "recall": 0.9150197628458498,
+        "f1_score": 0.943934760448522,
+        "training_time": 377.72032618522644,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 82.8,
+        "avgTimeMs": 8.19279432296753,
+        "inferencePerSecond": 122.0584773129991,
+        "maxTimeMs": 11.55400276184082,
+        "minTimeMs": 4.848957061767578,
+        "totalInferences": 1000,
+        "totalTimeMs": 8192.79432296753
+      },
+      "standard": {
+        "accuracy": 83.2,
+        "avgTimeMs": 18.63278067111969,
+        "inferencePerSecond": 53.668854780756,
+        "maxTimeMs": 24.91307258605957,
+        "minTimeMs": 15.056014060974121,
+        "totalInferences": 1000,
+        "totalTimeMs": 18632.78067111969
+      }
+    }
+  },
+  {
+    "modelId": "run_6_20260212_132351_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 495.58971214294434,
+      "metrics": {
+        "test_loss": 0.2338309196056798,
+        "test_acc": 92.9,
+        "precision": 0.9865771812080537,
+        "recall": 0.8715415019762845,
+        "f1_score": 0.9254984260230851,
+        "training_time": 482.33604311943054,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 87.3,
+        "avgTimeMs": 8.11639940738678,
+        "inferencePerSecond": 123.20734229637523,
+        "maxTimeMs": 9.215950965881348,
+        "minTimeMs": 4.179954528808594,
+        "totalInferences": 1000,
+        "totalTimeMs": 8116.39940738678
+      },
+      "standard": {
+        "accuracy": 87.4,
+        "avgTimeMs": 18.41661238670349,
+        "inferencePerSecond": 54.298802570335056,
+        "maxTimeMs": 33.95402431488037,
+        "minTimeMs": 10.635018348693848,
+        "totalInferences": 1000,
+        "totalTimeMs": 18416.61238670349
+      }
+    }
+  },
+  {
+    "modelId": "run_7_20260212_133018_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 306.9887046813965,
+      "metrics": {
+        "test_loss": 0.1376602403470315,
+        "test_acc": 96.1,
+        "precision": 0.9834368530020704,
+        "recall": 0.9387351778656127,
+        "f1_score": 0.9605662285136503,
+        "training_time": 291.8605890274048,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 89.8,
+        "avgTimeMs": 7.1444560289382935,
+        "inferencePerSecond": 139.96866884610188,
+        "maxTimeMs": 8.921980857849121,
+        "minTimeMs": 4.613995552062988,
+        "totalInferences": 1000,
+        "totalTimeMs": 7144.4560289382935
+      },
+      "standard": {
+        "accuracy": 90.10000000000001,
+        "avgTimeMs": 18.122785925865173,
+        "inferencePerSecond": 55.1791542476249,
+        "maxTimeMs": 25.36606788635254,
+        "minTimeMs": 9.804964065551758,
+        "totalInferences": 1000,
+        "totalTimeMs": 18122.785925865173
+      }
+    }
+  },
+  {
+    "modelId": "run_8_20260212_133150_128197220275904",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 391.1019196510315,
+      "metrics": {
+        "test_loss": 0.16148887603048934,
+        "test_acc": 96.2,
+        "precision": 0.9795081967213115,
+        "recall": 0.9446640316205533,
+        "f1_score": 0.9617706237424547,
+        "training_time": 376.77987575531006,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 83.2,
+        "avgTimeMs": 5.425437092781067,
+        "inferencePerSecond": 184.31694680057606,
+        "maxTimeMs": 12.734055519104004,
+        "minTimeMs": 3.117084503173828,
+        "totalInferences": 1000,
+        "totalTimeMs": 5425.437092781067
+      },
+      "standard": {
+        "accuracy": 81.10000000000001,
+        "avgTimeMs": 13.102312684059143,
+        "inferencePerSecond": 76.32240384681435,
+        "maxTimeMs": 21.872997283935547,
+        "minTimeMs": 8.378028869628906,
+        "totalInferences": 1000,
+        "totalTimeMs": 13102.312684059143
+      }
+    }
+  },
+  {
+    "modelId": "run_9_20260212_133207_128197228668608",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 374.9833438396454,
+      "metrics": {
+        "test_loss": 0.19375785579904914,
+        "test_acc": 93.0,
+        "precision": 0.9678111587982833,
+        "recall": 0.8913043478260869,
+        "f1_score": 0.9279835390946503,
+        "training_time": 361.11885476112366,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 77.8,
+        "avgTimeMs": 8.246724963188171,
+        "inferencePerSecond": 121.26025840122132,
+        "maxTimeMs": 16.067028045654297,
+        "minTimeMs": 5.496978759765625,
+        "totalInferences": 1000,
+        "totalTimeMs": 8246.724963188171
+      },
+      "standard": {
+        "accuracy": 77.8,
+        "avgTimeMs": 19.039236783981323,
+        "inferencePerSecond": 52.52311378580841,
+        "maxTimeMs": 27.42302417755127,
+        "minTimeMs": 15.166044235229492,
+        "totalInferences": 1000,
+        "totalTimeMs": 19039.236783981323
+      }
+    }
+  }
+]

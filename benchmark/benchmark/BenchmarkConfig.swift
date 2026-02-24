@@ -5,6 +5,7 @@
 //  Configuration and data types for the benchmark app.
 //
 
+import CoreML
 import Foundation
 
 // MARK: - Configuration
@@ -60,6 +61,39 @@ struct ModelSettings: Codable, Equatable {
     }
 }
 
+// MARK: - Model Architecture
+
+/// Architecture type of the model (determines input format)
+enum ModelArchitecture: String, CaseIterable, Identifiable {
+    /// Siamese network: two separate image inputs (image1, image2)
+    case siamese
+    /// Merged classifier: single merged image input (image)
+    case merged
+
+    var id: String {
+        rawValue
+    }
+
+    var displayName: String {
+        switch self {
+        case .siamese:
+            return "Siamese (Two Inputs)"
+        case .merged:
+            return "Merged (Single Input)"
+        }
+    }
+
+    /// Detect architecture from model's input descriptions
+    static func detect(from model: MLModel) -> ModelArchitecture {
+        let inputs = model.modelDescription.inputDescriptionsByName
+        // Merged models have a single "image" input; siamese have "image1" and "image2"
+        if inputs["image"] != nil && inputs["image1"] == nil {
+            return .merged
+        }
+        return .siamese
+    }
+}
+
 // MARK: - Model Types
 
 /// Types of MLPackage models supported
@@ -69,7 +103,9 @@ enum ModelType: String, CaseIterable, Identifiable {
     /// Standard model with TensorType inputs and float32 precision
     case standard = "model.mlpackage"
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 
     var displayName: String {
         switch self {
@@ -92,6 +128,7 @@ struct BenchmarkResult: Identifiable {
     let modelName: String
     let modelPath: String
     let modelType: ModelType?
+    let modelArchitecture: ModelArchitecture
     let modelSettings: ModelSettings?
     let totalInferences: Int
     let totalTimeMs: Double

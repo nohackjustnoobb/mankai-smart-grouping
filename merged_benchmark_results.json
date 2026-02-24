@@ -1,0 +1,1622 @@
+[
+  {
+    "modelId": "run_10_20260224_102711_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 325.62329149246216,
+      "metrics": {
+        "test_loss": 0.03949136915616691,
+        "test_acc": 98.8,
+        "precision": 0.994,
+        "recall": 0.9822134387351779,
+        "f1_score": 0.9880715705765406,
+        "training_time": 317.3104832172394,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.3,
+        "avgTimeMs": 3.486997961997986,
+        "inferencePerSecond": 286.7796342005942,
+        "maxTimeMs": 8.123040199279785,
+        "minTimeMs": 1.598954200744629,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3486.997961997986
+      },
+      "standard": {
+        "accuracy": 98.5,
+        "avgTimeMs": 14.357267618179321,
+        "inferencePerSecond": 69.6511360374581,
+        "maxTimeMs": 18.60201358795166,
+        "minTimeMs": 6.374001502990723,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14357.267618179321
+      }
+    }
+  },
+  {
+    "modelId": "run_11_20260224_103136_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 250.44730949401855,
+      "metrics": {
+        "test_loss": 0.045977985838362656,
+        "test_acc": 98.4,
+        "precision": 0.9822834645669292,
+        "recall": 0.9861660079051383,
+        "f1_score": 0.9842209072978304,
+        "training_time": 243.49678707122803,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 99.6,
+        "avgTimeMs": 3.2139090299606323,
+        "inferencePerSecond": 311.1475747066335,
+        "maxTimeMs": 7.706999778747559,
+        "minTimeMs": 2.369046211242676,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3213.9090299606323
+      },
+      "standard": {
+        "accuracy": 99.6,
+        "avgTimeMs": 16.198153734207153,
+        "inferencePerSecond": 61.73543086507487,
+        "maxTimeMs": 17.97497272491455,
+        "minTimeMs": 7.008075714111328,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 16198.153734207153
+      }
+    }
+  },
+  {
+    "modelId": "run_12_20260224_103143_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 258.39571261405945,
+      "metrics": {
+        "test_loss": 0.04911802905553486,
+        "test_acc": 98.9,
+        "precision": 0.9959919839679359,
+        "recall": 0.9822134387351779,
+        "f1_score": 0.9890547263681592,
+        "training_time": 250.4728124141693,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 99.1,
+        "avgTimeMs": 2.8188408613204956,
+        "inferencePerSecond": 354.7557486205683,
+        "maxTimeMs": 7.687091827392578,
+        "minTimeMs": 2.230048179626465,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2818.8408613204956
+      },
+      "standard": {
+        "accuracy": 98.8,
+        "avgTimeMs": 10.716137409210205,
+        "inferencePerSecond": 93.31720580034084,
+        "maxTimeMs": 25.548934936523438,
+        "minTimeMs": 5.06901741027832,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 10716.137409210205
+      }
+    }
+  },
+  {
+    "modelId": "run_13_20260224_103237_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 289.7666618824005,
+      "metrics": {
+        "test_loss": 0.07047211327987916,
+        "test_acc": 98.1,
+        "precision": 0.9840954274353877,
+        "recall": 0.9782608695652174,
+        "f1_score": 0.981169474727453,
+        "training_time": 280.87423300743103,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.4,
+        "avgTimeMs": 3.755755066871643,
+        "inferencePerSecond": 266.25804457289865,
+        "maxTimeMs": 8.358955383300781,
+        "minTimeMs": 2.917051315307617,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3755.755066871643
+      },
+      "standard": {
+        "accuracy": 98.4,
+        "avgTimeMs": 13.863248229026794,
+        "inferencePerSecond": 72.1331670240316,
+        "maxTimeMs": 18.442988395690918,
+        "minTimeMs": 7.194042205810547,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 13863.248229026794
+      }
+    }
+  },
+  {
+    "modelId": "run_14_20260224_103601_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 372.8164575099945,
+      "metrics": {
+        "test_loss": 0.04626178438887846,
+        "test_acc": 98.4,
+        "precision": 0.9841897233201581,
+        "recall": 0.9841897233201581,
+        "f1_score": 0.9841897233201581,
+        "training_time": 363.33560943603516,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 99,
+        "avgTimeMs": 3.649300456047058,
+        "inferencePerSecond": 274.0251212648041,
+        "maxTimeMs": 5.977988243103027,
+        "minTimeMs": 2.6340484619140625,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3649.300456047058
+      },
+      "standard": {
+        "accuracy": 99.1,
+        "avgTimeMs": 14.338611841201782,
+        "inferencePerSecond": 69.74175820329519,
+        "maxTimeMs": 23.020029067993164,
+        "minTimeMs": 6.360054016113281,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14338.611841201782
+      }
+    }
+  },
+  {
+    "modelId": "run_15_20260224_103727_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 366.560378074646,
+      "metrics": {
+        "test_loss": 0.052891859157488584,
+        "test_acc": 98.7,
+        "precision": 0.9920159680638723,
+        "recall": 0.9822134387351779,
+        "f1_score": 0.9870903674280039,
+        "training_time": 358.48293137550354,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98,
+        "avgTimeMs": 3.222195267677307,
+        "inferencePerSecond": 310.34742370559115,
+        "maxTimeMs": 8.193016052246094,
+        "minTimeMs": 2.6699304580688477,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3222.195267677307
+      },
+      "standard": {
+        "accuracy": 98.8,
+        "avgTimeMs": 16.187489986419678,
+        "inferencePerSecond": 61.77609999072984,
+        "maxTimeMs": 17.297029495239258,
+        "minTimeMs": 10.309100151062012,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 16187.489986419678
+      }
+    }
+  },
+  {
+    "modelId": "run_16_20260224_104214_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 295.68242168426514,
+      "metrics": {
+        "test_loss": 0.06798850325474863,
+        "test_acc": 98.4,
+        "precision": 0.99,
+        "recall": 0.9782608695652174,
+        "f1_score": 0.9840954274353876,
+        "training_time": 287.55531573295593,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.3,
+        "avgTimeMs": 2.854344964027405,
+        "inferencePerSecond": 350.3430778699666,
+        "maxTimeMs": 8.111000061035156,
+        "minTimeMs": 2.2040605545043945,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2854.344964027405
+      },
+      "standard": {
+        "accuracy": 98.4,
+        "avgTimeMs": 11.044446229934692,
+        "inferencePerSecond": 90.54324491975123,
+        "maxTimeMs": 12.692928314208984,
+        "minTimeMs": 7.3909759521484375,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 11044.446229934692
+      }
+    }
+  },
+  {
+    "modelId": "run_17_20260224_104333_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 280.94834423065186,
+      "metrics": {
+        "test_loss": 0.06627362849212659,
+        "test_acc": 98.3,
+        "precision": 0.9880239520958084,
+        "recall": 0.9782608695652174,
+        "f1_score": 0.9831181727904668,
+        "training_time": 268.1661298274994,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.9,
+        "avgTimeMs": 3.73399555683136,
+        "inferencePerSecond": 267.8096384369006,
+        "maxTimeMs": 7.833957672119141,
+        "minTimeMs": 2.7680397033691406,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3733.99555683136
+      },
+      "standard": {
+        "accuracy": 99.1,
+        "avgTimeMs": 14.746405005455017,
+        "inferencePerSecond": 67.81313816011958,
+        "maxTimeMs": 18.463969230651855,
+        "minTimeMs": 7.217049598693848,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14746.405005455017
+      }
+    }
+  },
+  {
+    "modelId": "run_18_20260224_104709_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 305.90257239341736,
+      "metrics": {
+        "test_loss": 0.03434093138349681,
+        "test_acc": 98.9,
+        "precision": 0.9881656804733728,
+        "recall": 0.9901185770750988,
+        "f1_score": 0.9891411648568609,
+        "training_time": 297.31051802635193,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.9,
+        "avgTimeMs": 3.47480845451355,
+        "inferencePerSecond": 287.7856472062698,
+        "maxTimeMs": 8.936047554016113,
+        "minTimeMs": 2.5789737701416016,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3474.80845451355
+      },
+      "standard": {
+        "accuracy": 99,
+        "avgTimeMs": 15.0177743434906,
+        "inferencePerSecond": 66.5877630817809,
+        "maxTimeMs": 17.792940139770508,
+        "minTimeMs": 6.752967834472656,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 15017.7743434906
+      }
+    }
+  },
+  {
+    "modelId": "run_19_20260224_104814_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 301.4815721511841,
+      "metrics": {
+        "test_loss": 0.05504012781045731,
+        "test_acc": 98.6,
+        "precision": 0.992,
+        "recall": 0.9802371541501976,
+        "f1_score": 0.9860834990059641,
+        "training_time": 292.9198954105377,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.3,
+        "avgTimeMs": 3.198262572288513,
+        "inferencePerSecond": 312.66976284703577,
+        "maxTimeMs": 7.583022117614746,
+        "minTimeMs": 2.4830102920532227,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3198.262572288513
+      },
+      "standard": {
+        "accuracy": 98.8,
+        "avgTimeMs": 15.906258940696716,
+        "inferencePerSecond": 62.868334014195206,
+        "maxTimeMs": 24.853944778442383,
+        "minTimeMs": 6.858944892883301,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 15906.258940696716
+      }
+    }
+  },
+  {
+    "modelId": "run_1_20260224_100559_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 297.52995705604553,
+      "metrics": {
+        "test_loss": 0.13150864714836125,
+        "test_acc": 98.1,
+        "precision": 0.980276134122288,
+        "recall": 0.9822134387351779,
+        "f1_score": 0.981243830207305,
+        "training_time": 289.18370604515076,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.4,
+        "avgTimeMs": 3.7403011322021484,
+        "inferencePerSecond": 267.3581523665282,
+        "maxTimeMs": 8.203983306884766,
+        "minTimeMs": 2.8591156005859375,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3740.3011322021484
+      },
+      "standard": {
+        "accuracy": 98.6,
+        "avgTimeMs": 15.87385892868042,
+        "inferencePerSecond": 62.996654089777095,
+        "maxTimeMs": 19.47307586669922,
+        "minTimeMs": 7.358908653259277,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 15873.85892868042
+      }
+    }
+  },
+  {
+    "modelId": "run_20_20260224_105215_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 267.4283757209778,
+      "metrics": {
+        "test_loss": 0.06666038117145945,
+        "test_acc": 98.6,
+        "precision": 0.9880952380952381,
+        "recall": 0.9841897233201581,
+        "f1_score": 0.9861386138613861,
+        "training_time": 259.4784426689148,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.89999999999999,
+        "avgTimeMs": 2.567909359931946,
+        "inferencePerSecond": 389.4218447128141,
+        "maxTimeMs": 5.283951759338379,
+        "minTimeMs": 1.206040382385254,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2567.909359931946
+      },
+      "standard": {
+        "accuracy": 98.5,
+        "avgTimeMs": 10.995084524154663,
+        "inferencePerSecond": 90.94973283771851,
+        "maxTimeMs": 20.30503749847412,
+        "minTimeMs": 9.001970291137695,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 10995.084524154663
+      }
+    }
+  },
+  {
+    "modelId": "run_21_20260224_105316_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.0001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 266.3336749076843,
+      "metrics": {
+        "test_loss": 0.05741127255896572,
+        "test_acc": 98.2,
+        "precision": 0.9860557768924303,
+        "recall": 0.9782608695652174,
+        "f1_score": 0.9821428571428572,
+        "training_time": 258.0517144203186,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.4,
+        "avgTimeMs": 3.0489853620529175,
+        "inferencePerSecond": 327.97796028994,
+        "maxTimeMs": 11.891007423400879,
+        "minTimeMs": 1.629948616027832,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3048.9853620529175
+      },
+      "standard": {
+        "accuracy": 98.1,
+        "avgTimeMs": 14.724853038787842,
+        "inferencePerSecond": 67.91239256282049,
+        "maxTimeMs": 18.864035606384277,
+        "minTimeMs": 7.25400447845459,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14724.853038787842
+      }
+    }
+  },
+  {
+    "modelId": "run_22_20260224_105643_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.0001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 321.34083890914917,
+      "metrics": {
+        "test_loss": 0.041825650092505384,
+        "test_acc": 98.7,
+        "precision": 0.9900596421471173,
+        "recall": 0.9841897233201581,
+        "f1_score": 0.9871159563924677,
+        "training_time": 312.0073597431183,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.5,
+        "avgTimeMs": 3.5015475749969482,
+        "inferencePerSecond": 285.58800889657243,
+        "maxTimeMs": 8.070945739746094,
+        "minTimeMs": 2.5800466537475586,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3501.5475749969482
+      },
+      "standard": {
+        "accuracy": 98.7,
+        "avgTimeMs": 15.59434449672699,
+        "inferencePerSecond": 64.12581177810227,
+        "maxTimeMs": 17.280101776123047,
+        "minTimeMs": 14.29295539855957,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 15594.34449672699
+      }
+    }
+  },
+  {
+    "modelId": "run_23_20260224_105742_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.0001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 251.20776391029358,
+      "metrics": {
+        "test_loss": 0.05538132781293825,
+        "test_acc": 98.8,
+        "precision": 0.9920318725099602,
+        "recall": 0.9841897233201581,
+        "f1_score": 0.988095238095238,
+        "training_time": 244.32222270965576,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.3,
+        "avgTimeMs": 3.209689736366272,
+        "inferencePerSecond": 311.5565933584945,
+        "maxTimeMs": 7.2879791259765625,
+        "minTimeMs": 2.53903865814209,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3209.689736366272
+      },
+      "standard": {
+        "accuracy": 98.7,
+        "avgTimeMs": 16.136993885040283,
+        "inferencePerSecond": 61.96941060546877,
+        "maxTimeMs": 17.033100128173828,
+        "minTimeMs": 6.821990013122559,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 16136.993885040283
+      }
+    }
+  },
+  {
+    "modelId": "run_24_20260224_105749_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.0001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 267.50812125205994,
+      "metrics": {
+        "test_loss": 0.05284496242165915,
+        "test_acc": 98.8,
+        "precision": 0.994,
+        "recall": 0.9822134387351779,
+        "f1_score": 0.9880715705765406,
+        "training_time": 254.6367175579071,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.2,
+        "avgTimeMs": 2.8716142177581787,
+        "inferencePerSecond": 348.2361919703418,
+        "maxTimeMs": 7.6400041580200195,
+        "minTimeMs": 1.9469261169433594,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2871.6142177581787
+      },
+      "standard": {
+        "accuracy": 99.1,
+        "avgTimeMs": 11.047048449516296,
+        "inferencePerSecond": 90.52191674272831,
+        "maxTimeMs": 12.511014938354492,
+        "minTimeMs": 7.856011390686035,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 11047.048449516296
+      }
+    }
+  },
+  {
+    "modelId": "run_25_20260224_110204_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 296.31809258461,
+      "metrics": {
+        "test_loss": 0.06596510939388758,
+        "test_acc": 98.1,
+        "precision": 0.9899396378269618,
+        "recall": 0.9723320158102767,
+        "f1_score": 0.9810568295114657,
+        "training_time": 288.12185311317444,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.2,
+        "avgTimeMs": 3.7568318843841553,
+        "inferencePerSecond": 266.1817272571212,
+        "maxTimeMs": 9.150981903076172,
+        "minTimeMs": 2.8409957885742188,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3756.8318843841553
+      },
+      "standard": {
+        "accuracy": 98,
+        "avgTimeMs": 14.513044714927673,
+        "inferencePerSecond": 68.90352917960975,
+        "maxTimeMs": 18.48602294921875,
+        "minTimeMs": 7.36391544342041,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14513.044714927673
+      }
+    }
+  },
+  {
+    "modelId": "run_26_20260224_110216_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 361.48551869392395,
+      "metrics": {
+        "test_loss": 0.043338699768702055,
+        "test_acc": 98.8,
+        "precision": 0.9920318725099602,
+        "recall": 0.9841897233201581,
+        "f1_score": 0.988095238095238,
+        "training_time": 352.12269830703735,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.6,
+        "avgTimeMs": 3.576487183570862,
+        "inferencePerSecond": 279.60396575546315,
+        "maxTimeMs": 5.652070045471191,
+        "minTimeMs": 2.375960350036621,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3576.487183570862
+      },
+      "standard": {
+        "accuracy": 98.6,
+        "avgTimeMs": 15.196756958961487,
+        "inferencePerSecond": 65.80351338778914,
+        "maxTimeMs": 24.459004402160645,
+        "minTimeMs": 6.60395622253418,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 15196.756958961487
+      }
+    }
+  },
+  {
+    "modelId": "run_27_20260224_110700_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 358.1559455394745,
+      "metrics": {
+        "test_loss": 0.043607943107388795,
+        "test_acc": 98.6,
+        "precision": 0.992,
+        "recall": 0.9802371541501976,
+        "f1_score": 0.9860834990059641,
+        "training_time": 344.197669506073,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.7,
+        "avgTimeMs": 3.213037371635437,
+        "inferencePerSecond": 311.23198529464963,
+        "maxTimeMs": 7.130026817321777,
+        "minTimeMs": 2.47800350189209,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3213.037371635437
+      },
+      "standard": {
+        "accuracy": 98.3,
+        "avgTimeMs": 16.520628452301025,
+        "inferencePerSecond": 60.53038496006597,
+        "maxTimeMs": 17.045974731445312,
+        "minTimeMs": 10.794997215270996,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 16520.628452301025
+      }
+    }
+  },
+  {
+    "modelId": "run_28_20260224_110818_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 297.3658573627472,
+      "metrics": {
+        "test_loss": 0.04124575925137227,
+        "test_acc": 98.5,
+        "precision": 0.9919839679358717,
+        "recall": 0.9782608695652174,
+        "f1_score": 0.9850746268656717,
+        "training_time": 289.15160179138184,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.7,
+        "avgTimeMs": 2.889323115348816,
+        "inferencePerSecond": 346.1018238796993,
+        "maxTimeMs": 7.116913795471191,
+        "minTimeMs": 2.3010969161987305,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2889.323115348816
+      },
+      "standard": {
+        "accuracy": 98.3,
+        "avgTimeMs": 10.726392984390259,
+        "inferencePerSecond": 93.22798460351628,
+        "maxTimeMs": 13.000965118408203,
+        "minTimeMs": 5.086064338684082,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 10726.392984390259
+      }
+    }
+  },
+  {
+    "modelId": "run_29_20260224_111259_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 284.9576153755188,
+      "metrics": {
+        "test_loss": 0.0839896272518672,
+        "test_acc": 97.7,
+        "precision": 0.9898580121703854,
+        "recall": 0.9644268774703557,
+        "f1_score": 0.976976976976977,
+        "training_time": 276.7836413383484,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.8,
+        "avgTimeMs": 3.6982306241989136,
+        "inferencePerSecond": 270.39957796483105,
+        "maxTimeMs": 7.937908172607422,
+        "minTimeMs": 2.7289390563964844,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3698.2306241989136
+      },
+      "standard": {
+        "accuracy": 97.7,
+        "avgTimeMs": 16.430577158927917,
+        "inferencePerSecond": 60.862134685063566,
+        "maxTimeMs": 18.94199848175049,
+        "minTimeMs": 7.483959197998047,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 16430.577158927917
+      }
+    }
+  },
+  {
+    "modelId": "run_2_20260224_100559_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 359.95145058631897,
+      "metrics": {
+        "test_loss": 0.039601941482321726,
+        "test_acc": 98.8,
+        "precision": 0.9900793650793651,
+        "recall": 0.9861660079051383,
+        "f1_score": 0.9881188118811881,
+        "training_time": 351.41944909095764,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 99.3,
+        "avgTimeMs": 3.787030339241028,
+        "inferencePerSecond": 264.0591467245582,
+        "maxTimeMs": 15.38395881652832,
+        "minTimeMs": 2.060055732727051,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3787.030339241028
+      },
+      "standard": {
+        "accuracy": 99.4,
+        "avgTimeMs": 14.892582893371582,
+        "inferencePerSecond": 67.14751948401656,
+        "maxTimeMs": 37.51397132873535,
+        "minTimeMs": 5.756974220275879,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14892.582893371582
+      }
+    }
+  },
+  {
+    "modelId": "run_30_20260224_111315_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 331.58741068840027,
+      "metrics": {
+        "test_loss": 0.05721548150177114,
+        "test_acc": 98.4,
+        "precision": 0.9861111111111112,
+        "recall": 0.9822134387351779,
+        "f1_score": 0.9841584158415843,
+        "training_time": 323.08106780052185,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.7,
+        "avgTimeMs": 3.519402503967285,
+        "inferencePerSecond": 284.1391397752144,
+        "maxTimeMs": 7.604002952575684,
+        "minTimeMs": 2.6350021362304688,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3519.402503967285
+      },
+      "standard": {
+        "accuracy": 98.6,
+        "avgTimeMs": 15.337323546409607,
+        "inferencePerSecond": 65.20042411402967,
+        "maxTimeMs": 17.302989959716797,
+        "minTimeMs": 6.603002548217773,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 15337.323546409607
+      }
+    }
+  },
+  {
+    "modelId": "run_31_20260224_111744_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 327.9747769832611,
+      "metrics": {
+        "test_loss": 0.05479659246338997,
+        "test_acc": 98.2,
+        "precision": 0.9919354838709677,
+        "recall": 0.9723320158102767,
+        "f1_score": 0.9820359281437127,
+        "training_time": 319.12509393692017,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.89999999999999,
+        "avgTimeMs": 3.14197838306427,
+        "inferencePerSecond": 318.2708084148982,
+        "maxTimeMs": 19.935011863708496,
+        "minTimeMs": 1.3070106506347656,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3141.97838306427
+      },
+      "standard": {
+        "accuracy": 98.5,
+        "avgTimeMs": 16.562418818473816,
+        "inferencePerSecond": 60.37765443321565,
+        "maxTimeMs": 18.067002296447754,
+        "minTimeMs": 9.61005687713623,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 16562.418818473816
+      }
+    }
+  },
+  {
+    "modelId": "run_32_20260224_111847_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 278.52636790275574,
+      "metrics": {
+        "test_loss": 0.04806488225221983,
+        "test_acc": 98.3,
+        "precision": 0.9899799599198397,
+        "recall": 0.9762845849802372,
+        "f1_score": 0.9830845771144279,
+        "training_time": 265.7021288871765,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.5,
+        "avgTimeMs": 2.8368961811065674,
+        "inferencePerSecond": 352.4979189086635,
+        "maxTimeMs": 7.335066795349121,
+        "minTimeMs": 2.259969711303711,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2836.8961811065674
+      },
+      "standard": {
+        "accuracy": 98.2,
+        "avgTimeMs": 11.037744402885437,
+        "inferencePerSecond": 90.59822038808804,
+        "maxTimeMs": 14.710068702697754,
+        "minTimeMs": 9.998917579650879,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 11037.744402885437
+      }
+    }
+  },
+  {
+    "modelId": "run_33_20260224_112312_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 1e-05,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 271.8958783149719,
+      "metrics": {
+        "test_loss": 0.142141695600003,
+        "test_acc": 96.6,
+        "precision": 0.9836065573770492,
+        "recall": 0.9486166007905138,
+        "f1_score": 0.9657947686116699,
+        "training_time": 264.0341126918793,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 96.8,
+        "avgTimeMs": 3.790975332260132,
+        "inferencePerSecond": 263.78435952623636,
+        "maxTimeMs": 8.531928062438965,
+        "minTimeMs": 2.892017364501953,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3790.975332260132
+      },
+      "standard": {
+        "accuracy": 95.89999999999999,
+        "avgTimeMs": 14.198805928230286,
+        "inferencePerSecond": 70.4284575093589,
+        "maxTimeMs": 18.460988998413086,
+        "minTimeMs": 7.185935974121094,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14198.805928230286
+      }
+    }
+  },
+  {
+    "modelId": "run_34_20260224_112325_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 1e-05,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 322.029390335083,
+      "metrics": {
+        "test_loss": 0.05397496189107187,
+        "test_acc": 98.0,
+        "precision": 0.9783464566929134,
+        "recall": 0.9822134387351779,
+        "f1_score": 0.9802761341222881,
+        "training_time": 313.480535030365,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.6,
+        "avgTimeMs": 3.5131399631500244,
+        "inferencePerSecond": 284.6456476226923,
+        "maxTimeMs": 7.292032241821289,
+        "minTimeMs": 2.0999908447265625,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3513.1399631500244
+      },
+      "standard": {
+        "accuracy": 97.7,
+        "avgTimeMs": 14.970024466514587,
+        "inferencePerSecond": 66.80015802491377,
+        "maxTimeMs": 18.5469388961792,
+        "minTimeMs": 6.531953811645508,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14970.024466514587
+      }
+    }
+  },
+  {
+    "modelId": "run_35_20260224_112743_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 1e-05,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 251.4523582458496,
+      "metrics": {
+        "test_loss": 0.05742389929946512,
+        "test_acc": 98.1,
+        "precision": 0.9899396378269618,
+        "recall": 0.9723320158102767,
+        "f1_score": 0.9810568295114657,
+        "training_time": 244.4468560218811,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 97.7,
+        "avgTimeMs": 3.1728302240371704,
+        "inferencePerSecond": 315.1760193230827,
+        "maxTimeMs": 7.184028625488281,
+        "minTimeMs": 2.4559497833251953,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3172.8302240371704
+      },
+      "standard": {
+        "accuracy": 98,
+        "avgTimeMs": 15.458379745483398,
+        "inferencePerSecond": 64.6898327292146,
+        "maxTimeMs": 18.16689968109131,
+        "minTimeMs": 6.338953971862793,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 15458.379745483398
+      }
+    }
+  },
+  {
+    "modelId": "run_36_20260224_112755_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 1e-05,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 217.4055256843567,
+      "metrics": {
+        "test_loss": 0.04797762160887942,
+        "test_acc": 98.0,
+        "precision": 0.9879518072289156,
+        "recall": 0.9723320158102767,
+        "f1_score": 0.9800796812749004,
+        "training_time": 210.09904646873474,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 95.7,
+        "avgTimeMs": 2.9115188121795654,
+        "inferencePerSecond": 343.4633483447765,
+        "maxTimeMs": 10.751008987426758,
+        "minTimeMs": 2.2699832916259766,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2911.5188121795654
+      },
+      "standard": {
+        "accuracy": 97.5,
+        "avgTimeMs": 10.7782142162323,
+        "inferencePerSecond": 92.77974810465089,
+        "maxTimeMs": 12.677907943725586,
+        "minTimeMs": 5.056023597717285,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 10778.2142162323
+      }
+    }
+  },
+  {
+    "modelId": "run_3_20260224_101057_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 353.9393560886383,
+      "metrics": {
+        "test_loss": 0.05955902363382934,
+        "test_acc": 98.3,
+        "precision": 0.9899799599198397,
+        "recall": 0.9762845849802372,
+        "f1_score": 0.9830845771144279,
+        "training_time": 345.0947332382202,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 99.3,
+        "avgTimeMs": 3.2510889768600464,
+        "inferencePerSecond": 307.5892438249463,
+        "maxTimeMs": 6.804108619689941,
+        "minTimeMs": 2.4499893188476562,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3251.0889768600464
+      },
+      "standard": {
+        "accuracy": 99.3,
+        "avgTimeMs": 15.592984080314636,
+        "inferencePerSecond": 64.13140646134886,
+        "maxTimeMs": 17.814993858337402,
+        "minTimeMs": 7.101893424987793,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 15592.984080314636
+      }
+    }
+  },
+  {
+    "modelId": "run_4_20260224_101159_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 16,
+      "learning_rate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 303.9380257129669,
+      "metrics": {
+        "test_loss": 0.041117867147310166,
+        "test_acc": 98.8,
+        "precision": 0.994,
+        "recall": 0.9822134387351779,
+        "f1_score": 0.9880715705765406,
+        "training_time": 290.9355640411377,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 99,
+        "avgTimeMs": 2.8790500164031982,
+        "inferencePerSecond": 347.33679314446283,
+        "maxTimeMs": 7.782936096191406,
+        "minTimeMs": 2.2170543670654297,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2879.0500164031982
+      },
+      "standard": {
+        "accuracy": 98.7,
+        "avgTimeMs": 10.700374245643616,
+        "inferencePerSecond": 93.45467523316995,
+        "maxTimeMs": 12.501955032348633,
+        "minTimeMs": 4.883050918579102,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 10700.374245643616
+      }
+    }
+  },
+  {
+    "modelId": "run_5_20260224_101651_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 281.6664454936981,
+      "metrics": {
+        "test_loss": 0.043806163856061175,
+        "test_acc": 98.6,
+        "precision": 0.992,
+        "recall": 0.9802371541501976,
+        "f1_score": 0.9860834990059641,
+        "training_time": 273.1185233592987,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.7,
+        "avgTimeMs": 3.6538150310516357,
+        "inferencePerSecond": 273.686541738316,
+        "maxTimeMs": 12.646079063415527,
+        "minTimeMs": 2.252936363220215,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3653.8150310516357
+      },
+      "standard": {
+        "accuracy": 98.7,
+        "avgTimeMs": 14.346230626106262,
+        "inferencePerSecond": 69.70472077733578,
+        "maxTimeMs": 18.533945083618164,
+        "minTimeMs": 7.19606876373291,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14346.230626106262
+      }
+    }
+  },
+  {
+    "modelId": "run_6_20260224_101703_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "model": "fastvit_t8.apple_dist_in1k",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 332.1449580192566,
+      "metrics": {
+        "test_loss": 0.042079331215063576,
+        "test_acc": 98.3,
+        "precision": 0.9766081871345029,
+        "recall": 0.9901185770750988,
+        "f1_score": 0.9833169774288517,
+        "training_time": 323.1255099773407,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 99,
+        "avgTimeMs": 3.099134922027588,
+        "inferencePerSecond": 322.670688808139,
+        "maxTimeMs": 8.157968521118164,
+        "minTimeMs": 1.292109489440918,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3099.134922027588
+      },
+      "standard": {
+        "accuracy": 99,
+        "avgTimeMs": 14.549025297164917,
+        "inferencePerSecond": 68.73312676106654,
+        "maxTimeMs": 20.05791664123535,
+        "minTimeMs": 10.610103607177734,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 14549.025297164917
+      }
+    }
+  },
+  {
+    "modelId": "run_7_20260224_102132_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "model": "efficientnet_b0",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 329.9384832382202,
+      "metrics": {
+        "test_loss": 0.0323202682993724,
+        "test_acc": 98.7,
+        "precision": 0.9900596421471173,
+        "recall": 0.9841897233201581,
+        "f1_score": 0.9871159563924677,
+        "training_time": 316.58649039268494,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.1,
+        "avgTimeMs": 3.2884914875030518,
+        "inferencePerSecond": 304.0907978020338,
+        "maxTimeMs": 5.549073219299316,
+        "minTimeMs": 2.411961555480957,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3288.4914875030518
+      },
+      "standard": {
+        "accuracy": 98.1,
+        "avgTimeMs": 16.27586591243744,
+        "inferencePerSecond": 61.440663457164234,
+        "maxTimeMs": 16.98899269104004,
+        "minTimeMs": 7.170915603637695,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 16275.865912437439
+      }
+    }
+  },
+  {
+    "modelId": "run_8_20260224_102235_132494500865728",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 32,
+      "learning_rate": 0.001,
+      "model": "mobilenetv3_large_100",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 276.0661036968231,
+      "metrics": {
+        "test_loss": 0.04790359314264947,
+        "test_acc": 98.5,
+        "precision": 0.9861386138613861,
+        "recall": 0.9841897233201581,
+        "f1_score": 0.9851632047477744,
+        "training_time": 268.1302843093872,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 98.8,
+        "avgTimeMs": 2.8647756576538086,
+        "inferencePerSecond": 349.06747316436605,
+        "maxTimeMs": 5.977988243103027,
+        "minTimeMs": 2.3260116577148438,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 2864.7756576538086
+      },
+      "standard": {
+        "accuracy": 98.9,
+        "avgTimeMs": 10.134594678878784,
+        "inferencePerSecond": 98.67192834895224,
+        "maxTimeMs": 18.88895034790039,
+        "minTimeMs": 4.724979400634766,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 10134.594678878784
+      }
+    }
+  },
+  {
+    "modelId": "run_9_20260224_102702_132494509258432",
+    "settings": {
+      "epochs": 10,
+      "batch_size": 64,
+      "learning_rate": 0.001,
+      "model": "resnet18",
+      "patience": 10
+    },
+    "training": {
+      "status": "success",
+      "duration": 274.1052873134613,
+      "metrics": {
+        "test_loss": 0.0846181360866467,
+        "test_acc": 98.2,
+        "precision": 0.9860557768924303,
+        "recall": 0.9782608695652174,
+        "f1_score": 0.9821428571428572,
+        "training_time": 266.01199173927307,
+        "epochs_run": 10
+      }
+    },
+    "inference": {
+      "optimized": {
+        "accuracy": 99.2,
+        "avgTimeMs": 3.7997995615005493,
+        "inferencePerSecond": 263.1717762515604,
+        "maxTimeMs": 7.923007011413574,
+        "minTimeMs": 2.8530359268188477,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 3799.7995615005493
+      },
+      "standard": {
+        "accuracy": 99.1,
+        "avgTimeMs": 16.4705628156662,
+        "inferencePerSecond": 60.714379416885286,
+        "maxTimeMs": 18.552064895629883,
+        "minTimeMs": 7.310986518859863,
+        "modelArchitecture": "merged",
+        "totalInferences": 1000,
+        "totalTimeMs": 16470.5628156662
+      }
+    }
+  }
+]

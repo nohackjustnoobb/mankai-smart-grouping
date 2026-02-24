@@ -34,6 +34,7 @@ class BenchmarkRunner {
         let modelURL: URL
         let name: String
         let modelType: ModelType?
+        let architecture: ModelArchitecture
         let modelSettings: ModelSettings?
     }
 
@@ -62,34 +63,58 @@ class BenchmarkRunner {
             let totalIterations = config.iterations
             let numBatches = (totalIterations + batchSize - 1) / batchSize
 
-            // 4. Initialize accumulated results for each model
-            var accumulatedResults: [AccumulatedResult] = modelURLs.map { modelURL in
-                let folderName = modelURL.deletingLastPathComponent().lastPathComponent
-                let fileName = modelURL.deletingPathExtension().lastPathComponent
+            // 4. Pre-load all models to detect their architecture
+            status = .loadingModels
+            var modelInfos: [(url: URL, model: MLModel, inputType: ModelInputType, architecture: ModelArchitecture)] = []
+            for modelURL in modelURLs {
+                do {
+                    let model = try await modelRunner.loadModel(from: modelURL)
+                    let architecture = ModelArchitecture.detect(from: model)
+                    let inputType = await modelRunner.detectInputType(model: model, architecture: architecture)
+                    modelInfos.append((url: modelURL, model: model, inputType: inputType, architecture: architecture))
+                } catch {
+                    print("Failed to load model at \(modelURL): \(error)")
+                }
+            }
+
+            if modelInfos.isEmpty {
+                status = .error("Failed to load any models")
+                return
+            }
+
+            // 5. Initialize accumulated results for each model
+            var accumulatedResults: [AccumulatedResult] = modelInfos.map { info in
+                let folderName = info.url.deletingLastPathComponent().lastPathComponent
+                let fileName = info.url.deletingPathExtension().lastPathComponent
                 let name = "\(folderName)/\(fileName)"
 
                 let modelType: ModelType?
-                if modelURL.lastPathComponent == ModelType.optimized.rawValue {
+                if info.url.lastPathComponent == ModelType.optimized.rawValue {
                     modelType = .optimized
-                } else if modelURL.lastPathComponent == ModelType.standard.rawValue {
+                } else if info.url.lastPathComponent == ModelType.standard.rawValue {
                     modelType = .standard
                 } else {
                     modelType = nil
                 }
 
-                let modelSettings = ModelSettings.load(from: modelURL)
+                let modelSettings = ModelSettings.load(from: info.url)
 
                 var result = AccumulatedResult(
-                    modelURL: modelURL,
+                    modelURL: info.url,
                     name: name,
                     modelType: modelType,
+                    architecture: info.architecture,
                     modelSettings: modelSettings
                 )
                 result.times.reserveCapacity(totalIterations)
                 return result
             }
 
-            // 5. Process batches
+            // Check if we need siamese patches, merged patches, or both
+            let needsSiamese = modelInfos.contains { $0.architecture == .siamese }
+            let needsMerged = modelInfos.contains { $0.architecture == .merged }
+
+            // 6. Process batches
             var iterationsCompleted = 0
 
             for batchIndex in 0 ..< numBatches {
@@ -97,30 +122,33 @@ class BenchmarkRunner {
                 let batchEnd = min(batchStart + batchSize, totalIterations)
                 let currentBatchSize = batchEnd - batchStart
 
-                // Generate patches for this batch
+                // Generate patches for this batch (only the types we need)
                 status = .generatingPatches
-                let patchPairs = try generator.generatePairs(count: currentBatchSize, includeNormalized: true)
+                var siamesePairs: [PatchPair] = []
+                var mergedPairs: [MergedPatchPair] = []
+
+                if needsSiamese {
+                    siamesePairs = try generator.generatePairs(count: currentBatchSize, includeNormalized: true)
+                }
+                if needsMerged {
+                    mergedPairs = try generator.generateMergedPairs(count: currentBatchSize, includeNormalized: true)
+                }
 
                 // Run all models on this batch
-                for (modelIndex, modelURL) in modelURLs.enumerated() {
+                for (modelIndex, info) in modelInfos.enumerated() {
                     let name = accumulatedResults[modelIndex].name
+                    let architecture = info.architecture
 
-                    // Load the model
                     status = .warming(modelName: name)
-
-                    let model: MLModel
-                    let inputType: ModelInputType
-                    do {
-                        model = try await modelRunner.loadModel(from: modelURL)
-                        inputType = await modelRunner.detectInputType(model: model)
-                    } catch {
-                        print("Failed to load model at \(modelURL): \(error)")
-                        continue
-                    }
 
                     // Warmup only on first batch
                     if batchIndex == 0 {
-                        try await warmup(model: model, inputType: inputType, patches: patchPairs, iterations: config.warmupIterations)
+                        switch architecture {
+                        case .siamese:
+                            try await warmup(model: info.model, inputType: info.inputType, patches: siamesePairs, iterations: config.warmupIterations)
+                        case .merged:
+                            try await warmupMerged(model: info.model, inputType: info.inputType, patches: mergedPairs, iterations: config.warmupIterations)
+                        }
                     }
 
                     // Run benchmark on this batch
@@ -128,41 +156,54 @@ class BenchmarkRunner {
                         let globalIteration = iterationsCompleted + i + 1
                         status = .running(modelName: name, iteration: globalIteration, total: totalIterations)
 
-                        let pair = patchPairs[i]
+                        let score: Float
+                        let isAdjacent: Bool
 
                         // Measure inference time
                         let startTime = CFAbsoluteTimeGetCurrent()
-                        let score = try await modelRunner.predict(
-                            model: model,
-                            inputType: inputType,
-                            patch1: pair.patch1,
-                            patch2: pair.patch2
-                        )
+
+                        switch architecture {
+                        case .siamese:
+                            let pair = siamesePairs[i]
+                            score = try await modelRunner.predict(
+                                model: info.model,
+                                inputType: info.inputType,
+                                patch1: pair.patch1,
+                                patch2: pair.patch2
+                            )
+                            isAdjacent = pair.isAdjacent
+
+                        case .merged:
+                            let pair = mergedPairs[i]
+                            score = try await modelRunner.predictMerged(
+                                model: info.model,
+                                inputType: info.inputType,
+                                mergedPatch: pair.mergedPatch
+                            )
+                            isAdjacent = pair.isAdjacent
+                        }
+
                         let endTime = CFAbsoluteTimeGetCurrent()
 
                         accumulatedResults[modelIndex].times.append((endTime - startTime) * 1000.0)
 
                         // Check accuracy
                         let predicted = score > 0.5
-                        if predicted == pair.isAdjacent {
+                        if predicted == isAdjacent {
                             accumulatedResults[modelIndex].correctPredictions += 1
                         }
 
                         // Update progress
                         let modelProgress = Double(i + 1) / Double(currentBatchSize)
-                        let batchProgress = (Double(batchIndex) + (Double(modelIndex) + modelProgress) / Double(modelURLs.count)) / Double(numBatches)
+                        let batchProgress = (Double(batchIndex) + (Double(modelIndex) + modelProgress) / Double(modelInfos.count)) / Double(numBatches)
                         progress = batchProgress
                     }
-
-                    // Model is released when it goes out of scope
                 }
 
                 iterationsCompleted += currentBatchSize
-
-                // Patch pairs are released when they go out of scope at end of batch loop
             }
 
-            // 6. Calculate final statistics for each model
+            // 7. Calculate final statistics for each model
             for accumulated in accumulatedResults {
                 guard !accumulated.times.isEmpty else { continue }
 
@@ -177,6 +218,7 @@ class BenchmarkRunner {
                     modelName: accumulated.name,
                     modelPath: accumulated.modelURL.path,
                     modelType: accumulated.modelType,
+                    modelArchitecture: accumulated.architecture,
                     modelSettings: accumulated.modelSettings,
                     totalInferences: totalIterations,
                     totalTimeMs: totalTime,
@@ -232,7 +274,7 @@ class BenchmarkRunner {
         return mlpackageURLs
     }
 
-    /// Warmup the model
+    /// Warmup the model with siamese patch pairs
     private func warmup(model: MLModel, inputType: ModelInputType, patches: [PatchPair], iterations: Int) async throws {
         guard !patches.isEmpty else { return }
 
@@ -243,6 +285,20 @@ class BenchmarkRunner {
                 inputType: inputType,
                 patch1: pair.patch1,
                 patch2: pair.patch2
+            )
+        }
+    }
+
+    /// Warmup the model with merged patch pairs
+    private func warmupMerged(model: MLModel, inputType: ModelInputType, patches: [MergedPatchPair], iterations: Int) async throws {
+        guard !patches.isEmpty else { return }
+
+        for i in 0 ..< iterations {
+            let pair = patches[i % patches.count]
+            _ = try await modelRunner.predictMerged(
+                model: model,
+                inputType: inputType,
+                mergedPatch: pair.mergedPatch
             )
         }
     }

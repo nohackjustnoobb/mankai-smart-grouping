@@ -2,7 +2,7 @@
 //  ImagePatchGenerator.swift
 //  benchmark
 //
-//  Generates 224×224 patch pairs from images, matching siamese_network.py logic.
+//  Generates 224×224 patch pairs from images for both Siamese and Merged model architectures.
 //
 
 import Accelerate
@@ -32,6 +32,14 @@ struct ImagePatch {
 struct PatchPair {
     let patch1: ImagePatch
     let patch2: ImagePatch
+    let isAdjacent: Bool
+    let sourceImageName: String
+}
+
+/// A merged patch for merged classifier adjacency detection
+struct MergedPatchPair {
+    /// The merged image (two patches side-by-side, resized to 224x224)
+    let mergedPatch: ImagePatch
     let isAdjacent: Bool
     let sourceImageName: String
 }
@@ -88,6 +96,34 @@ class ImagePatchGenerator {
             let isPositive = i % 2 == 0 // Alternate between positive and negative
 
             let pair = try generatePair(
+                primaryURL: url,
+                isPositive: isPositive,
+                includeNormalized: includeNormalized
+            )
+            pairs.append(pair)
+        }
+
+        return pairs
+    }
+
+    /// Generate a batch of merged patch pairs for merged classifier benchmarking
+    /// - Parameters:
+    ///   - count: Number of pairs to generate
+    ///   - includeNormalized: Whether to include pre-normalized tensors
+    /// - Returns: Array of merged patch pairs
+    func generateMergedPairs(count: Int, includeNormalized: Bool = true) throws -> [MergedPatchPair] {
+        guard !imageURLs.isEmpty else {
+            throw PatchGeneratorError.noImagesFound
+        }
+
+        var pairs: [MergedPatchPair] = []
+        pairs.reserveCapacity(count)
+
+        for i in 0 ..< count {
+            let url = imageURLs[i % imageURLs.count]
+            let isPositive = i % 2 == 0
+
+            let pair = try generateMergedPair(
                 primaryURL: url,
                 isPositive: isPositive,
                 includeNormalized: includeNormalized
@@ -166,6 +202,101 @@ class ImagePatchGenerator {
             isAdjacent: isAdjacent,
             sourceImageName: primaryURL.lastPathComponent
         )
+    }
+
+    /// Generate a single merged pair from an image (for merged classifier)
+    /// Concatenates two patches side-by-side and resizes to 224x224
+    private func generateMergedPair(primaryURL: URL, isPositive: Bool, includeNormalized: Bool) throws -> MergedPatchPair {
+        // Load primary image
+        guard let imageSource = CGImageSourceCreateWithURL(primaryURL as CFURL, nil),
+              let image = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
+        else {
+            throw PatchGeneratorError.failedToLoadImage(primaryURL.lastPathComponent)
+        }
+
+        let width = image.width
+        let height = image.height
+        let midX = width / 2
+
+        // Extract left and right patches
+        let leftRect = CGRect(x: 0, y: 0, width: midX, height: height)
+        let rightRect = CGRect(x: midX, y: 0, width: width - midX, height: height)
+
+        guard let leftCrop = image.cropping(to: leftRect),
+              let rightCrop = image.cropping(to: rightRect)
+        else {
+            throw PatchGeneratorError.failedToCrop
+        }
+
+        // Crop to 224x224, maintaining edge alignment
+        let leftPatch = try cropToPatchSize(leftCrop, alignRight: true)
+
+        let patch2Image: CGImage
+        let isAdjacent: Bool
+
+        if isPositive {
+            patch2Image = try cropToPatchSize(rightCrop, alignRight: false)
+            isAdjacent = true
+        } else {
+            let randomURL = imageURLs.randomElement()!
+            guard let randomSource = CGImageSourceCreateWithURL(randomURL as CFURL, nil),
+                  let randomImage = CGImageSourceCreateImageAtIndex(randomSource, 0, nil)
+            else {
+                throw PatchGeneratorError.failedToLoadImage(randomURL.lastPathComponent)
+            }
+
+            let randomMidX = randomImage.width / 2
+            let randomLeftRect = CGRect(x: 0, y: 0, width: randomMidX, height: randomImage.height)
+            guard let randomLeftCrop = randomImage.cropping(to: randomLeftRect) else {
+                throw PatchGeneratorError.failedToCrop
+            }
+
+            patch2Image = try cropToPatchSize(randomLeftCrop, alignRight: false)
+            isAdjacent = false
+        }
+
+        // Merge the two patches side-by-side and resize to 224x224
+        let mergedImage = try mergeAndResize(left: leftPatch, right: patch2Image)
+
+        let mergedPatch = try ImagePatch(
+            image: mergedImage,
+            normalizedTensor: includeNormalized ? createNormalizedTensor(from: mergedImage) : nil
+        )
+
+        return MergedPatchPair(
+            mergedPatch: mergedPatch,
+            isAdjacent: isAdjacent,
+            sourceImageName: primaryURL.lastPathComponent
+        )
+    }
+
+    /// Merge two patches side-by-side and resize to 224x224
+    private func mergeAndResize(left: CGImage, right: CGImage) throws -> CGImage {
+        // Draw left and right side-by-side
+        let combinedWidth = left.width + right.width
+        let combinedHeight = max(left.height, right.height)
+
+        guard let ctx = CGContext(
+            data: nil,
+            width: combinedWidth,
+            height: combinedHeight,
+            bitsPerComponent: 8,
+            bytesPerRow: 0,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else {
+            throw PatchGeneratorError.failedToCreateContext
+        }
+
+        ctx.draw(left, in: CGRect(x: 0, y: 0, width: left.width, height: left.height))
+        ctx.draw(right, in: CGRect(x: left.width, y: 0, width: right.width, height: right.height))
+
+        guard let combined = ctx.makeImage() else {
+            throw PatchGeneratorError.failedToCreateContext
+        }
+
+        // Resize the combined image to 224x224
+        return try resizeImage(combined, to: CGSize(width: kPatchSize, height: kPatchSize))
     }
 
     /// Crop/resize image to 224x224

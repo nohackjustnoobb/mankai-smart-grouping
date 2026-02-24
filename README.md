@@ -197,7 +197,23 @@ Located in `models/siamese/`. A **MobileNetV3 Large 100** model chosen for its s
 
 ### Merged Classifier
 
-> **Status:** Training in progress
+Located in `models/merged/`. A **MobileNetV3 Large 100** model chosen for its superior balance of speed and accuracy.
+
+- **PyTorch Model:** [`models/merged/model.pth`](models/merged/model.pth)
+- **Core ML Model:** [`models/merged/model.mlpackage`](models/merged/model.mlpackage) / [`models/merged/model_optimized.mlpackage`](models/merged/model_optimized.mlpackage)
+- **Architecture:** `mobilenetv3_large_100`
+- **Test Accuracy:** 99.88%
+- **Precision:** 0.9990
+- **Recall:** 0.9986
+- **F1 Score:** 0.9988
+
+**Training Settings:**
+
+- **Dataset:** ~520,000 pairs (~520,000 images)
+- **Epochs:** 21 (Early Stopping, Max 50)
+- **Batch Size:** 64
+- **Learning Rate:** 0.001
+- **Patience:** 10
 
 ## Benchmark Results
 
@@ -235,8 +251,38 @@ Located in `models/siamese/`. A **MobileNetV3 Large 100** model chosen for its s
 | mobilenetv3_large_100 | Optimized | 16         | 1e-05         | 80.00%   | 5.37          | 186.11  |
 | mobilenetv3_large_100 | Optimized | 64         | 1e-05         | 76.40%   | 5.38          | 185.74  |
 
-For the full benchmark results, please refer to [benchmark_results.json](benchmark_results.json).
+For the full benchmark results, please refer to [siamese_benchmark_results.json](siamese_benchmark_results.json).
 
 ### Merged Classifier
 
-> **Status:** Training in progress
+#### Training Environment
+
+- **Epochs:** 10
+- **GPU:** RTX 3080 10GB
+- **Dataset:** 10,000 pairs (10,000 images)
+
+#### Top Results Summary (Training)
+
+| Model                      | Learning Rate | Batch Size | Accuracy | Loss   | Precision | Recall | F1 Score | Duration (s) |
+| -------------------------- | ------------- | ---------- | -------- | ------ | --------- | ------ | -------- | ------------ |
+| mobilenetv3_large_100      | 0.001         | 64         | 98.90%   | 0.0491 | 0.9960    | 0.9822 | 0.9891   | 258.40       |
+| fastvit_t8.apple_dist_in1k | 0.0001        | 32         | 98.90%   | 0.0343 | 0.9882    | 0.9901 | 0.9891   | 305.90       |
+| fastvit_t8.apple_dist_in1k | 0.001         | 64         | 98.80%   | 0.0395 | 0.9940    | 0.9822 | 0.9881   | 325.62       |
+| efficientnet_b0            | 0.0001        | 64         | 98.80%   | 0.0554 | 0.9920    | 0.9842 | 0.9881   | 251.21       |
+| mobilenetv3_large_100      | 0.0001        | 64         | 98.80%   | 0.0528 | 0.9940    | 0.9822 | 0.9881   | 267.51       |
+
+#### Inference Environment
+
+- **Device:** iPhone 15
+- **OS:** iOS 26.2.1
+- **Dataset:** 1,000 pairs (1,000 images)
+
+#### Top Results Summary (Inference)
+
+| Model                 | Type      | Batch Size | Learning Rate | Accuracy | Avg Time (ms) | Inf/Sec |
+| :-------------------- | :-------- | :--------- | :------------ | :------- | :------------ | :------ |
+| mobilenetv3_large_100 | Optimized | 32         | 0.0001        | 97.90%   | 2.57          | 389.42  |
+| mobilenetv3_large_100 | Optimized | 64         | 0.001         | 99.10%   | 2.82          | 354.76  |
+| mobilenetv3_large_100 | Optimized | 32         | 1e-05         | 97.50%   | 2.84          | 352.50  |
+| mobilenetv3_large_100 | Optimized | 16         | 0.0001        | 98.30%   | 2.85          | 350.34  |
+| mobilenetv3_large_100 | Optimized | 32         | 0.001         | 98.80%   | 2.86          | 349.07  |

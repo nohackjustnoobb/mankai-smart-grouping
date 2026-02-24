@@ -49,6 +49,10 @@ struct ResultCard: View {
                             .foregroundStyle(.secondary)
                     }
 
+                    Text(result.modelArchitecture.displayName)
+                        .font(.caption)
+                        .foregroundStyle(.purple)
+
                     // Model architecture from settings
                     if let settings = result.modelSettings, let model = settings.model {
                         Text(model.capitalized)

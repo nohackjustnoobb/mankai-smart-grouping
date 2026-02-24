@@ -2,7 +2,8 @@
 //  ModelRunner.swift
 //  benchmark
 //
-//  Handles loading and running MLPackage models, supporting both ImageType and TensorType inputs.
+//  Handles loading and running MLPackage models, supporting both Siamese (two inputs)
+//  and Merged (single input) architectures with ImageType and TensorType inputs.
 //
 
 import CoreGraphics
@@ -31,16 +32,17 @@ actor ModelRunner {
 
         // Compile and load the model
         let compiledURL = try await MLModel.compileModel(at: url)
-        let model = try MLModel(contentsOf: compiledURL, configuration: config)
-
-        return model
+        return try MLModel(contentsOf: compiledURL, configuration: config)
     }
 
     /// Detect the input type of a model
-    func detectInputType(model: MLModel) -> ModelInputType {
+    func detectInputType(model: MLModel, architecture: ModelArchitecture) -> ModelInputType {
         let description = model.modelDescription
 
-        guard let inputDescription = description.inputDescriptionsByName["image1"] else {
+        // For merged models, check the "image" input; for siamese, check "image1"
+        let inputName = architecture == .merged ? "image" : "image1"
+
+        guard let inputDescription = description.inputDescriptionsByName[inputName] else {
             // Fallback to tensor type if we can't determine
             return .tensorType
         }
@@ -52,7 +54,7 @@ actor ModelRunner {
         }
     }
 
-    /// Run inference on a patch pair
+    /// Run inference on a siamese patch pair (two inputs)
     func predict(
         model: MLModel,
         inputType: ModelInputType,
@@ -68,14 +70,33 @@ actor ModelRunner {
             provider = try createTensorInput(patch1: patch1, patch2: patch2)
         }
 
-        let output = try model.prediction(from: provider)
+        return try extractScore(from: model.prediction(from: provider))
+    }
 
-        // Extract the adjacency score
+    /// Run inference on a merged image (single input)
+    func predictMerged(
+        model: MLModel,
+        inputType: ModelInputType,
+        mergedPatch: ImagePatch
+    ) throws -> Float {
+        let provider: MLFeatureProvider
+
+        switch inputType {
+        case .imageType:
+            provider = try createMergedImageInput(patch: mergedPatch)
+        case .tensorType:
+            provider = try createMergedTensorInput(patch: mergedPatch)
+        }
+
+        return try extractScore(from: model.prediction(from: provider))
+    }
+
+    /// Extract adjacency score from model output
+    private func extractScore(from output: MLFeatureProvider) throws -> Float {
         guard let scoreFeature = output.featureValue(for: "adjacency_score") else {
             throw ModelRunnerError.outputNotFound
         }
 
-        // Handle different output types
         if let multiArray = scoreFeature.multiArrayValue {
             return multiArray[0].floatValue
         } else if scoreFeature.type == .double {
@@ -101,7 +122,7 @@ actor ModelRunner {
         return try MLDictionaryFeatureProvider(dictionary: features)
     }
 
-    /// Create input for TensorType models
+    /// Create input for TensorType models (siamese: two inputs)
     private func createTensorInput(patch1: ImagePatch, patch2: ImagePatch) throws -> MLFeatureProvider {
         guard let tensor1 = patch1.normalizedTensor,
               let tensor2 = patch2.normalizedTensor
@@ -112,6 +133,30 @@ actor ModelRunner {
         let features: [String: MLFeatureValue] = [
             "image1": MLFeatureValue(multiArray: tensor1),
             "image2": MLFeatureValue(multiArray: tensor2),
+        ]
+
+        return try MLDictionaryFeatureProvider(dictionary: features)
+    }
+
+    /// Create input for ImageType merged models (single input)
+    private func createMergedImageInput(patch: ImagePatch) throws -> MLFeatureProvider {
+        let pixelBuffer = try createPixelBuffer(from: patch.image)
+
+        let features: [String: MLFeatureValue] = [
+            "image": MLFeatureValue(pixelBuffer: pixelBuffer),
+        ]
+
+        return try MLDictionaryFeatureProvider(dictionary: features)
+    }
+
+    /// Create input for TensorType merged models (single input)
+    private func createMergedTensorInput(patch: ImagePatch) throws -> MLFeatureProvider {
+        guard let tensor = patch.normalizedTensor else {
+            throw ModelRunnerError.missingNormalizedTensor
+        }
+
+        let features: [String: MLFeatureValue] = [
+            "image": MLFeatureValue(multiArray: tensor),
         ]
 
         return try MLDictionaryFeatureProvider(dictionary: features)
@@ -161,12 +206,15 @@ struct ModelInfo {
     let model: MLModel
     let inputType: ModelInputType
     let modelType: ModelType?
+    let architecture: ModelArchitecture
 
     var displayName: String {
+        var parts: [String] = []
         if let type = modelType {
-            return "\(name) (\(type.displayName))"
+            parts.append(type.displayName)
         }
-        return name
+        parts.append(architecture.displayName)
+        return "\(name) (\(parts.joined(separator: ", ")))"
     }
 }
 

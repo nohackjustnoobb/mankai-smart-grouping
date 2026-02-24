@@ -199,7 +199,9 @@ struct ContentView: View {
 import UniformTypeIdentifiers
 
 struct BenchmarkResultsDocument: FileDocument {
-    static var readableContentTypes: [UTType] { [.json] }
+    static var readableContentTypes: [UTType] {
+        [.json]
+    }
 
     let results: [BenchmarkResult]
 
@@ -217,6 +219,7 @@ struct BenchmarkResultsDocument: FileDocument {
                 "modelName": result.modelName,
                 "modelPath": result.modelPath,
                 "modelType": result.modelType?.rawValue ?? "unknown",
+                "modelArchitecture": result.modelArchitecture.rawValue,
                 "totalInferences": result.totalInferences,
                 "totalTimeMs": result.totalTimeMs,
                 "avgTimeMs": result.avgTimeMs,
