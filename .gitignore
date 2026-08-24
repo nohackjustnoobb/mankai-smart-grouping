@@ -212,8 +212,8 @@ pyrightconfig.json
 .zed
 
 # output
-output
+/output
 
 # Dataset
-raw
-data
+/raw
+/data
