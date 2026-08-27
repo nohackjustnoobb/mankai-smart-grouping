@@ -27,10 +27,9 @@ from .dataset import (
     PairDataset,
     build_transform,
     class_counts,
-    dataset_sha256,
-    file_sha256,
     make_balanced_sampler,
     read_manifest,
+    sample_experiment_splits,
     split_records_for_experiment,
 )
 from .deploy import export_checkpoint_bundle
@@ -263,6 +262,15 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--workers", type=int, default=4)
     parser.add_argument("--device", default="auto")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--test-run",
+        type=float,
+        metavar="FRACTION",
+        help=(
+            "use FRACTION of every split (0 < FRACTION <= 1), sampled while "
+            "preserving the class ratio"
+        ),
+    )
     return parser
 
 
@@ -291,6 +299,10 @@ def _validate_args(args: argparse.Namespace) -> None:
         raise ValueError("checkpoint_every cannot be negative")
     if args.workers < 0:
         raise ValueError("workers cannot be negative")
+    if args.test_run is not None and (
+        not math.isfinite(args.test_run) or not 0.0 < args.test_run <= 1.0
+    ):
+        raise ValueError("test_run fraction must be finite and in (0, 1]")
     if args.samples_per_epoch is not None and args.samples_per_epoch < 2:
         raise ValueError("samples_per_epoch must be at least 2")
     if args.minimum_precision is not None and not 0.0 < args.minimum_precision <= 1.0:
@@ -309,16 +321,25 @@ def main(argv: Sequence[str] | None = None) -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     manifest_path = args.manifest.expanduser().resolve()
-    manifest_digest = file_sha256(manifest_path)
+    manifest_started = time.monotonic()
+    print(f"[info] reading manifest with Polars: {manifest_path}")
     all_records = read_manifest(manifest_path)
-    if file_sha256(manifest_path) != manifest_digest:
-        raise ValueError("manifest changed while it was being parsed")
-    dataset_digest = dataset_sha256(
-        manifest_path,
-        all_records,
-        expected_manifest_sha256=manifest_digest,
-    )
     splits = split_records_for_experiment(all_records)
+    print(
+        f"[info] parsed and validated {len(all_records):,} manifest rows in "
+        f"{time.monotonic() - manifest_started:.1f}s"
+    )
+    del all_records
+    if args.test_run is not None:
+        print(
+            f"[warning] test-run mode: using {args.test_run:.2%} of each split, "
+            "outputs are not suitable for release"
+        )
+        splits = sample_experiment_splits(
+            splits,
+            fraction=args.test_run,
+            seed=args.seed,
+        )
     training_records = splits.training
     validation_records = splits.validation
     calibration_records = splits.calibration
@@ -410,8 +431,6 @@ def main(argv: Sequence[str] | None = None) -> int:
     scaler = torch.amp.GradScaler("cuda", enabled=device.type == "cuda")
 
     config = {
-        "manifest_sha256": manifest_digest,
-        "dataset_sha256": dataset_digest,
         "model_name": args.model_name,
         "embedding_dim": args.embedding_dim,
         "classifier_hidden_dim": args.classifier_hidden_dim,
@@ -428,6 +447,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         "samples_per_epoch": samples_per_epoch,
         "sample_positive_fraction": args.sample_positive_fraction,
         "deployment_positive_fraction": args.deployment_positive_fraction,
+        "data_fraction": args.test_run,
+        "max_samples_per_split": None,
         "seed": args.seed,
         "image_size": 224,
         "image_mean": list(IMAGENET_MEAN),
@@ -450,8 +471,6 @@ def main(argv: Sequence[str] | None = None) -> int:
             "run_id": run_id,
             "started_at": run_started_at.isoformat(),
             "manifest": str(manifest_path),
-            "manifest_sha256": manifest_digest,
-            "dataset_sha256": dataset_digest,
             "output_dir": str(output_dir),
             "device": str(device),
             "torch_version": str(torch.__version__),
@@ -512,8 +531,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         if not isinstance(saved_config, dict):
             raise TypeError("resume checkpoint config must be a mapping")
         compatible_keys = (
-            "manifest_sha256",
-            "dataset_sha256",
             "model_name",
             "embedding_dim",
             "classifier_hidden_dim",
@@ -530,6 +547,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             "samples_per_epoch",
             "sample_positive_fraction",
             "deployment_positive_fraction",
+            "data_fraction",
+            "max_samples_per_split",
             "seed",
         )
         mismatched = [
@@ -776,16 +795,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         threshold=recommended_threshold,
         deployment_positive_fraction=args.deployment_positive_fraction,
     )
-    final_dataset_digest = dataset_sha256(
-        manifest_path,
-        all_records,
-        expected_manifest_sha256=manifest_digest,
-    )
-    if final_dataset_digest != dataset_digest:
-        raise ValueError(
-            "dataset image content changed during training or evaluation. "
-            "regenerate or restore the dataset before finalization"
-        )
     print("[info] calibration operating point")
     print_metrics(calibration_metrics)
     print("[info] independent test result")
@@ -818,8 +827,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         **test_metrics,
         "split": "test",
         "threshold_source": "calibration",
-        "manifest_sha256": manifest_digest,
-        "dataset_sha256": dataset_digest,
     }
     _atomic_write_json(evaluation_report, output_dir / "evaluation.json")
     encoder_path, classifier_path, metadata_path = export_checkpoint_bundle(

@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import math
-import re
 from collections.abc import Mapping
 from dataclasses import dataclass
 from typing import Any
@@ -13,7 +12,6 @@ from torch import Tensor
 
 CALIBRATION_THRESHOLD_SOURCE = "calibration"
 CLASSIFIER_FORWARD_OUTPUT = "float training-distribution logit"
-_SHA256_PATTERN = re.compile(r"[0-9a-fA-F]{64}\Z")
 
 
 @dataclass(frozen=True)
@@ -22,8 +20,9 @@ class DeploymentPolicy:
     threshold_deployment_positive_fraction: float
     recommended_threshold: float | None
     threshold_source: str | None
-    manifest_sha256: str
-    dataset_sha256: str
+    data_fraction: float | None = None
+    max_samples_per_split: int | None = None
+    dataset_subset_seed: int | None = None
 
 
 def validated_probability(value: Any, *, name: str) -> float:
@@ -52,16 +51,36 @@ def validate_metadata_contract(metadata: Mapping[str, Any]) -> DeploymentPolicy:
     if metadata.get("classifier_forward_output") != CLASSIFIER_FORWARD_OUTPUT:
         raise ValueError("metadata has an unsupported classifier_forward_output")
 
-    manifest_sha256 = metadata.get("manifest_sha256")
-    if not isinstance(manifest_sha256, str) or not _SHA256_PATTERN.fullmatch(
-        manifest_sha256
+    data_fraction = metadata.get("data_fraction")
+    if data_fraction is not None and (
+        isinstance(data_fraction, bool)
+        or not isinstance(data_fraction, (int, float))
+        or not math.isfinite(data_fraction)
+        or not 0.0 < data_fraction <= 1.0
     ):
-        raise ValueError("metadata manifest_sha256 must be a 64-character hex digest")
-    dataset_sha256 = metadata.get("dataset_sha256")
-    if not isinstance(dataset_sha256, str) or not _SHA256_PATTERN.fullmatch(
-        dataset_sha256
+        raise ValueError("metadata data_fraction must be finite and in (0, 1]")
+    if data_fraction is not None:
+        data_fraction = float(data_fraction)
+
+    max_samples_per_split = metadata.get("max_samples_per_split")
+    if max_samples_per_split is not None and (
+        isinstance(max_samples_per_split, bool)
+        or not isinstance(max_samples_per_split, int)
+        or max_samples_per_split < 2
     ):
-        raise ValueError("metadata dataset_sha256 must be a 64-character hex digest")
+        raise ValueError("metadata max_samples_per_split must be an integer >= 2")
+    if data_fraction is not None and max_samples_per_split is not None:
+        raise ValueError(
+            "metadata cannot set both data_fraction and max_samples_per_split"
+        )
+    dataset_subset_seed = metadata.get("dataset_subset_seed")
+    if data_fraction is None and max_samples_per_split is None:
+        if dataset_subset_seed is not None:
+            raise ValueError("metadata dataset_subset_seed requires a dataset subset")
+    elif isinstance(dataset_subset_seed, bool) or not isinstance(
+        dataset_subset_seed, int
+    ):
+        raise ValueError("metadata dataset_subset_seed must be an integer")
 
     training_positive_fraction = validated_probability(
         metadata.get("training_positive_fraction"),
@@ -84,8 +103,9 @@ def validate_metadata_contract(metadata: Mapping[str, Any]) -> DeploymentPolicy:
             ),
             recommended_threshold=None,
             threshold_source=None,
-            manifest_sha256=manifest_sha256,
-            dataset_sha256=dataset_sha256,
+            data_fraction=data_fraction,
+            max_samples_per_split=max_samples_per_split,
+            dataset_subset_seed=dataset_subset_seed,
         )
 
     recommended_threshold = validated_threshold(
@@ -104,8 +124,9 @@ def validate_metadata_contract(metadata: Mapping[str, Any]) -> DeploymentPolicy:
         threshold_deployment_positive_fraction=threshold_deployment_positive_fraction,
         recommended_threshold=recommended_threshold,
         threshold_source=threshold_source,
-        manifest_sha256=manifest_sha256,
-        dataset_sha256=dataset_sha256,
+        data_fraction=data_fraction,
+        max_samples_per_split=max_samples_per_split,
+        dataset_subset_seed=dataset_subset_seed,
     )
 
 

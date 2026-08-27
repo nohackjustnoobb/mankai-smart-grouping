@@ -7,7 +7,7 @@ Mankai Smart Grouping uses deep learning to identify and group image fragments t
 ## Models
 
 - [Final models](release/models)
-- [Training report](release/report.md)
+- [Training report](release/training_report/report.md)
 
 ## Training
 
@@ -33,16 +33,10 @@ uv run python -m src.train
 uv run python -m src.evaluate
 ```
 
-### 5. Generate a report
-
-```bash
-uv run python scripts/generate_report.py
-```
-
-### 6. Convert to Core ML
+### 5. Convert to Core ML
 
 ```bash
 uv run python scripts/convert_coreml.py
 ```
 
-The trained TorchScript and Core ML models are saved to `output/deploy/`, and the report is saved to `output/report.md`.
+The trained TorchScript and Core ML models are saved below `output/deploy`.

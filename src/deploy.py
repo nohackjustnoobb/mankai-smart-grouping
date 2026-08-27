@@ -5,7 +5,6 @@ from __future__ import annotations
 import argparse
 import json
 import math
-import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -17,7 +16,6 @@ from .model import build_model_from_checkpoint, export_torchscript_models
 from .policy import CLASSIFIER_FORWARD_OUTPUT
 
 CALIBRATION_THRESHOLD_SOURCE = "calibration"
-_SHA256_PATTERN = re.compile(r"[0-9a-fA-F]{64}\Z")
 
 _RESERVED_METADATA_KEYS = frozenset(
     {
@@ -27,8 +25,9 @@ _RESERVED_METADATA_KEYS = frozenset(
         "threshold_embedded",
         "training_positive_fraction",
         "recommended_threshold_deployment_positive_fraction",
-        "manifest_sha256",
-        "dataset_sha256",
+        "data_fraction",
+        "max_samples_per_split",
+        "dataset_subset_seed",
         "input_shape",
         "normalization_mean",
         "normalization_std",
@@ -75,20 +74,30 @@ def _validate_checkpoint_contract(
         name="deployment_positive_fraction",
         strict=True,
     )
-    manifest_sha256 = config.get("manifest_sha256")
-    if not isinstance(manifest_sha256, str) or not _SHA256_PATTERN.fullmatch(
-        manifest_sha256
+    data_fraction = config.get("data_fraction")
+    if data_fraction is not None and (
+        isinstance(data_fraction, bool)
+        or not isinstance(data_fraction, (int, float))
+        or not math.isfinite(data_fraction)
+        or not 0.0 < data_fraction <= 1.0
     ):
-        raise ValueError(
-            "checkpoint config manifest_sha256 must be a 64-character hex digest"
-        )
-    dataset_sha256 = config.get("dataset_sha256")
-    if not isinstance(dataset_sha256, str) or not _SHA256_PATTERN.fullmatch(
-        dataset_sha256
+        raise ValueError("checkpoint data_fraction must be finite and in (0, 1]")
+    max_samples_per_split = config.get("max_samples_per_split")
+    if max_samples_per_split is not None and (
+        isinstance(max_samples_per_split, bool)
+        or not isinstance(max_samples_per_split, int)
+        or max_samples_per_split < 2
     ):
+        raise ValueError("checkpoint max_samples_per_split must be an integer >= 2")
+    if data_fraction is not None and max_samples_per_split is not None:
         raise ValueError(
-            "checkpoint config dataset_sha256 must be a 64-character hex digest"
+            "checkpoint cannot set both data_fraction and max_samples_per_split"
         )
+    subset_seed = config.get("seed")
+    if (data_fraction is not None or max_samples_per_split is not None) and (
+        isinstance(subset_seed, bool) or not isinstance(subset_seed, int)
+    ):
+        raise ValueError("subset checkpoint seed must be an integer")
 
     recommended_threshold = checkpoint.get("recommended_threshold")
     threshold_source = checkpoint.get("threshold_source")
@@ -193,8 +202,6 @@ def export_checkpoint_bundle(
         "recommended_threshold_deployment_positive_fraction": (
             deployment_positive_fraction
         ),
-        "manifest_sha256": _config["manifest_sha256"],
-        "dataset_sha256": _config["dataset_sha256"],
         "input_shape": ["batch", 3, 224, 224],
         "normalization_mean": list(IMAGENET_MEAN),
         "normalization_std": list(IMAGENET_STD),
@@ -202,6 +209,20 @@ def export_checkpoint_bundle(
         "metrics_split": metrics_split,
         "analysis_run_id": checkpoint.get("run_id"),
     }
+    if _config.get("data_fraction") is not None:
+        metadata.update(
+            {
+                "data_fraction": _config["data_fraction"],
+                "dataset_subset_seed": _config["seed"],
+            }
+        )
+    elif _config.get("max_samples_per_split") is not None:
+        metadata.update(
+            {
+                "max_samples_per_split": _config["max_samples_per_split"],
+                "dataset_subset_seed": _config["seed"],
+            }
+        )
     if recommended_threshold is not None:
         metadata.update(
             {

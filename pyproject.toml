@@ -6,8 +6,10 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "coremltools>=9.0",
+    "matplotlib>=3.11.1",
     "numpy>=2.5.2",
     "pillow>=12.3.0",
+    "polars>=1.44.0",
     "scikit-learn>=1.9.0",
     "timm>=1.0.28",
     "torch>=2.13.0",

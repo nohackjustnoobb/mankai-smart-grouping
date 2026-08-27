@@ -6,7 +6,6 @@ import argparse
 import csv
 import json
 import math
-import re
 from collections.abc import Mapping, Sequence
 from pathlib import Path
 from typing import Any
@@ -20,15 +19,14 @@ from torch.utils.data import DataLoader
 from .dataset import (
     PairDataset,
     build_transform,
-    dataset_sha256,
-    file_sha256,
+    class_counts,
+    limit_experiment_splits,
     read_manifest,
+    sample_experiment_splits,
     split_records_for_experiment,
 )
 from .model import SiameseNetwork, build_model_from_checkpoint
 from .policy import deployment_probability
-
-_SHA256_PATTERN = re.compile(r"[0-9a-fA-F]{64}\Z")
 
 
 def resolve_device(requested: str) -> torch.device:
@@ -369,26 +367,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                 )
 
     manifest_path = args.manifest.expanduser().resolve()
-    expected_manifest_sha256 = config.get("manifest_sha256")
-    if not isinstance(expected_manifest_sha256, str) or not _SHA256_PATTERN.fullmatch(
-        expected_manifest_sha256
-    ):
-        raise ValueError(
-            "checkpoint config requires a 64-character hex manifest_sha256"
-        )
-    expected_dataset_sha256 = config.get("dataset_sha256")
-    if not isinstance(expected_dataset_sha256, str) or not _SHA256_PATTERN.fullmatch(
-        expected_dataset_sha256
-    ):
-        raise ValueError("checkpoint config requires a 64-character hex dataset_sha256")
-    actual_manifest_sha256 = file_sha256(manifest_path)
-    if actual_manifest_sha256 != expected_manifest_sha256:
-        raise ValueError(
-            "manifest does not match the checkpoint used for training: "
-            f"expected SHA-256 {expected_manifest_sha256}, got "
-            f"{actual_manifest_sha256}"
-        )
-
     if args.threshold is not None:
         threshold = _validated_threshold(args.threshold, source="command-line")
         threshold_source = "command_line"
@@ -398,24 +376,58 @@ def main(argv: Sequence[str] | None = None) -> int:
     else:
         raise ValueError("checkpoint has no recommended threshold. Pass --threshold")
 
-    records = read_manifest(manifest_path)
-    actual_dataset_sha256 = dataset_sha256(
-        manifest_path,
-        records,
-        expected_manifest_sha256=actual_manifest_sha256,
-    )
-    if actual_dataset_sha256 != expected_dataset_sha256:
+    data_fraction = config.get("data_fraction")
+    if data_fraction is not None and (
+        isinstance(data_fraction, bool)
+        or not isinstance(data_fraction, (int, float))
+        or not math.isfinite(data_fraction)
+        or not 0.0 < data_fraction <= 1.0
+    ):
+        raise ValueError("checkpoint data_fraction must be finite and in (0, 1]")
+    max_samples_per_split = config.get("max_samples_per_split")
+    if max_samples_per_split is not None and (
+        isinstance(max_samples_per_split, bool)
+        or not isinstance(max_samples_per_split, int)
+        or max_samples_per_split < 2
+    ):
+        raise ValueError("checkpoint max_samples_per_split must be an integer >= 2")
+    if data_fraction is not None and max_samples_per_split is not None:
         raise ValueError(
-            "dataset image content does not match the checkpoint used for training: "
-            f"expected SHA-256 {expected_dataset_sha256}, got "
-            f"{actual_dataset_sha256}"
+            "checkpoint cannot set both data_fraction and max_samples_per_split"
         )
-    splits = split_records_for_experiment(records)
-    split_name = args.split or "test"
-    if split_name != "all":
-        records = getattr(splits, split_name)
+    subset_seed = config.get("seed")
+    if (data_fraction is not None or max_samples_per_split is not None) and (
+        isinstance(subset_seed, bool) or not isinstance(subset_seed, int)
+    ):
+        raise ValueError("subset checkpoint seed must be an integer")
 
-    negative_count = sum(record.label == 0 for record in records)
+    records = read_manifest(manifest_path)
+    splits = split_records_for_experiment(records)
+    if data_fraction is not None:
+        splits = sample_experiment_splits(
+            splits,
+            fraction=float(data_fraction),
+            seed=subset_seed,
+        )
+    elif max_samples_per_split is not None:
+        splits = limit_experiment_splits(
+            splits,
+            max_samples=max_samples_per_split,
+            seed=subset_seed,
+        )
+    split_name = args.split or "test"
+    records = (
+        [
+            *splits.training,
+            *splits.validation,
+            *splits.calibration,
+            *splits.test,
+        ]
+        if split_name == "all"
+        else getattr(splits, split_name)
+    )
+
+    negative_count = class_counts(records)["negative"]
     if negative_count < 10_000:
         print(
             f"[warning] {split_name} has only {negative_count:,} negatives. "
@@ -449,8 +461,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         **metrics,
         "split": split_name,
         "threshold_source": threshold_source,
-        "manifest_sha256": actual_manifest_sha256,
-        "dataset_sha256": actual_dataset_sha256,
     }
 
     if args.output_json:

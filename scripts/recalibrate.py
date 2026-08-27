@@ -19,22 +19,23 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.dataset import (
+from src.dataset import (  # noqa: E402
     PairDataset,
     PairRecord,
     build_transform,
-    dataset_sha256,
-    file_sha256,
+    class_counts,
+    limit_experiment_splits,
     read_manifest,
+    sample_experiment_splits,
     split_records_for_experiment,
 )
-from src.evaluate import (
+from src.evaluate import (  # noqa: E402
     compute_metrics,
     print_metrics,
     resolve_device,
     select_threshold,
 )
-from src.policy import (
+from src.policy import (  # noqa: E402
     CALIBRATION_THRESHOLD_SOURCE,
     DeploymentPolicy,
     deployment_probability,
@@ -61,28 +62,43 @@ def _artifact_path(model_dir: Path, metadata: Mapping[str, Any], *, key: str) ->
     return path
 
 
-def _validate_dataset(
+def _load_dataset(
     manifest_path: Path, policy: DeploymentPolicy
-) -> tuple[list[PairRecord], str, str]:
-    manifest_sha256 = file_sha256(manifest_path)
-    if manifest_sha256 != policy.manifest_sha256:
-        raise ValueError(
-            "manifest does not match the deployed model: "
-            f"expected SHA-256 {policy.manifest_sha256}, got {manifest_sha256}"
-        )
+) -> Sequence[PairRecord]:
     records = read_manifest(manifest_path)
-    observed_dataset_sha256 = dataset_sha256(
-        manifest_path,
-        records,
-        expected_manifest_sha256=manifest_sha256,
-    )
-    if observed_dataset_sha256 != policy.dataset_sha256:
-        raise ValueError(
-            "dataset image content does not match the deployed model: "
-            f"expected SHA-256 {policy.dataset_sha256}, got "
-            f"{observed_dataset_sha256}"
+    if policy.data_fraction is not None:
+        subset_seed = policy.dataset_subset_seed
+        if subset_seed is None:
+            raise ValueError("dataset_subset_seed is required with data_fraction")
+        splits = sample_experiment_splits(
+            split_records_for_experiment(records),
+            fraction=policy.data_fraction,
+            seed=subset_seed,
         )
-    return records, manifest_sha256, observed_dataset_sha256
+        records = [
+            *splits.training,
+            *splits.validation,
+            *splits.calibration,
+            *splits.test,
+        ]
+    elif policy.max_samples_per_split is not None:
+        subset_seed = policy.dataset_subset_seed
+        if subset_seed is None:
+            raise ValueError(
+                "dataset_subset_seed is required with max_samples_per_split"
+            )
+        splits = limit_experiment_splits(
+            split_records_for_experiment(records),
+            max_samples=policy.max_samples_per_split,
+            seed=subset_seed,
+        )
+        records = [
+            *splits.training,
+            *splits.validation,
+            *splits.calibration,
+            *splits.test,
+        ]
+    return records
 
 
 def _build_loader(
@@ -130,7 +146,7 @@ def _predict(
 
 
 def _warn_if_small_negative_split(name: str, records: Sequence[PairRecord]) -> None:
-    negative_count = sum(record.label == 0 for record in records)
+    negative_count = class_counts(records)["negative"]
     if negative_count < 10_000:
         print(
             f"[warning] {name} has only {negative_count:,} negatives. "
@@ -198,9 +214,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     policy = validate_metadata_contract(metadata)
 
     manifest_path = args.manifest.expanduser().resolve()
-    records, manifest_sha256, observed_dataset_sha256 = _validate_dataset(
-        manifest_path, policy
-    )
+    records = _load_dataset(manifest_path, policy)
     splits = split_records_for_experiment(records)
     _warn_if_small_negative_split("calibration", splits.calibration)
     _warn_if_small_negative_split("test", splits.test)
@@ -268,8 +282,6 @@ def main(argv: Sequence[str] | None = None) -> int:
         "recommended_threshold": recommended_threshold,
         "threshold_reason": threshold_reason,
         "threshold_source": CALIBRATION_THRESHOLD_SOURCE,
-        "manifest_sha256": manifest_sha256,
-        "dataset_sha256": observed_dataset_sha256,
         "calibration_metrics": calibration_metrics,
         "test_metrics": test_metrics,
     }

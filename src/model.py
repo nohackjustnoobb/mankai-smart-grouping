@@ -101,8 +101,9 @@ class SiameseNetwork(nn.Module):
         self.classifier = classifier
 
     def forward(self, image_1: Tensor, image_2: Tensor) -> Tensor:
-        embedding_1 = self.encoder(image_1)
-        embedding_2 = self.encoder(image_2)
+        batch_size = image_1.shape[0]
+        embeddings = self.encoder(torch.cat((image_1, image_2), dim=0))
+        embedding_1, embedding_2 = embeddings.split(batch_size, dim=0)
         return self.classifier(embedding_1, embedding_2)
 
 

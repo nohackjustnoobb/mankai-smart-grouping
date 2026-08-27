@@ -24,7 +24,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from src.dataset import IMAGE_SIZE, IMAGENET_MEAN, IMAGENET_STD, build_transform
+from src.dataset import (  # noqa: E402
+    IMAGE_SIZE,
+    IMAGENET_MEAN,
+    IMAGENET_STD,
+    build_transform,
+)
 
 IMAGE_SHAPE = (1, 3, IMAGE_SIZE, IMAGE_SIZE)
 DEFAULT_MODEL_DIR = Path("output/deploy")
